@@ -2313,7 +2313,9 @@ Adopt the Warm Standby pattern: Aurora Global Database with a continuously-repli
 
 ## Consequences
 
-**Positive:** Meets the documented RTO/RPO targets with a well-understood, testable failover procedure and a cost roughly 15–25% above single-region (rather than 100% above, as active-active would require). **Negative:** The DR region's minimally-scaled standby capacity means a scale-up delay of several minutes is required before it can absorb full production traffic post-failover — acceptable within the 4-hour RTO budget but a genuine limitation the team must remember when reviewing this decision in the future.
+**Positive:** Meets the documented RTO/RPO targets with a well-understood, testable failover procedure and a cost roughly 15–25% above single-region (rather than 100% above, as active-active would require).
+
+**Negative:** The DR region's minimally-scaled standby capacity means a scale-up delay of several minutes is required before it can absorb full production traffic post-failover — acceptable within the 4-hour RTO budget but a genuine limitation the team must remember when reviewing this decision in the future.
 
 ## Risks
 
@@ -2534,4 +2536,20 @@ Commonly encountered AWS service quotas include: Lambda concurrent execution lim
 
 ## Final Recommendations from the Architect
 
-**Biggest success factor:** Getting IAM least-privilege design right from the start, rather than retrofitting it — this single decision affects security posture, audit outcomes, and blast radius more than almost any other architectural choice. **Biggest implementation risk:** Under-testing the disaster recovery failover path until it's needed for real — an untested runbook is not a mitigated risk, it's a deferred discovery of new problems during an actual disaster. **First thing to build:** The networking foundation (VPC, subnets, security groups) via Terraform, since every other component depends on it and retrofitting network topology later is disruptive. **First thing to automate:** The CI/CD pipeline for infrastructure changes, including the policy-as-code security gate — manual production changes should never be a normal path, from day one. **First thing to monitor:** End-to-end request success rate and latency as explicit SLOs, before worrying about granular resource-utilization dashboards. **First security control to enable:** CloudTrail and GuardDuty organization-wide — the audit trail and threat detection you don't have during an incident can never be reconstructed after the fact. **First FinOps recommendation:** Enforce tagging at resource creation time via Terraform, since retrofitting cost allocation across an untagged estate is a much larger project than doing it correctly from the start. **First disaster recovery test:** A tabletop exercise within the first month of go-live, followed by a genuine failover test in a staging-equivalent environment within the first quarter — don't wait for the "right" calm period, because it rarely arrives on its own. **Long-term maintenance advice:** Treat this architecture as a living system requiring scheduled quarterly review (rightsizing, IAM policy audit, DR test, Terraform module refactoring) rather than a project that's "done" once it first reaches production — the architectures that age well are the ones with a deliberate maintenance cadence built in from the beginning, not the ones left alone until they force an emergency.
+**Biggest success factor:** Getting IAM least-privilege design right from the start, rather than retrofitting it — this single decision affects security posture, audit outcomes, and blast radius more than almost any other architectural choice.
+
+**Biggest implementation risk:** Under-testing the disaster recovery failover path until it's needed for real — an untested runbook is not a mitigated risk, it's a deferred discovery of new problems during an actual disaster.
+
+**First thing to build:** The networking foundation (VPC, subnets, security groups) via Terraform, since every other component depends on it and retrofitting network topology later is disruptive.
+
+**First thing to automate:** The CI/CD pipeline for infrastructure changes, including the policy-as-code security gate — manual production changes should never be a normal path, from day one.
+
+**First thing to monitor:** End-to-end request success rate and latency as explicit SLOs, before worrying about granular resource-utilization dashboards.
+
+**First security control to enable:** CloudTrail and GuardDuty organization-wide — the audit trail and threat detection you don't have during an incident can never be reconstructed after the fact.
+
+**First FinOps recommendation:** Enforce tagging at resource creation time via Terraform, since retrofitting cost allocation across an untagged estate is a much larger project than doing it correctly from the start.
+
+**First disaster recovery test:** A tabletop exercise within the first month of go-live, followed by a genuine failover test in a staging-equivalent environment within the first quarter — don't wait for the "right" calm period, because it rarely arrives on its own.
+
+**Long-term maintenance advice:** Treat this architecture as a living system requiring scheduled quarterly review (rightsizing, IAM policy audit, DR test, Terraform module refactoring) rather than a project that's "done" once it first reaches production — the architectures that age well are the ones with a deliberate maintenance cadence built in from the beginning, not the ones left alone until they force an emergency.

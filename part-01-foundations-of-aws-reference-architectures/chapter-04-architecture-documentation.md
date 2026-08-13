@@ -218,19 +218,25 @@ sequenceDiagram
     API-->>Client: 409 Conflict (no event published)
 ```
 
-**When to use:** Any workflow spanning 3+ components with a meaningful ordering or failure-branching structure. **When NOT to use:** A trivial single-hop request/response (client calls API, API responds) does not need a sequence diagram — the Container diagram already communicates this adequately, and an unnecessary sequence diagram adds maintenance burden without corresponding clarity gain.
+**When to use:** Any workflow spanning 3+ components with a meaningful ordering or failure-branching structure.
+
+**When NOT to use:** A trivial single-hop request/response (client calls API, API responds) does not need a sequence diagram — the Container diagram already communicates this adequately, and an unnecessary sequence diagram adds maintenance burden without corresponding clarity gain.
 
 ### Network Diagrams
 
 Network diagrams document the actual network topology — VPCs, subnets, route tables, security group boundaries, and connectivity paths (including to on-premises or third-party networks) — at a level of physical/logical network detail that C4 Container diagrams deliberately omit (C4 is about software structure, not network topology). This platform requires a current network diagram per VPC/environment, auto-validated where possible against the actual deployed Terraform state (Section 20 describes the CI check that flags a network diagram as stale if the underlying Terraform network module has changed without a corresponding diagram update).
 
-**When to use:** Every production VPC, and any environment in scope for a compliance audit's network-segmentation evidence requirement. **When NOT to use:** A network diagram is the wrong artifact for describing application-level service-to-service call patterns — that's a Container or sequence diagram's job; conflating the two produces a diagram too cluttered to be useful for either purpose.
+**When to use:** Every production VPC, and any environment in scope for a compliance audit's network-segmentation evidence requirement.
+
+**When NOT to use:** A network diagram is the wrong artifact for describing application-level service-to-service call patterns — that's a Container or sequence diagram's job; conflating the two produces a diagram too cluttered to be useful for either purpose.
 
 ### Data Flow Diagrams
 
 Data flow diagrams (DFDs) trace how a specific class of data (customer PII, payment card data, authentication credentials) moves through the system — which components read it, write it, transform it, and where it crosses a trust boundary. DFDs are the foundational input to threat modeling (below) and to compliance data-mapping exercises (GDPR Article 30 records of processing, PCI-DSS cardholder data flow diagrams). This platform requires a DFD for any data classification of "Confidential" or higher, maintained separately from (but cross-linked to) the corresponding Container diagram, since a DFD's organizing principle (follow the data) differs from a Container diagram's organizing principle (show the deployable units) even though they describe overlapping ground.
 
-**When to use:** Any system processing regulated or sensitive data classes. **When NOT to use:** A DFD for a system processing only non-sensitive, already-public data (e.g., a public documentation site's own content) is process overhead without compliance or security value.
+**When to use:** Any system processing regulated or sensitive data classes.
+
+**When NOT to use:** A DFD for a system processing only non-sensitive, already-public data (e.g., a public documentation site's own content) is process overhead without compliance or security value.
 
 ### Threat Models
 
@@ -247,13 +253,17 @@ A threat model is a structured analysis of a system's attack surface, typically 
 | Denial of Service | Attacker floods the checkout endpoint | WAF rate-based rules; CloudFront/Shield Standard absorption |
 | Elevation of Privilege | Compromised customer session used to access admin endpoints | Separate authorization scopes for customer vs. admin roles; admin console network-isolated |
 
-**When to use:** Mandatory for internet-facing systems and anything processing regulated data. **When NOT to use:** A full STRIDE exercise for a purely internal, read-only reporting dashboard with no sensitive data and no external exposure is disproportionate — a lighter-weight security review checklist (Section 31) is more appropriate there.
+**When to use:** Mandatory for internet-facing systems and anything processing regulated data.
+
+**When NOT to use:** A full STRIDE exercise for a purely internal, read-only reporting dashboard with no sensitive data and no external exposure is disproportionate — a lighter-weight security review checklist (Section 31) is more appropriate there.
 
 ### Architecture Decision Records (ADRs)
 
 An ADR is a short, structured document capturing a single architecturally significant decision: the context that prompted it, the decision made, the alternatives considered and why they were rejected, and the resulting consequences. ADRs are the mechanism by which "why did we do it this way" survives past the memory of the engineers who made the original decision — one of the most common and costly forms of institutional knowledge loss discussed in Section 34. This platform requires an ADR for any decision meeting at least one of: introduces a new AWS service or third-party dependency; changes a previously documented architectural pattern; has a significant, hard-to-reverse cost or security implication; or was contested enough during design review to warrant recording the reasoning, not just the outcome.
 
-**When to use:** As above. **When NOT to use:** An ADR for a routine, easily reversible implementation choice (e.g., which specific npm logging library a single service uses internally) is process overhead — ADRs are for architecturally significant, hard-to-reverse decisions, not every decision.
+**When to use:** As above.
+
+**When NOT to use:** An ADR for a routine, easily reversible implementation choice (e.g., which specific npm logging library a single service uses internally) is process overhead — ADRs are for architecturally significant, hard-to-reverse decisions, not every decision.
 
 ### Documentation Best Practices (Summary Principles)
 
@@ -2012,4 +2022,18 @@ The most commonly encountered limit is OpenSearch cluster capacity relative to c
 
 ## Final Recommendations from the Architect
 
-**Biggest success factor:** Genuine executive sponsorship connecting the CI-enforcement mechanism to a concrete, previously-felt business pain — tooling alone does not create the cultural discipline this platform depends on. **Biggest implementation risk:** Underestimating the effort to reconstruct accurate documentation for legacy, previously-undocumented systems, causing rollout timelines to slip and eroding confidence in the initiative before it delivers its full value. **First thing to build:** The lightweight underlying practice — text-based diagrams and ADRs in the same repository as code, reviewed via pull request — before investing in the full publishing/search platform; prove the discipline works at small scale first. **First thing to automate:** Staleness detection, since it directly targets this entire chapter's core problem and provides an early, visible win. **First thing to monitor:** Build-pipeline failure rate — a silently broken pipeline is the single failure mode most likely to quietly undo this platform's entire value proposition. **First security control to enable:** Access-tiered encryption (KMS CMK) for sensitive threat-model and network-diagram content, before broader rollout, since this content class carries disproportionate risk if exposed. **First FinOps recommendation:** Start with OpenSearch Serverless (or defer search entirely until the corpus genuinely warrants it) rather than provisioning a fixed cluster sized for an anticipated future scale that may take years to materialize. **First disaster recovery test:** Validate that the platform can be fully rebuilt from Git source alone within the target RTO, confirming the "fully reconstructable from source" assumption this platform's entire DR posture depends on, rather than assuming it without ever having actually tried it. **Long-term maintenance advice:** Treat this platform as a first-class internal product with an assigned owner and a scheduled quarterly review cadence (rightsizing, staleness-detector threshold tuning, exemption-label usage audit) — the organizations that get the most enduring value from this pattern are the ones that keep investing in it deliberately, rather than treating its initial rollout as a one-time project that's "finished" once first launched.
+**Biggest success factor:** Genuine executive sponsorship connecting the CI-enforcement mechanism to a concrete, previously-felt business pain — tooling alone does not create the cultural discipline this platform depends on.
+
+**Biggest implementation risk:** Underestimating the effort to reconstruct accurate documentation for legacy, previously-undocumented systems, causing rollout timelines to slip and eroding confidence in the initiative before it delivers its full value.
+
+**First thing to build:** The lightweight underlying practice — text-based diagrams and ADRs in the same repository as code, reviewed via pull request — before investing in the full publishing/search platform; prove the discipline works at small scale first.
+
+**First thing to automate:** Staleness detection, since it directly targets this entire chapter's core problem and provides an early, visible win.
+
+**First thing to monitor:** Build-pipeline failure rate — a silently broken pipeline is the single failure mode most likely to quietly undo this platform's entire value proposition.
+
+**First security control to enable:** Access-tiered encryption (KMS CMK) for sensitive threat-model and network-diagram content, before broader rollout, since this content class carries disproportionate risk if exposed.
+
+**First FinOps recommendation:** Start with OpenSearch Serverless (or defer search entirely until the corpus genuinely warrants it) rather than provisioning a fixed cluster sized for an anticipated future scale that may take years to materialize. **First disaster recovery test:** Validate that the platform can be fully rebuilt from Git source alone within the target RTO, confirming the "fully reconstructable from source" assumption this platform's entire DR posture depends on, rather than assuming it without ever having actually tried it.
+
+**Long-term maintenance advice:** Treat this platform as a first-class internal product with an assigned owner and a scheduled quarterly review cadence (rightsizing, staleness-detector threshold tuning, exemption-label usage audit) — the organizations that get the most enduring value from this pattern are the ones that keep investing in it deliberately, rather than treating its initial rollout as a one-time project that's "finished" once first launched.

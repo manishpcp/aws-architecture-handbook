@@ -565,7 +565,17 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
 
 ## 12. High Availability
 
-**AZ failures:** The architecture tolerates the complete loss of any single Availability Zone without customer-visible downtime — the ALB stops routing to targets in the failed AZ, Aurora fails over to its synchronous standby (typically <60 seconds), and ElastiCache promotes a replica in a surviving AZ. **Instance failures:** Auto Scaling health checks detect and replace failed instances automatically, typically within 2–5 minutes depending on AMI boot time and application warm-up. **Regional failures:** This baseline single-region architecture does *not* tolerate a full regional failure without manual intervention and data loss up to the last cross-region backup/replica point — this is an explicit, documented limitation of the baseline design, not an oversight (see Section 13 and the multi-region chapters for architectures that do tolerate regional failure). **Database failures:** Aurora Multi-AZ failover is automatic and DNS-based (the writer endpoint CNAME is repointed), requiring application-level retry logic with exponential backoff to ride out the brief connection interruption. **Load balancing and health checks:** The ALB's target group health check (an application-specific `/health` endpoint that verifies database connectivity, not just process liveness) is the primary signal driving both traffic routing and Auto Scaling replacement decisions. **Failover** for DNS-level routing (used in multi-region designs, not needed for this single-region baseline) would use Route 53 health-check-based failover routing policies.
+**AZ failures:** The architecture tolerates the complete loss of any single Availability Zone without customer-visible downtime — the ALB stops routing to targets in the failed AZ, Aurora fails over to its synchronous standby (typically <60 seconds), and ElastiCache promotes a replica in a surviving AZ.
+
+**Instance failures:** Auto Scaling health checks detect and replace failed instances automatically, typically within 2–5 minutes depending on AMI boot time and application warm-up.
+
+**Regional failures:** This baseline single-region architecture does *not* tolerate a full regional failure without manual intervention and data loss up to the last cross-region backup/replica point — this is an explicit, documented limitation of the baseline design, not an oversight (see Section 13 and the multi-region chapters for architectures that do tolerate regional failure).
+
+**Database failures:** Aurora Multi-AZ failover is automatic and DNS-based (the writer endpoint CNAME is repointed), requiring application-level retry logic with exponential backoff to ride out the brief connection interruption.
+
+**Load balancing and health checks:** The ALB's target group health check (an application-specific `/health` endpoint that verifies database connectivity, not just process liveness) is the primary signal driving both traffic routing and Auto Scaling replacement decisions.
+
+**Failover** for DNS-level routing (used in multi-region designs, not needed for this single-region baseline) would use Route 53 health-check-based failover routing policies.
 
 ---
 
@@ -590,7 +600,19 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
 
 ## 14. Scalability
 
-**Horizontal scaling** is the primary scaling mechanism for the application tier: the Auto Scaling Group scales out based on target-tracking policies (average CPU utilization, or preferably ALB request-count-per-target for request-bound workloads) across a configured min/max/desired range spanning all three AZs. **Vertical scaling** is used sparingly — primarily for the Aurora writer instance class, where scaling up (not out) is the only option for write-throughput headroom, and requires a brief failover. **Auto Scaling** policies combine target tracking (steady-state responsiveness) with a scheduled scaling action ahead of known traffic events (e.g., a marketing campaign launch) to pre-warm capacity rather than reacting purely to load after the fact. **Serverless scaling** (Lambda, DynamoDB on-demand) requires no explicit capacity planning by design, which is precisely why asynchronous, spiky workloads in this architecture (image processing, notification delivery) are offloaded to Lambda rather than added to the EC2 fleet's peak sizing. **Database scaling** uses Aurora read replicas (up to 15) to scale read throughput horizontally, with Aurora Auto Scaling automatically adding/removing replicas based on average CPU or connection count across the replica fleet. **Storage scaling** for Aurora is automatic and requires no operator action up to 128 TiB; S3 storage scaling is inherently unlimited. **Queue scaling** for SQS-backed workers uses a target-tracking Auto Scaling policy on the custom CloudWatch metric `ApproximateNumberOfMessagesVisible` divided by the number of running workers, keeping per-worker backlog roughly constant regardless of absolute queue depth.
+**Horizontal scaling** is the primary scaling mechanism for the application tier: the Auto Scaling Group scales out based on target-tracking policies (average CPU utilization, or preferably ALB request-count-per-target for request-bound workloads) across a configured min/max/desired range spanning all three AZs.
+
+**Vertical scaling** is used sparingly — primarily for the Aurora writer instance class, where scaling up (not out) is the only option for write-throughput headroom, and requires a brief failover.
+
+**Auto Scaling** policies combine target tracking (steady-state responsiveness) with a scheduled scaling action ahead of known traffic events (e.g., a marketing campaign launch) to pre-warm capacity rather than reacting purely to load after the fact.
+
+**Serverless scaling** (Lambda, DynamoDB on-demand) requires no explicit capacity planning by design, which is precisely why asynchronous, spiky workloads in this architecture (image processing, notification delivery) are offloaded to Lambda rather than added to the EC2 fleet's peak sizing.
+
+**Database scaling** uses Aurora read replicas (up to 15) to scale read throughput horizontally, with Aurora Auto Scaling automatically adding/removing replicas based on average CPU or connection count across the replica fleet.
+
+**Storage scaling** for Aurora is automatic and requires no operator action up to 128 TiB; S3 storage scaling is inherently unlimited.
+
+**Queue scaling** for SQS-backed workers uses a target-tracking Auto Scaling policy on the custom CloudWatch metric `ApproximateNumberOfMessagesVisible` divided by the number of running workers, keeping per-worker backlog roughly constant regardless of absolute queue depth.
 
 ---
 
@@ -1347,7 +1369,9 @@ This chapter established the conceptual foundation for every architecture in thi
 
 The key architectural decisions worth carrying forward into every subsequent chapter are: push statelessness as far up the stack as possible so compute is disposable; treat managed data services as the load-bearing walls deserving the most redundancy investment; match the disaster recovery tier and multi-region complexity to actual, stated RTO/RPO/SLA requirements rather than to what sounds impressive in a design review; and enforce least privilege and infrastructure-as-code discipline from day one, because retrofitting these controls onto a live system is always more expensive than building them in from the start.
 
-**When to use this baseline pattern:** Organizations with a single-region, predictable-to-moderately-spiky workload, an availability target in the 99.9–99.95% range, and a relational data model with real referential integrity requirements. **When not to use it:** workloads requiring 99.99%+ availability or tolerance of a full regional failure (go to multi-region architectures), workloads with truly variable-to-zero baseline traffic where serverless economics dominate, or workloads whose access patterns are fundamentally key-value/single-table rather than relational (consider DynamoDB-centric designs covered later in this book).
+**When to use this baseline pattern:** Organizations with a single-region, predictable-to-moderately-spiky workload, an availability target in the 99.9–99.95% range, and a relational data model with real referential integrity requirements.
+
+**When not to use it:** workloads requiring 99.99%+ availability or tolerance of a full regional failure (go to multi-region architectures), workloads with truly variable-to-zero baseline traffic where serverless economics dominate, or workloads whose access patterns are fundamentally key-value/single-table rather than relational (consider DynamoDB-centric designs covered later in this book).
 
 ---
 
@@ -1489,4 +1513,20 @@ Each transition is driven by a specific, named constraint being hit — not by c
 
 ## Final Recommendations from the Architect
 
-**Biggest success factor:** treating the requirements document (Section 2) as the actual source of truth for every downstream decision, and being willing to say "we don't need Multi-Region for this" even when a stakeholder finds multi-region impressive-sounding. **Biggest implementation risk:** underestimating application-layer coupling to the old environment (session state, hardcoded assumptions) during a migration — budget explicit discovery time for this before committing to a timeline. **First thing to build:** the networking foundation (VPC, subnets, security groups) via Terraform, because every other component depends on it and retrofitting network topology changes later is disproportionately disruptive. **First thing to automate:** the Terraform plan/apply pipeline itself, before writing a single line of application deployment automation — infrastructure change safety is the prerequisite for everything else. **First thing to monitor:** the ALB's error rate and latency, because it is the single metric closest to actual customer experience and will surface problems anywhere downstream in the stack. **First security control to enable:** least-privilege IAM on the very first workload role created, not retrofitted later — permissions are far easier to grant incrementally than to revoke from a system already depending on them. **First FinOps recommendation:** enforce tagging at resource creation time via Terraform variables and a Service Control Policy, because cost allocation is nearly impossible to reconstruct retroactively once untagged resources have accumulated for months. **First disaster recovery test:** a controlled Aurora Multi-AZ forced-failover test in a non-production environment within the first month, specifically to validate that application-level retry/backoff logic actually rides out the failover gracefully rather than assuming it does. **Long-term maintenance advice:** schedule a recurring (quarterly is a reasonable cadence) architecture review against this exact checklist (Section 31), because architectures that were correct at launch silently drift out of alignment with actual traffic patterns, team structure, and compliance obligations if no one is explicitly checking.
+**Biggest success factor:** treating the requirements document (Section 2) as the actual source of truth for every downstream decision, and being willing to say "we don't need Multi-Region for this" even when a stakeholder finds multi-region impressive-sounding.
+
+**Biggest implementation risk:** underestimating application-layer coupling to the old environment (session state, hardcoded assumptions) during a migration — budget explicit discovery time for this before committing to a timeline.
+
+**First thing to build:** the networking foundation (VPC, subnets, security groups) via Terraform, because every other component depends on it and retrofitting network topology changes later is disproportionately disruptive.
+
+**First thing to automate:** the Terraform plan/apply pipeline itself, before writing a single line of application deployment automation — infrastructure change safety is the prerequisite for everything else.
+
+**First thing to monitor:** the ALB's error rate and latency, because it is the single metric closest to actual customer experience and will surface problems anywhere downstream in the stack.
+
+**First security control to enable:** least-privilege IAM on the very first workload role created, not retrofitted later — permissions are far easier to grant incrementally than to revoke from a system already depending on them.
+
+**First FinOps recommendation:** enforce tagging at resource creation time via Terraform variables and a Service Control Policy, because cost allocation is nearly impossible to reconstruct retroactively once untagged resources have accumulated for months.
+
+**First disaster recovery test:** a controlled Aurora Multi-AZ forced-failover test in a non-production environment within the first month, specifically to validate that application-level retry/backoff logic actually rides out the failover gracefully rather than assuming it does.
+
+**Long-term maintenance advice:** schedule a recurring (quarterly is a reasonable cadence) architecture review against this exact checklist (Section 31), because architectures that were correct at launch silently drift out of alignment with actual traffic patterns, team structure, and compliance obligations if no one is explicitly checking.
