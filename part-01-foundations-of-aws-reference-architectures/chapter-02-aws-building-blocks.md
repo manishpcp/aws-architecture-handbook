@@ -40,31 +40,18 @@ Each of these scenarios reappears, in far greater architectural detail, across t
 Before selecting any specific AWS service, an architecture review should establish the requirements the building blocks must satisfy. The table below captures the requirement categories that recur across almost every enterprise workload, along with the questions a Principal Architect should be asking during intake.
 
 | Requirement Category | Key Questions | Typical Enterprise Answer |
-
 |---|---|---|
-
 | Business drivers | What revenue, cost, or risk outcome does this system serve? | Reduce time-to-market, cut infrastructure spend, meet a compliance deadline, replace an out-of-support legacy platform |
-
 | Functional requirements | What must the system do, end to end? | Serve API traffic, process events, store transactional/analytical data, authenticate users |
-
 | Non-functional requirements | Performance, availability, security, maintainability | p99 latency < 300ms, 99.95% availability, encryption at rest/in transit, least-privilege IAM |
-
 | Scalability goals | Expected peak vs. baseline load, growth curve | 10x traffic growth over 24 months; 5x spike during known seasonal events |
-
 | Availability requirements | Acceptable downtime per year, per incident | 99.9%–99.99% depending on tier; core payment paths typically 99.95%+ |
-
 | Latency requirements | End-user and internal service latency budgets | < 200ms p95 for interactive APIs; < 5s for async batch jobs |
-
 | Compliance requirements | Regulatory frameworks in scope | PCI-DSS, HIPAA, SOC 2, GDPR, FedRAMP depending on industry and geography |
-
 | Security expectations | Data classification, threat model | PII/PCI data requires field-level encryption, restricted network paths, audited access |
-
 | Recovery objectives | RPO/RTO per system tier | See RPO/RTO table below |
-
 | SLAs | Internal and external commitments | Contractual uptime and support response times passed down to infrastructure design |
-
 | Expected workload | Requests/sec, data volume, concurrency | Baseline + peak numbers, ideally from real traffic analysis, not guesses |
-
 | Expected growth | 1-year, 3-year projection | Drives right-sizing and Reserved Instance/Savings Plan commitment horizon |
 
 ### RPO and RTO by System Tier
@@ -72,15 +59,10 @@ Before selecting any specific AWS service, an architecture review should establi
 Not every system in an enterprise portfolio deserves the same recovery investment. A common and defensible pattern is to classify systems into tiers and apply differentiated RPO/RTO targets, because chasing near-zero RPO/RTO for every system is both financially wasteful and operationally counterproductive — it dilutes engineering attention that should go to the systems that actually need it.
 
 | Tier | Example Systems | RPO Target | RTO Target | Typical Pattern |
-
 |---|---|---|---|---|
-
 | Tier 0 – Mission Critical | Payment processing, core ledger | < 1 minute | < 15 minutes | Multi-AZ + multi-region active-active or active-passive, automated failover |
-
 | Tier 1 – Business Critical | Customer-facing web app, order management | < 15 minutes | < 1 hour | Multi-AZ, cross-region backup, warm standby |
-
 | Tier 2 – Important | Internal tools, reporting dashboards | < 4 hours | < 8 hours | Multi-AZ, daily cross-region snapshot |
-
 | Tier 3 – Non-critical | Dev/test environments, batch analytics | < 24 hours | < 48 hours | Single-AZ acceptable, standard backup |
 
 > **Note:** RPO/RTO targets should be signed off by the business owner, not set unilaterally by engineering. A common architecture review failure is engineering assuming a system is Tier 2 while the business treats it as Tier 0 during an actual incident.
@@ -183,25 +165,15 @@ This section covers every AWS service category relevant to a general-purpose ent
 ### Compute Decision Matrix
 
 | Factor | EC2 | ECS Fargate | Lambda | EKS |
-
 |---|---|---|---|---|
-
 | Operational overhead | High | Low | Lowest | Highest |
-
 | Cold start | None (always running) | Seconds | Milliseconds–seconds | N/A (pods) |
-
 | Max execution duration | Unlimited | Unlimited | 15 minutes | Unlimited |
-
 | Best for steady-state high throughput | Yes | Yes | No | Yes |
-
 | Best for spiky/event-driven | No | Partial | Yes | Partial |
-
 | Team needs Kubernetes skills | No | No | No | Yes |
-
 | Custom OS/kernel access | Yes | No | No | Yes (node level) |
-
 | Typical cost profile at low utilization | Poor | Fair | Excellent | Poor |
-
 | Typical cost profile at high, steady utilization | Excellent (with RI/SP) | Good | Poor | Good |
 
 ## 4.2 Storage
@@ -243,17 +215,11 @@ This section covers every AWS service category relevant to a general-purpose ent
 ### Storage Decision Matrix
 
 | Factor | S3 | EBS | EFS | FSx |
-
 |---|---|---|---|---|
-
 | Access pattern | Object (API) | Block (single instance) | File (shared, POSIX) | File (Windows/HPC) |
-
 | Multi-instance concurrent access | Yes (via API) | No | Yes | Yes |
-
 | Durability | 11 nines | AZ-bound, needs snapshots | Regional | Varies by type |
-
 | Typical use case | Data lake, backups, static assets | Databases, boot volumes | Shared app storage | Windows shares, HPC scratch |
-
 | Cost profile | Lowest per GB (with tiering) | Moderate | Higher per GB | Higher per GB |
 
 ## 4.3 Networking
@@ -327,19 +293,12 @@ This section covers every AWS service category relevant to a general-purpose ent
 ### Database Decision Matrix
 
 | Factor | RDS | Aurora | DynamoDB |
-
 |---|---|---|---|
-
 | Query model | SQL, joins, ad hoc queries | SQL, joins, ad hoc queries | Key-value/document, defined access patterns |
-
 | Scaling | Vertical (resize instance) | Vertical + read replicas, Serverless v2 | Horizontal, near-unlimited |
-
 | Failover time | 60–120s (Multi-AZ) | < 30s | N/A (multi-AZ by default) |
-
 | Operational overhead | Low (managed) | Low (managed) | Lowest (fully serverless) |
-
 | Best for | Traditional OLTP, known engine requirements | High-throughput OLTP, fast failover needs | High-scale, well-defined access patterns |
-
 | Schema flexibility | High (relational) | High (relational) | Low — access patterns fixed at design time |
 
 ## 4.5 Messaging
@@ -365,15 +324,10 @@ This section covers every AWS service category relevant to a general-purpose ent
 ### Messaging Decision Matrix
 
 | Factor | SQS | SNS | EventBridge |
-
 |---|---|---|---|
-
 | Pattern | Point-to-point queue | Pub/sub fan-out | Content-based event routing |
-
 | Ordering guarantee | FIFO queues only | No | No (per-event) |
-
 | Content-based filtering | No | Basic (attributes) | Advanced (rule patterns) |
-
 | Best for | Work queues, buffering, retries | Simple fan-out to multiple subscribers | Complex, multi-source event architectures |
 
 ## 4.6 Analytics
@@ -519,37 +473,21 @@ flowchart TB
 # 6 Component-by-Component Explanation
 
 | Component | Purpose | Scaling | High Availability | Failure Handling | Key Dependencies |
-
 |---|---|---|---|---|---|
-
 | Route 53 | DNS resolution, health-check-based failover | N/A (managed, global) | Multi-region by design | Health checks trigger automatic failover routing | None (root of the chain) |
-
 | CloudFront | Edge caching, TLS termination, DDoS absorption | Automatic, global edge network | Built-in multi-edge-location redundancy | Origin failover groups for multi-origin resilience | Origin (ALB or S3) |
-
 | WAF / Shield | Layer 7 filtering, DDoS protection | Automatic | N/A (edge service) | Rule-based blocking; Shield Advanced adds 24/7 DRT support | CloudFront/ALB attachment |
-
 | ALB | Layer 7 load balancing, routing | Automatic, scales to traffic | Multi-AZ by default | Removes unhealthy targets via health checks | Target compute (ECS/EC2/Lambda) |
-
 | ECS Fargate Service | Runs containerized application logic | Auto Scaling based on CPU/memory/custom metrics | Tasks spread across multiple AZs | ECS reschedules failed tasks automatically | ALB, IAM task role, data tier |
-
 | Lambda Functions | Event-driven processing | Automatic, per-invocation | Multi-AZ by default | Automatic retries (config-dependent), DLQ for poison messages | IAM execution role, event source |
-
 | Aurora | Primary relational data store | Read replicas (up to 15), Serverless v2 auto-scaling | 3-AZ storage replication, automated failover | Automatic failover to replica, point-in-time recovery | KMS, Secrets Manager, VPC security groups |
-
 | DynamoDB | High-scale key-value data store | On-demand or provisioned with auto scaling | Multi-AZ by default (all tables) | Automatic; conditional writes prevent race conditions | IAM, KMS (encryption at rest) |
-
 | ElastiCache Redis | Caching, session store | Cluster mode for horizontal scaling | Multi-AZ with automatic failover | Automatic failover to replica | VPC security groups |
-
 | SQS | Decoupling, buffering, retry | Automatic, virtually unlimited throughput | Multi-AZ by design | Dead-letter queues for repeated processing failures | IAM |
-
 | SNS | Pub/sub fan-out | Automatic | Multi-AZ by design | Delivery retries with backoff | IAM |
-
 | EventBridge | Content-based event routing | Automatic | Multi-AZ by design | Retry policies, DLQ per rule target | IAM, schema registry |
-
 | S3 | Object storage (assets, data lake, backups) | Automatic, virtually unlimited | 11 nines durability, multi-AZ within region | Versioning + cross-region replication for DR | KMS, IAM bucket policy |
-
 | GuardDuty | Threat detection | N/A (managed, regional) | Multi-region aggregation via Security Hub | Findings feed into Security Hub and EventBridge for automated response | CloudTrail, VPC Flow Logs, DNS logs |
-
 | CloudWatch | Metrics, logs, alarms, dashboards | Automatic | Regional service with high durability | Alarms trigger SNS/Lambda-based remediation | All compute/data components as sources |
 
 ---
@@ -669,21 +607,13 @@ Every deployment pipeline should include automated post-deploy validation: smoke
 A production VPC should be planned with a CIDR block large enough to accommodate multiple subnet tiers across multiple Availability Zones, with headroom for growth. A common enterprise pattern:
 
 | Element | Example CIDR | Notes |
-
 |---|---|---|
-
 | VPC | 10.0.0.0/16 | 65,536 addresses; leave room for multiple VPCs per environment across the CIDR space (e.g., 10.0.0.0/16 for prod, 10.1.0.0/16 for staging) |
-
 | Public subnet AZ-a | 10.0.0.0/24 | ALB, NAT Gateway |
-
 | Public subnet AZ-b | 10.0.1.0/24 | ALB, NAT Gateway |
-
 | Private app subnet AZ-a | 10.0.10.0/24 | ECS/EC2/Lambda ENIs |
-
 | Private app subnet AZ-b | 10.0.11.0/24 | ECS/EC2/Lambda ENIs |
-
 | Private data subnet AZ-a | 10.0.20.0/24 | RDS/Aurora/ElastiCache |
-
 | Private data subnet AZ-b | 10.0.21.0/24 | RDS/Aurora/ElastiCache |
 
 > **Warning:** Never plan CIDR ranges in isolation from the rest of the organization's network estate. Overlapping CIDR ranges between VPCs that later need to be peered or connected via Transit Gateway (or to on-premises networks via Direct Connect/VPN) force a costly re-IP effort. Establish an IP address management (IPAM) policy — AWS VPC IPAM is purpose-built for this — before the second VPC is created.
@@ -703,13 +633,9 @@ Once an organization operates more than roughly 3–4 VPCs that need mutual conn
 ## Route Tables, Network ACLs, and Security Groups
 
 | Control | Scope | Stateful? | Typical Use |
-
 |---|---|---|---|
-
 | Route Tables | Subnet-level | N/A | Determine where traffic is sent (IGW, NAT, TGW, VPC endpoint, local) |
-
 | Network ACLs | Subnet-level | No (stateless — must define both inbound and outbound rules) | Coarse-grained subnet boundary control, defense in depth |
-
 | Security Groups | ENI/instance-level | Yes (return traffic automatically allowed) | Primary mechanism for least-privilege access control between resources |
 
 > **Note:** Security Groups, not Network ACLs, should be the primary access control mechanism in almost all designs — they are stateful, resource-scoped, and far easier to reason about. NACLs are best reserved for coarse, rarely-changing subnet-level rules (e.g., explicitly denying a known-bad CIDR range) rather than fine-grained application logic.
@@ -824,23 +750,14 @@ Zero Trust, applied concretely rather than as a buzzword, means: no implicit tru
 ## Threat Model and Mitigations
 
 | Attack Vector | Description | Primary Mitigation |
-
 |---|---|---|
-
 | Credential compromise (long-lived keys) | Leaked IAM user access keys used for unauthorized access | Use IAM roles instead of long-lived keys; GuardDuty anomaly detection; mandatory MFA for human users |
-
 | SSRF against IMDS | Application vulnerability used to steal instance credentials via the metadata service | Enforce IMDSv2 (session-oriented, token-required) account-wide via SCP |
-
 | Public data exposure | S3 bucket or snapshot accidentally made public | SCP denying public bucket policies; AWS Config rules; S3 Block Public Access at account level |
-
 | Overly permissive IAM | Wildcard policies granting far more access than needed | IAM Access Analyzer, permission boundaries, regular access reviews |
-
 | Injection attacks (SQLi, XSS) | Malicious input exploiting application vulnerabilities | WAF managed rule groups; parameterized queries; input validation at the application layer |
-
 | DDoS | Volumetric or application-layer denial of service | CloudFront + Shield (Standard/Advanced) + WAF rate-based rules |
-
 | Supply chain compromise | Malicious dependency or compromised CI/CD pipeline | Inspector scanning, SBOM generation, signed artifacts, restricted CI/CD IAM roles |
-
 | Data exfiltration via compromised workload | Compromised container/instance exfiltrating data over the network | Egress-restricted security groups, VPC endpoints instead of NAT for AWS service traffic, GuardDuty |
 
 ---
@@ -884,15 +801,10 @@ Every stateful component needs an explicit, tested backup strategy, not an assum
 ## DR Strategy Patterns
 
 | Pattern | RTO | RPO | Relative Cost | Description |
-
 |---|---|---|---|---|
-
 | Backup & Restore | Hours | Hours | $ | Regular backups to a DR region; infrastructure provisioned only when needed |
-
 | Pilot Light | Tens of minutes | Minutes | $$ | Core data replicated continuously; minimal standby compute, scaled up on failover |
-
 | Warm Standby | Minutes | Seconds–minutes | $$$ | Scaled-down but fully functional replica environment running continuously |
-
 | Multi-Site Active-Active | Near-zero | Near-zero | $$$$ | Full production capacity running simultaneously in multiple regions, active traffic in both |
 
 **Selection guidance:** Map each system's Section 2 tier directly to a DR pattern — Tier 0 systems justify warm standby or active-active; Tier 2/3 systems are typically over-engineered by anything beyond backup-and-restore or pilot light. A common architecture review failure is applying a single DR pattern uniformly across an entire portfolio regardless of tier, which either overspends on low-value systems or under-protects high-value ones.
@@ -958,25 +870,15 @@ CPU-bound or I/O-bound work that doesn't need to block the request path (sending
 The estimates below are illustrative, based on `us-east-1` on-demand pricing at time of writing, for the architecture pattern shown in Section 5. Actual costs vary by traffic pattern, data volume, and commitment discounts — treat these as a starting point for a Cost Explorer-validated estimate, not a quote.
 
 | Component | Small (startup) | Medium (growth-stage) | Enterprise |
-
 |---|---|---|---|
-
 | Compute (ECS Fargate / EC2) | $150–400 | $1,500–4,000 | $15,000–50,000+ |
-
 | Database (Aurora) | $200–400 | $1,200–3,000 | $10,000–30,000+ |
-
 | Load Balancing + NAT | $80–150 | $300–600 | $1,500–4,000 |
-
 | CloudFront + WAF | $20–100 | $300–1,000 | $3,000–15,000 |
-
 | S3 Storage | $10–50 | $200–800 | $2,000–10,000+ |
-
 | ElastiCache | $50–100 | $400–1,000 | $3,000–8,000 |
-
 | Messaging (SQS/SNS/EventBridge) | < $20 | $100–300 | $1,000–5,000 |
-
 | Monitoring (CloudWatch/X-Ray) | $30–80 | $200–600 | $2,000–6,000 |
-
 | **Approximate Total** | **$560–1,300** | **$4,200–11,300** | **$38,500–128,000+** |
 
 ## Major Cost Drivers
@@ -990,19 +892,12 @@ In roughly descending order of how often they dominate an unexpectedly high AWS 
 ## S3 Lifecycle and Storage Classes
 
 | Storage Class | Use Case | Relative Cost |
-
 |---|---|---|
-
 | S3 Standard | Frequently accessed data | Baseline |
-
 | S3 Intelligent-Tiering | Unknown/changing access patterns | Baseline + small monitoring fee, saves automatically |
-
 | S3 Standard-IA | Infrequent access, millisecond retrieval needed | ~45% less than Standard |
-
 | S3 Glacier Instant Retrieval | Archival with millisecond retrieval | ~68% less than Standard |
-
 | S3 Glacier Flexible Retrieval | Archival, retrieval in minutes–hours acceptable | ~80% less than Standard |
-
 | S3 Glacier Deep Archive | Long-term archival (7+ years), 12-hour retrieval acceptable | ~95% less than Standard |
 
 A lifecycle policy transitioning objects Standard → Standard-IA at 30 days → Glacier Flexible at 90 days → Deep Archive at 365 days is a common, defensible default for log and backup data; application data with genuinely unpredictable access should generally use Intelligent-Tiering instead of hand-authored lifecycle rules.
@@ -1595,13 +1490,9 @@ X-Ray traces a request across every instrumented hop (ALB → ECS → downstream
 ## SLIs, SLOs, and Error Budgets
 
 | Concept | Definition | Example |
-
 |---|---|---|
-
 | SLI (Service Level Indicator) | A measured metric of user-facing behavior | p99 API latency, successful request percentage |
-
 | SLO (Service Level Objective) | A target value for an SLI over a time window | p99 latency < 300ms for 99.5% of 30-day rolling window |
-
 | Error Budget | The allowable amount of SLO violation before corrective action is mandated | 0.5% of requests may exceed the latency target before the team pauses feature work to address reliability |
 
 Defining SLOs explicitly (rather than relying on informal "it feels slow" reports) gives engineering teams an objective basis for prioritizing reliability work against feature work — the error budget concept, specifically, prevents both extremes: shipping features indefinitely while reliability silently degrades, and over-investing in reliability work for a system that is comfortably within its target.
@@ -1629,15 +1520,10 @@ For teams needing near-real-time, full-text-searchable log analysis with rich da
 ## Retention Policy
 
 | Log Type | Typical Hot Retention (CloudWatch) | Typical Cold Retention (S3) |
-
 |---|---|---|
-
 | Application logs | 30 days | 1 year |
-
 | ALB/CloudFront access logs | 30 days | 1–3 years |
-
 | VPC Flow Logs | 14 days | 1 year |
-
 | CloudTrail (audit) | 90 days | 7 years (compliance-driven) |
 
 Retention periods should be driven by the applicable compliance framework (PCI-DSS, HIPAA, SOC 2 all specify minimum audit log retention) as a floor, with cost as the reason to move data to S3/Glacier rather than a reason to delete it prematurely.
@@ -1675,37 +1561,21 @@ A minimal, effective incident response process includes: a clear severity classi
 # 24 Failure Scenarios
 
 | # | Failure | Symptoms | Root Cause | Detection | Resolution | Prevention |
-
 |---|---|---|---|---|---|---|
-
 | 1 | AZ outage | Elevated errors, subset of tasks unreachable | Physical/power/network failure in one AZ | CloudWatch AZ-level health signals, ALB target health | ALB routes around unhealthy AZ automatically; ASG replaces lost capacity in healthy AZs | Multi-AZ deployment for every tier, including data |
-
 | 2 | Database primary failure | Connection errors, elevated latency during failover | Underlying host failure, storage issue | RDS/Aurora events, CloudWatch DatabaseConnections drop | Automated Multi-AZ failover; application retry logic | Multi-AZ enabled, tested failover, retry logic with backoff in app code |
-
 | 3 | NAT Gateway failure | Private-subnet outbound calls fail in one AZ | Single NAT Gateway serving multiple AZs, or AZ-level issue | Elevated errors on outbound-dependent calls (e.g., third-party API calls) | Traffic in affected AZ has no path; requires per-AZ NAT | Deploy one NAT Gateway per AZ (Section 9) |
-
 | 4 | Runaway Lambda recursion | Sudden cost spike, throttling errors | Misconfigured event source causing self-triggering loop | Cost Anomaly Detection, CloudWatch invocation count spike | Disable/fix the trigger; add recursion guard | Recursion detection config, careful event-source design review |
-
 | 5 | Exhausted RDS connections | Application errors: "too many connections" | High-concurrency compute (e.g., Lambda) opening direct DB connections | CloudWatch DatabaseConnections near max_connections | Deploy RDS Proxy; add connection pooling | RDS Proxy as default pattern for Lambda-to-RDS |
-
 | 6 | S3 bucket made public accidentally | GuardDuty/Config finding, potential data exposure | Manual console change or misconfigured bucket policy | AWS Config rule violation, Security Hub finding | Immediately restrict bucket policy; rotate any exposed credentials | S3 Block Public Access at account level via SCP |
-
 | 7 | Certificate expiration | TLS handshake failures, browser warnings | Manually managed certificate not renewed | Uptime monitoring, CloudWatch synthetic canary failure | Issue/attach new certificate | Use ACM for automatic renewal instead of manually managed certs |
-
 | 8 | DynamoDB hot partition | Throttling on specific keys despite overall table capacity available | Poor partition key design causing uneven access distribution | CloudWatch ThrottledRequests metric | Redesign partition key strategy (often requires data migration) | Model partition key against actual access pattern before launch (Section 4.4) |
-
 | 9 | Auto Scaling flapping | Repeated scale-out/scale-in cycles, cost spikes | Scaling policy threshold too sensitive or metric too noisy | CloudWatch Auto Scaling activity history | Tune target-tracking thresholds, add cooldown periods | Load-test scaling policies before production; use appropriate metric smoothing |
-
 | 10 | Secrets Manager rotation failure | Application authentication failures after rotation window | Rotation Lambda misconfigured or lacks required permissions | CloudWatch Logs from rotation Lambda, application auth error spike | Manually complete/roll back rotation; fix Lambda permissions | Test rotation in staging before enabling in production |
-
 | 11 | CloudFront cache poisoning via unkeyed headers | Users receiving incorrect cached content | Cache key configuration includes/excludes wrong headers | User reports, synthetic monitoring mismatches | Invalidate affected cache, fix cache policy | Careful cache key policy design and testing before launch |
-
 | 12 | IAM permission boundary blocking legitimate access | Unexpected AccessDenied errors after a role change | Permission boundary or SCP more restrictive than intended | CloudTrail AccessDenied events | Adjust boundary/SCP after review | Test IAM changes in a non-prod account/OU first |
-
 | 13 | Cross-region replication lag during regional incident | DR region data is stale at failover time | Replication lag exceeded RPO target under heavy write load | Aurora Global Database replication lag metric | Accept data loss within measured lag, or delay failover | Monitor replication lag continuously; alarm before it approaches RPO threshold |
-
 | 14 | WAF rule blocking legitimate traffic | Elevated 403s from legitimate users | Overly aggressive managed rule group or custom rule | CloudWatch WAF metrics, user reports | Adjust/exclude the specific rule | Use WAF in "count" mode before "block" mode for new rules |
-
 | 15 | Orphaned resources accumulating cost | Gradual, unexplained cost creep | Resources (EBS volumes, snapshots, load balancers) not cleaned up after their owning resource is deleted | Cost Anomaly Detection, monthly cost review | Identify and terminate orphaned resources | Automated cleanup via lifecycle policies; IaC-only provisioning (Section 8) so deletion is also codified |
 
 ---
@@ -1713,25 +1583,15 @@ A minimal, effective incident response process includes: a clear severity classi
 # 25 Troubleshooting Guide
 
 | Problem | Symptoms | Likely Cause | Diagnosis | AWS CLI Command | Resolution |
-
 |---|---|---|---|---|---|
-
 | High API latency | p99 latency above SLO | Database query slowness, cold Lambda starts, or downstream dependency | Check X-Ray trace breakdown by segment | `aws xray get-trace-summaries --time-range-type TraceId` | Optimize slow query/add index; enable Provisioned Concurrency; add caching |
-
 | 5xx errors from ALB | Elevated ALB 5xx count | Unhealthy targets, application crashes | Check target health and application logs | `aws elbv2 describe-target-health --target-group-arn <arn>` | Fix application bug; verify health check configuration |
-
 | ECS tasks stuck in PENDING | Service never reaches desired count | Insufficient subnet IPs, image pull failure, IAM permission issue | Check ECS service events | `aws ecs describe-services --cluster <c> --services <s>` | Free subnet IP space; fix ECR permissions; verify task role |
-
 | Database CPU pegged at 100% | Slow queries, timeouts | Missing index, inefficient query, undersized instance | Enable Performance Insights, review slow query log | `aws rds describe-db-instances --db-instance-identifier <id>` | Add index; optimize query; consider read replica offload or instance resize |
-
 | Unexpected cost spike | Bill significantly above forecast | Runaway resource (Lambda loop, oversized Auto Scaling), data transfer spike | Cost Explorer breakdown by service/day | `aws ce get-cost-and-usage --time-period Start=...,End=... --granularity DAILY --metrics UnblendedCost` | Identify and stop the runaway resource; add Budget alert for early detection next time |
-
 | GuardDuty finding: unusual API activity | Security alert for anomalous behavior | Compromised credentials or genuinely new legitimate usage pattern | Review CloudTrail events for the flagged principal | `aws cloudtrail lookup-events --lookup-attributes AttributeKey=Username,AttributeValue=<user>` | Rotate/revoke compromised credentials; suppress finding if verified legitimate |
-
 | Terraform apply fails with state lock error | "Error acquiring the state lock" | Previous apply crashed without releasing DynamoDB lock | Check DynamoDB lock table entry | `aws dynamodb get-item --table-name acme-terraform-locks --key '{"LockID":{"S":"<lock-id>"}}'` | Verify no other apply is running, then `terraform force-unlock` |
-
 | SQS messages not being processed | Growing ApproximateNumberOfMessagesVisible | Consumer (Lambda/ECS) errors or insufficient concurrency | Check consumer error logs and DLQ | `aws sqs get-queue-attributes --queue-url <url> --attribute-names All` | Fix consumer bug; increase concurrency; inspect DLQ for poison messages |
-
 | CloudFront serving stale content | Users see outdated content past expected TTL | Cache invalidation not triggered, or TTL misconfigured | Check distribution cache behavior settings | `aws cloudfront get-distribution-config --id <dist-id>` | Issue invalidation; correct TTL/cache policy |
 
 ---
@@ -1802,19 +1662,12 @@ A minimal, effective incident response process includes: a clear severity classi
 # 28 Alternatives
 
 | Alternative Approach | Advantages | Disadvantages | Relative Cost | Operational Complexity | Security | Performance |
-
 |---|---|---|---|---|---|---|
-
 | **This architecture** (ECS Fargate + Aurora + managed messaging) | Balanced operational overhead, strong AWS-native integration, mature tooling | AWS-specific, moderate learning curve for full stack | $$$ | Medium | Strong (with disciplined IAM/KMS use) | Strong |
-
 | **Kubernetes (EKS) based** | Portable across clouds, large ecosystem, fine-grained scheduling control | Highest operational complexity, requires dedicated platform expertise | $$$$ | High | Strong but requires more manual configuration | Strong |
-
 | **Fully serverless (Lambda + DynamoDB + API Gateway)** | Near-zero idle cost, minimal operational overhead, scales to zero | 15-min execution limits, cold starts, DynamoDB's rigid access-pattern modeling | $ (low traffic) – $$$ (high sustained traffic) | Low | Strong (smaller attack surface) | Excellent for spiky, variable for sustained high throughput |
-
 | **Traditional EC2 + self-managed database on EC2** | Maximum control, familiar to teams with on-prem background | Highest patching/operational burden, no managed failover, slowest to provision | $$ | High | Depends entirely on team discipline | Good, but requires manual tuning |
-
 | **Multi-cloud (AWS + Azure/GCP) active-active** | Vendor risk diversification, potential negotiating leverage | Very high complexity, duplicated tooling/expertise, higher net cost | $$$$$ | Very High | Complex — doubled attack surface to secure consistently | Depends on design, rarely simpler than single-cloud |
-
 | **App Runner / Elastic Beanstalk (PaaS-style)** | Lowest setup complexity, fastest time-to-first-deploy | Least architectural control, can become limiting at scale or for complex topologies | $$ | Low | Good defaults, less customizable | Good for standard web workloads |
 
 **When each alternative wins:** The architecture in this chapter is the right default for most mid-to-large enterprise workloads needing a balance of control and managed-service leverage. Fully serverless wins for genuinely spiky, event-driven workloads, especially at a startup's early stage before traffic is predictable. EKS wins when the organization already has Kubernetes expertise or a genuine multi-cloud portability requirement. Traditional EC2-with-self-managed-database is rarely the right choice for new builds today, and mostly persists as legacy debt. Multi-cloud active-active is justified only by specific regulatory or extreme business-continuity requirements — the operational cost is severe and should not be taken on for hypothetical future flexibility alone. PaaS options win for small teams prioritizing speed over architectural control, typically pre-Series-B startups or internal tools with modest scale requirements.
@@ -2037,33 +1890,19 @@ Commonly encountered AWS service quotas include: EC2 On-Demand instance vCPU lim
 ## Decision Matrix
 
 | Criteria | This Architecture (ECS Fargate + Aurora) | Fully Serverless (Lambda + DynamoDB) | EKS-based | Traditional EC2 + Self-Managed DB |
-
 |---|---|---|---|---|
-
 | Cost (low/variable traffic) | Fair | Excellent | Poor | Fair |
-
 | Cost (high, steady traffic) | Good | Fair | Good | Good |
-
 | Complexity | Medium | Low–Medium | High | Medium–High |
-
 | Performance | Strong | Variable (cold starts) | Strong | Strong (with tuning) |
-
 | Reliability | Strong | Strong | Strong | Depends on team discipline |
-
 | Scalability | Strong | Excellent | Strong | Fair (manual effort) |
-
 | Security | Strong | Strong (smaller surface) | Strong (more manual config) | Depends on team discipline |
-
 | Operational effort | Medium | Low | High | High |
-
 | Maintainability | Good | Good | Fair (ecosystem complexity) | Fair |
-
 | Compliance readiness | Strong | Strong | Strong | Requires more manual evidence |
-
 | Time to market | Good | Excellent | Fair | Poor |
-
 | Developer experience | Good | Good (within Lambda's constraints) | Fair (steep learning curve) | Fair |
-
 | **Overall recommendation** | **Default choice for most Tier 0–2 enterprise web/API workloads** | Best for spiky/event-driven workloads and early-stage products | Best with existing K8s expertise or multi-cloud requirement | Generally not recommended for new builds |
 
 ## Final Recommendations from the Architect
