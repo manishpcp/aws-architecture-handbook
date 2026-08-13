@@ -33,12 +33,19 @@ The second reason organizations adopt this pattern is **audit and compliance pre
 ## Major Business Benefits
 
 | Benefit | Explanation |
+
 |---|---|
+
 | Reduced onboarding time | New engineers self-serve architecture understanding via layered C4 diagrams instead of requiring hours of tribal-knowledge transfer from senior staff. |
+
 | Faster incident response | Accurate, current network and data flow diagrams let responders reason about blast radius and dependencies during an active incident rather than during a calmer retrospective. |
+
 | Audit readiness | ADRs and threat models with Git-backed review history provide direct, always-current evidence for SOC 2/ISO 27001 auditors. |
+
 | Reduced architectural drift | Documentation tied to the CI/CD pipeline surfaces undocumented changes as a review-time signal, not a surprise discovered months later. |
+
 | Better cross-team collaboration | A shared, searchable documentation platform lets teams discover and reuse existing patterns rather than re-solving problems other teams have already documented. |
+
 | Lower key-person risk | Architecture knowledge is captured in reviewable, versioned artifacts rather than existing only in a small number of engineers' heads. |
 
 ## Typical Enterprise Scenarios
@@ -68,25 +75,41 @@ It is a lower priority for a very small engineering team (fewer than 10–15 eng
 ## Functional Requirements
 
 | Requirement | Description |
+
 |---|---|
+
 | Diagrams-as-code authoring | Support Mermaid, PlantUML, and Structurizr DSL as text-based diagram source formats stored in Git. |
+
 | Automated rendering | CI/CD pipeline renders diagram source into static SVG/PNG and publishes to the documentation site on every merge to main. |
+
 | C4 model support | Support Context, Container, Component, and (optionally) Code-level C4 views with consistent cross-linking between levels. |
+
 | ADR repository | Structured, searchable repository of Architecture Decision Records, one per architecturally significant decision, linked to the systems they affect. |
+
 | Threat model repository | STRIDE-based threat model documents per system, linked to their corresponding architecture diagrams and data flow diagrams. |
+
 | Full-text search | Search across all diagrams, ADRs, and threat models by system name, component name, technology, or decision keyword. |
+
 | Access control | Role-based access — general engineering read access, restricted write access per system ownership, and a separate read tier for auditors/compliance without broader engineering access. |
+
 | Versioning | Every document accessible at any historical Git commit, not just the latest version. |
 
 ## Non-Functional Requirements
 
 | Category | Target |
+
 |---|---|
+
 | Availability | 99.5% (internal tooling — lower than customer-facing tiers, but not "best effort") |
+
 | Latency | < 1 second page load for rendered documentation pages; < 2 seconds for search queries |
+
 | Build/render pipeline latency | Diagram changes published within 5 minutes of merge to main |
+
 | Durability | 99.999999999% (11 nines) for documentation source and rendered artifacts (S3-backed) |
+
 | Security | Read access restricted to authenticated internal users; write access scoped to system owners via Git branch protection |
+
 | Compliance | Documentation update history must be retrievable for a minimum of 3 years to satisfy audit evidence requirements |
 
 ## Scalability Goals
@@ -163,6 +186,7 @@ The C4 model (Context, Containers, Components, Code) is a hierarchical approach 
 **When NOT to use C4 diagrams:** For a single-purpose Lambda function performing a simple, well-named transformation with no internal architectural complexity, a Context and Container-level mention is sufficient — a full four-level C4 treatment for a 40-line function is documentation-process overhead without corresponding value.
 
 ```mermaid
+
 flowchart TB
     subgraph L1["Level 1: System Context"]
         C1[Order Management System] --- U1[Customer]
@@ -185,6 +209,7 @@ flowchart TB
     end
     L1 -.zoom in.-> L2
     L2 -.zoom in.-> L3
+
 ```
 
 ### AWS Architecture Icons
@@ -198,6 +223,7 @@ AWS publishes an official Architecture Icons set (updated several times per year
 Sequence diagrams document the temporal, step-by-step interaction between components for a specific scenario — precisely the artifact needed to answer "in what order do these five services call each other during checkout, and what happens if step 3 fails?" This platform mandates a sequence diagram for every architecturally significant workflow (the primary "happy path" plus at least one significant failure/retry path) — a static Container diagram alone cannot express ordering, synchronous-versus-asynchronous distinction, or timeout/retry behavior, all of which are exactly the details an incident responder or a new engineer implementing a similar flow needs.
 
 ```mermaid
+
 sequenceDiagram
     participant Client
     participant API as Orders API
@@ -216,6 +242,7 @@ sequenceDiagram
     API->>DB: BEGIN TRANSACTION; INSERT order
     DB-->>API: Constraint violation
     API-->>Client: 409 Conflict (no event published)
+
 ```
 
 **When to use:** Any workflow spanning 3+ components with a meaningful ordering or failure-branching structure.
@@ -245,12 +272,19 @@ A threat model is a structured analysis of a system's attack surface, typically 
 **Example STRIDE entry (Orders API, "place order" trust boundary crossing from public internet to VPC):**
 
 | Threat Category | Specific Threat | Mitigation |
+
 |---|---|---|
+
 | Spoofing | Attacker forges a customer's session to place fraudulent orders | JWT signature validation; short token expiry; MFA on account changes |
+
 | Tampering | Attacker modifies order payload in transit to alter pricing | TLS 1.2+ enforced end-to-end; server-side price recalculation, never trusting client-supplied price |
+
 | Repudiation | Customer disputes having placed an order | CloudTrail + application-level audit log with immutable order history |
+
 | Information Disclosure | Attacker enumerates order IDs to view other customers' orders | Authorization check on every order-detail request tied to the authenticated customer ID, not just the order ID |
+
 | Denial of Service | Attacker floods the checkout endpoint | WAF rate-based rules; CloudFront/Shield Standard absorption |
+
 | Elevation of Privilege | Compromised customer session used to access admin endpoints | Separate authorization scopes for customer vs. admin roles; admin console network-isolated |
 
 **When to use:** Mandatory for internet-facing systems and anything processing regulated data.
@@ -278,15 +312,25 @@ An ADR is a short, structured document capturing a single architecturally signif
 ## Core Components
 
 | Layer | Components |
+
 |---|---|
+
 | Source | Git repositories (per-system, containing Markdown/Mermaid/PlantUML/Structurizr DSL alongside application code) |
+
 | Build/Render | AWS CodeBuild (or GitHub Actions runners) rendering diagram source to SVG, composing the static site via MkDocs/Docusaurus |
+
 | Publishing | Amazon S3 (static site origin), Amazon CloudFront (CDN + access control integration) |
+
 | Search | Amazon OpenSearch Service (full-text index of rendered content) |
+
 | Access Control | AWS IAM Identity Center / SSO federation, CloudFront signed cookies for authenticated access |
+
 | Automation | AWS Lambda (link-checking, staleness-detection, ADR-index generation) |
+
 | Storage | S3 (icon asset library, build artifacts, search index snapshots) |
+
 | Security | IAM, KMS (encryption of any sensitive threat-model content at rest), CloudTrail, GuardDuty |
+
 | Observability | CloudWatch (build pipeline health, site latency, search performance) |
 
 ## How Components Interact
@@ -436,6 +480,7 @@ Documentation source lives indefinitely in Git (subject to the source repository
 # 5. Complete Architecture Diagram
 
 ```mermaid
+
 flowchart TB
     subgraph Users["Users"]
         ENG[Engineers]
@@ -511,6 +556,7 @@ flowchart TB
     CB -.emits.-> CW
     CF -.emits.-> CW
     OS -.emits.-> CW
+
 ```
 
 ---
@@ -717,6 +763,7 @@ Distinct roles exist for: the CodeBuild rendering pipeline (write access to the 
 ## IAM Policies
 
 ```json
+
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -740,6 +787,7 @@ Distinct roles exist for: the CodeBuild rendering pipeline (write access to the 
     }
   ]
 }
+
 ```
 
 ## Resource Policies
@@ -829,21 +877,33 @@ This platform is itself subject to the same threat-modeling discipline it exists
 ## Attack Vectors
 
 | Vector | Description |
+
 |---|---|
+
 | Signed-cookie forgery | An attacker forges or replays a signed authentication cookie to bypass access control |
+
 | Public S3 misconfiguration | Accidental public exposure of the site bucket, particularly its sensitive threat-model content |
+
 | Compromised CI/CD credential | A leaked build-pipeline credential used to publish malicious/misleading documentation content |
+
 | OpenSearch index exposure | Misconfigured field-level security exposing sensitive content to an under-privileged searcher |
+
 | Cross-repository token overreach | The staleness-detector's cross-repository read token scoped more broadly than necessary, providing an attacker who compromises it wider access than intended |
 
 ## Mitigations
 
 | Attack Vector | Mitigation |
+
 |---|---|
+
 | Signed-cookie forgery | Strong signing-key length/rotation; short cookie expiry; IP/user-agent binding where feasible |
+
 | Public S3 misconfiguration | Account-wide S3 Block Public Access; Config rule alerting on any bucket policy change |
+
 | Compromised CI/CD credential | Scoped build role permissions; branch protection requiring review before any merge that triggers a build |
+
 | OpenSearch index exposure | Field-level security tested explicitly as part of the platform's own QA process, not assumed correct |
+
 | Cross-repository token overreach | Token scoped to read-only, specific-repository access only, reviewed on the same cadence as any other credential |
 
 ---
@@ -921,10 +981,15 @@ Rarely needed for this platform's modest workload; if the OpenSearch cluster's q
 ## Auto Scaling
 
 | Component | Scaling Trigger | Behavior |
+
 |---|---|---|
+
 | CodeBuild | Concurrent build requests | Scales automatically up to account concurrency limits |
+
 | Search-handler Lambda | Concurrent search requests | Scales automatically with request volume |
+
 | OpenSearch (provisioned) | Manual/scheduled based on corpus growth and query volume trends | Not fully automatic — reviewed quarterly against actual usage |
+
 | OpenSearch Serverless (alternative) | Automatic | Scales transparently with query/indexing load |
 
 ## Serverless Scaling
@@ -984,13 +1049,21 @@ The staleness-detection nightly sweep and the link-checker are both deliberately
 *(A few dozen documented systems, small engineering organization)*
 
 | Line Item | Estimated Monthly Cost (USD) |
+
 |---|---|
+
 | S3 (site + artifacts) | $10 |
+
 | CloudFront | $20 |
+
 | CodeBuild (low build volume) | $15 |
+
 | Lambda (link-check, staleness, indexing) | $5 |
+
 | OpenSearch (small managed cluster, or Serverless at low volume) | $150 |
+
 | CloudWatch/security baseline | $30 |
+
 | **Estimated Total** | **≈ $230/month** |
 
 ## Estimated Monthly Cost — Medium Deployment
@@ -998,13 +1071,21 @@ The staleness-detection nightly sweep and the link-checker are both deliberately
 *(A few hundred documented systems, mid-size engineering organization)*
 
 | Line Item | Estimated Monthly Cost (USD) |
+
 |---|---|
+
 | S3 | $40 |
+
 | CloudFront | $80 |
+
 | CodeBuild | $60 |
+
 | Lambda | $25 |
+
 | OpenSearch (3-node provisioned cluster) | $450 |
+
 | CloudWatch/security baseline | $80 |
+
 | **Estimated Total** | **≈ $735/month** |
 
 ## Estimated Monthly Cost — Enterprise Deployment
@@ -1012,13 +1093,21 @@ The staleness-detection nightly sweep and the link-checker are both deliberately
 *(Several thousand documented systems, large multi-team engineering organization, higher search/build volume)*
 
 | Line Item | Estimated Monthly Cost (USD) |
+
 |---|---|
+
 | S3 | $120 |
+
 | CloudFront | $250 |
+
 | CodeBuild | $200 |
+
 | Lambda | $80 |
+
 | OpenSearch (larger provisioned cluster, Multi-AZ) | $1,400 |
+
 | CloudWatch/security baseline | $200 |
+
 | **Estimated Total** | **≈ $2,250/month** |
 
 > **Note:** These are directional planning figures, not a substitute for validating against actual usage in the AWS Pricing Calculator and Cost Explorer. This platform's cost is a small fraction of the primary production architecture's cost (Chapter 3), which is itself a useful FinOps talking point when justifying the platform's value relative to its cost.
@@ -1030,10 +1119,15 @@ OpenSearch is, by a meaningful margin, the largest cost line for this platform a
 ## Optimization Opportunities
 
 | Opportunity | Typical Savings |
+
 |---|---|
+
 | OpenSearch Serverless instead of provisioned instances, for genuinely bursty/low-baseline search traffic | Can substantially reduce cost for organizations where search query volume is low and spiky rather than steady |
+
 | CloudFront cache TTL tuning (longer TTLs given the controlled-publish content-change model) | Reduces origin fetch frequency and associated S3 request costs |
+
 | CodeBuild dependency caching | Reduces build minutes, and therefore cost, as build frequency grows |
+
 | S3 Lifecycle rules on versioned build artifacts (transition older versions to Standard-IA) | Reduces storage cost for artifacts retained purely for audit-history purposes, rarely actually accessed |
 
 ## Reserved Instances / Savings Plans
@@ -1095,6 +1189,7 @@ This entire chapter's subject matter is, in a sense, about formalizing exactly t
 ## Repository Structure
 
 ```
+
 docs-platform-infrastructure/
 ├── modules/
 │   ├── static-site-hosting/
@@ -1106,11 +1201,13 @@ docs-platform-infrastructure/
 │       ├── variables.tf
 │       └── backend.tf
 └── README.md
+
 ```
 
 ## Providers and Backend
 
 ```hcl
+
 # environments/production/providers.tf
 
 terraform {
@@ -1144,11 +1241,13 @@ provider "aws" {
     }
   }
 }
+
 ```
 
 ## Static Site Hosting Module
 
 ```hcl
+
 # modules/static-site-hosting/main.tf
 
 resource "aws_s3_bucket" "docs_site" {
@@ -1230,11 +1329,13 @@ resource "aws_cloudfront_distribution" "docs_site" {
     ssl_support_method  = "sni-only"
   }
 }
+
 ```
 
 ## Search Cluster Module (OpenSearch)
 
 ```hcl
+
 # modules/search-cluster/main.tf
 
 resource "aws_opensearch_domain" "docs_search" {
@@ -1275,11 +1376,13 @@ resource "aws_opensearch_domain" "docs_search" {
     volume_size = var.opensearch_volume_size_gb
   }
 }
+
 ```
 
 ## IAM (Search Indexer Lambda Role)
 
 ```hcl
+
 # modules/build-pipeline/iam.tf
 
 resource "aws_iam_role" "indexer_lambda_role" {
@@ -1317,11 +1420,13 @@ resource "aws_iam_role_policy" "indexer_lambda_policy" {
     ]
   })
 }
+
 ```
 
 ## Outputs
 
 ```hcl
+
 # environments/production/outputs.tf
 
 output "docs_site_url" {
@@ -1334,6 +1439,7 @@ output "opensearch_endpoint" {
   value       = module.search_cluster.domain_endpoint
   sensitive   = true
 }
+
 ```
 
 ## Remote State
@@ -1353,40 +1459,51 @@ Identical discipline to Chapter 3: S3 backend with versioning, DynamoDB locking,
 ## Deployment
 
 ```bash
+
 # Apply Terraform changes for the documentation platform infrastructure
+
 cd environments/production
 terraform init -backend-config=backend.hcl
 terraform plan -out=tfplan
 terraform apply tfplan
 
 # Manually trigger a documentation site rebuild (outside the normal Git-triggered flow)
+
 aws codebuild start-build \
   --project-name docs-platform-render-pipeline \
   --region us-east-1
+
 ```
 
 ## Validation
 
 ```bash
+
 # Confirm the CloudFront distribution is deployed and enabled
+
 aws cloudfront get-distribution \
   --id E1A2B3C4D5E6F7 \
   --query 'Distribution.[Status,DistributionConfig.Enabled]'
 
 # Verify the OpenSearch domain is active and healthy
+
 aws opensearch describe-domain \
   --domain-name production-docs-platform-search \
   --query 'DomainStatus.[Processing,Created]'
 
 # Run a smoke-test search query
+
 curl -s -X GET "https://search.docs.internal.example.com/_search?q=orders-service" \
   -H "Authorization: Bearer $TEST_TOKEN"
+
 ```
 
 ## Monitoring
 
 ```bash
+
 # Check recent CodeBuild build history and status
+
 aws codebuild list-builds-for-project \
   --project-name docs-platform-render-pipeline \
   --query 'ids[0:5]' --output text | \
@@ -1394,6 +1511,7 @@ tr '\t' '\n' | xargs -I{} aws codebuild batch-get-builds --ids {} \
   --query 'builds[0].[buildStatus,startTime]'
 
 # Fetch CloudFront cache hit ratio over the last hour
+
 aws cloudwatch get-metric-statistics \
   --namespace AWS/CloudFront \
   --metric-name CacheHitRate \
@@ -1403,14 +1521,18 @@ aws cloudwatch get-metric-statistics \
   --period 300 --statistics Average
 
 # Check OpenSearch cluster health status
+
 aws opensearch describe-domain-health \
   --domain-name production-docs-platform-search
+
 ```
 
 ## Troubleshooting
 
 ```bash
+
 # Inspect the most recent failed CodeBuild build logs
+
 aws codebuild batch-get-builds \
   --ids $(aws codebuild list-builds-for-project \
     --project-name docs-platform-render-pipeline \
@@ -1418,26 +1540,32 @@ aws codebuild batch-get-builds \
   --query 'builds[0].logs.[groupName,streamName]'
 
 # Check for recent broken-link-checker Lambda errors
+
 aws logs filter-log-events \
   --log-group-name /aws/lambda/docs-platform-link-checker \
   --filter-pattern "ERROR" \
   --start-time $(date -d '2 hours ago' +%s000)
 
 # Verify a specific document is present in the OpenSearch index
+
 curl -s -X GET "https://search.docs.internal.example.com/_doc/orders-service-container-diagram" \
   -H "Authorization: Bearer $TEST_TOKEN"
+
 ```
 
 ## Cleanup
 
 ```bash
+
 # Remove build artifacts older than 90 days from the versioned artifacts bucket
+
 aws s3api list-object-versions \
   --bucket production-docs-platform-artifacts \
   --query "Versions[?LastModified<='$(date -d '90 days ago' --iso-8601)'].[Key,VersionId]" \
   --output text | while read key version; do
     aws s3api delete-object --bucket production-docs-platform-artifacts --key "$key" --version-id "$version"
 done
+
 ```
 
 ---
@@ -1447,7 +1575,9 @@ done
 ## GitHub Actions
 
 ```yaml
+
 # .github/workflows/docs-render-publish.yml
+
 name: Render and Publish Documentation
 on:
   push:
@@ -1482,6 +1612,7 @@ jobs:
             --paths "/*"
       - name: Trigger search re-index
         run: aws lambda invoke --function-name docs-platform-indexer /dev/null
+
 ```
 
 ## Terraform Pipeline for Platform Infrastructure
@@ -1539,9 +1670,13 @@ Build-failure alarms route to the specific engineering team whose pull request t
 ## SLIs / SLOs
 
 | SLI | SLO Target |
+
 |---|---|
+
 | Documentation site availability | ≥ 99.5% monthly |
+
 | Build-to-publish latency | < 5 minutes, 95th percentile |
+
 | Search query latency | < 2 seconds, 95th percentile |
 
 ## Error Budgets
@@ -1567,9 +1702,13 @@ Not used as a general log-analysis platform for this system's own operational lo
 ## Retention
 
 | Log Type | Retention |
+
 |---|---|
+
 | CloudFront access logs | 1 year (supports the audit-evidence requirement in Section 2) |
+
 | Build pipeline logs | 90 days |
+
 | CloudTrail | 7 years (organization-wide compliance standard, applied uniformly) |
 
 ## Audit Logging
@@ -1609,21 +1748,37 @@ Identical pull-request-based change management discipline as any other system in
 # 24. Failure Scenarios
 
 | # | Scenario | Symptoms | Root Cause | Detection | Resolution | Prevention |
+
 |---|---|---|---|---|---|---|
+
 | 1 | Build pipeline failing for all PRs | Every documentation pull request fails CI | Shared build-image dependency broken (e.g., a Mermaid CLI version bump introducing a breaking change) | CloudWatch alarm on build failure rate | Roll back the build image to the previous known-good version | Pin rendering-tool versions explicitly; test image updates in a canary pipeline before wide rollout |
+
 | 2 | Individual diagram fails to render | Single PR's build fails, others succeed | Mermaid/PlantUML syntax error in the specific diagram source | Build log inspection | Fix the syntax error in the source | Local pre-commit rendering validation before pushing |
+
 | 3 | Site returns 403 for legitimate users | Widespread authentication failures | Signed-cookie signing-key rotation not applied consistently, or SSO integration issue | CloudFront 4xx metric spike, user reports | Verify signing-key configuration; check SSO provider status | Test key rotation in staging; monitor SSO provider health independently |
+
 | 4 | Search returns stale results | Recently published content missing from search | Indexing Lambda failure or backlog | CloudWatch indexing-lag metric | Manually re-trigger indexing for affected content | Alerting on indexing lag exceeding threshold |
+
 | 5 | Sensitive threat model publicly exposed | Security team or Config alert | S3 bucket policy misconfiguration during a Terraform change | AWS Config rule violation, GuardDuty finding | Immediately correct the bucket policy; assess exposure window and notify per incident process | Config rule enforced as a hard CI gate, not just a monitoring alert |
+
 | 6 | Staleness detector flooding PRs with false positives | Engineers begin ignoring staleness warnings | Staleness threshold miscalibrated (too aggressive) for a legitimately slow-changing system | Engineer feedback, declining PR-comment engagement | Recalibrate the staleness threshold per system criticality tier | Configurable per-system thresholds rather than one global setting |
+
 | 7 | OpenSearch cluster degraded | Slow or failing search queries | Under-provisioned cluster for actual query volume growth | CloudWatch search-latency metric | Scale cluster instance type/count | Quarterly rightsizing review against actual usage trends |
+
 | 8 | Broken cross-links throughout the site | Link-checker reports rising broken-link count | A system renamed/restructured without updating references from other systems' documentation | Link-checker report | Fix broken references; consider a redirect mapping for renamed systems | Link-checker run on every build, not just periodically |
+
 | 9 | Documentation pull request approved without a qualified reviewer | An architecturally significant change merges with a superficial review | No enforced reviewer-expertise requirement on documentation changes | Retrospective discovery (e.g., during an incident where the diagram was wrong) | Correct the documentation; add the missing reviewer requirement | CODEOWNERS-based required-reviewer enforcement per system |
+
 | 10 | ADR missing for a significant decision | An architecture review board later asks "why was this decision made" with no record | No enforced requirement tying architecturally significant PRs to an ADR | Architecture review board feedback | Retroactively author the ADR from available context/interviews | CI check flagging PRs matching "architecturally significant" criteria without an accompanying ADR |
+
 | 11 | CloudFront serving outdated content after publish | Users report seeing stale diagrams despite a recent merge | Cache invalidation step failed silently | User report, or a monitoring check comparing published S3 content-hash to CloudFront-served content-hash | Manually trigger cache invalidation | Alert on invalidation-step failure as a hard pipeline failure, not a soft warning |
+
 | 12 | Cross-repository staleness-detector token expired | Staleness detection silently stops working for cross-repo comparisons | Token rotation missed | Detector's own error logs, or noticing detection has stopped flagging anything | Rotate and update the token | Automated token rotation with monitoring on the rotation process itself |
+
 | 13 | Documentation site slow for a specific region | Users in one geography report slow load times | CloudFront edge location issue, or a genuinely under-provisioned `PriceClass` setting excluding that region's nearby edge locations | Regional latency metrics if instrumented, or user reports | Adjust CloudFront price class/edge coverage | Monitor latency by region proactively, not only reactively |
+
 | 14 | Search index and published site diverge | A document appears in search but 404s when clicked, or vice versa | Indexing ran against a stale/future build artifact due to a race condition in the pipeline | User report, automated consistency check | Re-run indexing against the current published content | Sequence the pipeline so indexing always runs strictly after successful S3 publish, not in parallel |
+
 | 15 | A KMS key policy change accidentally revokes security team's decrypt access to threat models | Security team cannot open threat-model documents | Overly broad Terraform change to the KMS key policy | Security team report, CloudTrail `AccessDenied` events | Roll back the key policy change | Require security-team review specifically for any change touching the sensitive-content KMS key policy |
 
 ---
@@ -1631,13 +1786,21 @@ Identical pull-request-based change management discipline as any other system in
 # 25. Troubleshooting Guide
 
 | Problem | Symptoms | Likely Cause | Diagnosis | AWS CLI Commands | Resolution |
+
 |---|---|---|---|---|---|
+
 | Build fails on diagram render step | CI failure with a Mermaid/PlantUML parse error | Syntax error in diagram source | Read the specific build log error line | `aws codebuild batch-get-builds --ids <id>` | Fix the syntax error; consider adding a pre-commit local validation hook |
+
 | Site shows 403 for authenticated users | Widespread login redirect loop | Signed-cookie key mismatch or expired SSO session handling | Check CloudFront Function logs and signing-key configuration | `aws cloudfront get-function --name docs-auth-check` | Verify/redeploy the CloudFront Function with the current signing key |
+
 | Search returns no results for known content | Empty results for a query expected to match | Indexing Lambda failure or backlog | Check indexer Lambda logs and last-successful-run timestamp | `aws logs filter-log-events --log-group-name /aws/lambda/docs-platform-indexer` | Manually invoke the indexer for the affected content |
+
 | Diagram displays with missing AWS icons | Broken image placeholders in a rendered diagram | Icon asset reference doesn't match the centrally maintained icon library | Check the specific icon identifier against the icon library manifest | `aws s3 ls s3://docs-platform-icon-library/` | Correct the icon identifier reference in the diagram source |
+
 | Staleness detector flags a document incorrectly | False-positive staleness warning on a PR | Threshold miscalibrated for that specific system's actual change cadence | Review the staleness-detector's configured threshold for that system | N/A (configuration review) | Adjust the per-system staleness threshold configuration |
+
 | CloudFront cache not reflecting recent publish | Users see outdated content after a merge | Cache invalidation step failed or was skipped | Check the build pipeline's invalidation step logs | `aws cloudfront list-invalidations --distribution-id <id>` | Manually trigger `aws cloudfront create-invalidation` |
+
 | OpenSearch cluster shows yellow/red health | Search errors or degraded performance | Node failure or shard allocation issue | Check cluster health and shard allocation status | `aws opensearch describe-domain-health --domain-name <name>` | Investigate node status; scale/replace unhealthy nodes if needed |
 
 ---
@@ -1707,56 +1870,91 @@ Identical pull-request-based change management discipline as any other system in
 ## Alternative 1: Dedicated Diagramming SaaS (Lucidchart, Draw.io Cloud, Miro)
 
 | Dimension | Assessment |
+
 |---|---|
+
 | Advantages | Polished WYSIWYG editing experience; lower authoring learning curve than text-based diagram languages |
+
 | Disadvantages | Binary/proprietary source format not diffable in pull requests; documentation lifecycle decoupled from the code review process this chapter's approach specifically aims to couple it to |
+
 | Cost | Per-seat licensing cost that scales with engineering headcount, versus this architecture's marginal-cost-near-zero rendering pipeline |
+
 | Operational complexity | Lower initial setup complexity; higher long-term staleness risk given the decoupling from code review |
+
 | Security | Sending architecture/network/threat-model content to a third-party SaaS vendor requires careful data-governance review, which many enterprises' policies restrict for this specific content class |
+
 | Performance | Comparable for viewing; editing collaboration features may be superior to a text-based diagram workflow |
 
 ## Alternative 2: Confluence/Notion Wiki-Based Documentation
 
 | Dimension | Assessment |
+
 |---|---|
+
 | Advantages | Familiar, low-friction authoring experience for non-engineers (product managers, executives) who may also need to contribute |
+
 | Disadvantages | No enforced coupling to the code review/CI process; the exact staleness failure mode described in Section 1 |
+
 | Cost | Per-seat licensing, generally modest |
+
 | Operational complexity | Lower initial complexity; no rendering pipeline or search infrastructure to operate |
+
 | Security | Access control is typically simpler to configure than this chapter's custom signed-cookie approach, at the cost of weaker guarantees that documentation reflects the actual deployed system |
+
 | Performance | Adequate for a smaller documentation corpus; built-in search is often less precise than a purpose-built OpenSearch index for large corpora |
 
 ## Alternative 3: Structurizr Cloud/On-Premises (Dedicated C4 Modeling Tool)
 
 | Dimension | Assessment |
+
 |---|---|
+
 | Advantages | Purpose-built for the C4 model specifically, with strong built-in support for cross-level linking and a single underlying model generating all four C4 levels consistently |
+
 | Disadvantages | A more specialized tool requiring the team to learn the Structurizr DSL specifically, versus the broader Mermaid/PlantUML ecosystem familiarity many engineers already have |
+
 | Cost | Licensing cost for the hosted/enterprise tier, versus this architecture's self-hosted, AWS-native approach |
+
 | Operational complexity | Lower operational burden if using the hosted Structurizr Cloud offering; comparable complexity to this chapter's architecture if self-hosting Structurizr on-premises/on-AWS |
+
 | Security | Hosted Structurizr Cloud raises the same third-party data-governance considerations as Alternative 1 for sensitive content; self-hosted Structurizr avoids this but adds operational burden |
+
 | Performance | Purpose-built C4 rendering is often visually cleaner than hand-authored Mermaid C4-style diagrams, at the cost of the additional tooling dependency |
 
 ## Alternative 4: Docs-as-Code Without a Dedicated Search Layer (Static Site Only)
 
 | Dimension | Assessment |
+
 |---|---|
+
 | Advantages | Meaningfully simpler and cheaper architecture — no OpenSearch cluster (this chapter's dominant cost driver) at all |
+
 | Disadvantages | Client-side or no search at all; navigability degrades significantly as the documentation corpus grows past a few hundred pages |
+
 | Cost | Substantially lower — the majority of Section 16's cost estimate is the search layer |
+
 | Operational complexity | Lower — no stateful cluster to manage or rightsize |
+
 | Security | Comparable; slightly smaller attack surface with one fewer stateful service |
+
 | Performance | Adequate for a small-to-medium documentation corpus; a poor fit once the corpus grows large enough that browsing/navigation alone becomes impractical |
 
 ## Alternative 5: Fully Manual, Ad Hoc Documentation (No Platform at All)
 
 | Dimension | Assessment |
+
 |---|---|
+
 | Advantages | Zero infrastructure cost or operational overhead |
+
 | Disadvantages | This is precisely the failure mode described in Section 1 — near-certain staleness, no enforced review coupling, no audit-evidence trail, no searchability |
+
 | Cost | Lowest direct infrastructure cost, but highest indirect cost in onboarding time, incident response friction, and audit-preparation labor |
+
 | Operational complexity | None from a platform perspective, but highest ongoing manual-labor burden |
+
 | Security | No structural access control beyond whatever ad hoc file-sharing mechanism is used, typically weaker than a purpose-built platform |
+
 | Performance | N/A — no platform to measure |
 
 ---
@@ -2004,18 +2202,31 @@ The most commonly encountered limit is OpenSearch cluster capacity relative to c
 ## Decision Matrix
 
 | Criteria | This Architecture (Docs-as-Code + S3/CloudFront/OpenSearch) | Diagramming SaaS | Wiki (Confluence/Notion) | Structurizr | No Platform (Ad Hoc) |
+
 |---|---|---|---|---|---|
+
 | Cost | 4 | 3 | 4 | 3 | 5 |
+
 | Complexity (lower = simpler) | 3 | 4 | 4 | 3 | 5 |
+
 | Performance | 4 | 4 | 3 | 4 | 1 |
+
 | Reliability | 4 | 3 | 3 | 3 | 1 |
+
 | Scalability | 4 | 3 | 2 | 4 | 1 |
+
 | Security | 4 | 2 | 3 | 3 | 1 |
+
 | Operational Effort (lower = less effort) | 3 | 4 | 4 | 3 | 5 |
+
 | Maintainability | 4 | 2 | 2 | 4 | 1 |
+
 | Compliance | 4 | 2 | 2 | 3 | 1 |
+
 | Time to Market | 3 | 4 | 5 | 3 | 5 |
+
 | Developer Experience | 4 | 4 | 3 | 3 | 2 |
+
 | **Overall Recommendation** | **Best default for organizations of meaningful scale with compliance requirements** | Best for small teams valuing polish over review-coupling | Best for very small teams or non-engineering-heavy documentation | Best with dedicated C4-modeling investment | Acceptable only at very small scale, temporarily |
 
 *(Scale: 1 = weakest, 5 = strongest, scored relative to the business requirements in Section 2 — not a universal ranking.)*

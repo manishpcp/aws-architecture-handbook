@@ -35,14 +35,23 @@ Business drivers are the non-technical forces that make an architecture necessar
 ### 2.2 Functional Requirements
 
 | Requirement | Description |
+
 |---|---|
+
 | User-facing web and API access | Public HTTPS endpoints serving both a browser-rendered application and a versioned REST/JSON API for partner integrations |
+
 | Authentication and authorization | Support for federated identity (SAML/OIDC) in addition to first-party credentials |
+
 | File and media handling | Users can upload and retrieve documents/images up to 100 MB |
+
 | Transactional data operations | CRUD operations against a relational model with referential integrity guarantees |
+
 | Asynchronous processing | Long-running operations (report generation, bulk imports) must not block the request/response cycle |
+
 | Search | Full-text and faceted search across the primary dataset |
+
 | Notifications | Email and push notification delivery triggered by domain events |
+
 | Audit trail | Every state-changing operation must be attributable to an actor and timestamped immutably |
 
 ### 2.3 Non-Functional Requirements
@@ -62,8 +71,11 @@ Non-functional requirements (NFRs) are where most architectural decisions actual
 **Recovery objectives.**
 
 | Metric | Baseline Target | Definition |
+
 |---|---|---|
+
 | RPO (Recovery Point Objective) | ≤ 5 minutes | Maximum acceptable data loss measured in time, driven by continuous replication (e.g., RDS Multi-AZ synchronous replication, cross-region read replica lag) |
+
 | RTO (Recovery Time Objective) | ≤ 30 minutes | Maximum acceptable time to restore service after a declared disaster |
 
 **SLAs.** External customer-facing SLA is typically set at a level the architecture can beat with margin — if the NFR target is 99.95%, the contractual SLA offered to customers is usually 99.9%, preserving an error-budget cushion for planned maintenance and unanticipated degradation.
@@ -99,6 +111,7 @@ At a high level, a client request enters through Route 53 DNS resolution, is ser
 The **request lifecycle** begins at DNS resolution, proceeds through edge caching and WAF inspection, load balancing, and application processing, and terminates either at a cache hit (fastest path) or a full round-trip through the data tier. The **response lifecycle** is the inverse path, with the addition that responses eligible for caching are written back to CloudFront's edge cache with an explicit TTL policy, and all responses — success and failure — are logged to CloudWatch Logs with a correlation ID that ties the request to its full trace in X-Ray. The **data lifecycle** governs how data moves and ages within the system: hot transactional data lives in Aurora, session data lives in ElastiCache with a short TTL, uploaded objects land in an S3 "ingest" prefix and are subsequently processed and moved to a "processed" prefix by an event-driven Lambda triggered on S3 PUT, and cold data is moved via S3 Lifecycle policies to Infrequent Access and eventually Glacier Deep Archive tiers based on access patterns.
 
 ```mermaid
+
 flowchart LR
     A[Client Browser/API Consumer] --> B[Route 53 DNS]
     B --> C[CloudFront + WAF]
@@ -113,6 +126,7 @@ flowchart LR
     E --> K[EventBridge]
     K --> L[SNS Notifications]
     K --> M[Lambda Consumers]
+
 ```
 
 ---
@@ -256,6 +270,7 @@ These cross-cutting services are treated in depth in their dedicated sections (S
 ## 5. Complete Architecture Diagram
 
 ```mermaid
+
 flowchart TB
     subgraph Users["Users"]
         U1[Web Browser]
@@ -353,6 +368,7 @@ flowchart TB
     IAM -.audit.-> CT
     GD -.monitors.-> VPCNet
     CFG -.evaluates.-> AppTier
+
 ```
 
 ---
@@ -360,16 +376,27 @@ flowchart TB
 ## 6. Component-by-Component Explanation
 
 | Component | Purpose | Scaling | High Availability | Failure Handling | Key Dependencies |
+
 |---|---|---|---|---|---|
+
 | Route 53 | DNS resolution, health-check-based failover routing | Fully managed, no scaling action needed | Anycast-based, globally distributed by design | Automatic failover to healthy endpoint via health checks | None (foundational) |
+
 | CloudFront | Edge caching, TLS termination, WAF integration | Automatic, global edge network | Inherent to the service (200+ edge locations) | Origin failover groups for origin-level failure | ALB or S3 origin, ACM certificate |
+
 | WAF | Layer 7 filtering (SQLi, XSS, rate-based rules) | Scales with CloudFront/ALB automatically | Attached to CloudFront/ALB, inherits their HA | Rule evaluation failure defaults to configurable allow/block | CloudFront or ALB |
+
 | ALB | Layer 7 load balancing and health-check routing | Auto-scales capacity units transparently | Deployed across 3 AZs by default | Removes unhealthy targets from rotation automatically | VPC subnets, target group, ACM cert |
+
 | Auto Scaling Group (App) | Hosts stateless application code | Target-tracking or step scaling on CPU/request count | Instances spread across 3 AZs | Unhealthy instance replacement automatic | Launch template, IAM instance profile |
+
 | SQS | Durable async task buffering | Virtually unlimited, no operator action | Redundant across AZs within the region | DLQ captures repeatedly failing messages | IAM policy, consumer ASG/Lambda |
+
 | EventBridge | Domain event routing | Scales automatically | Regionally redundant | Failed invocations retried with backoff, then DLQ | Event bus, target permissions |
+
 | Aurora | System-of-record relational data | Read replicas scale reads; storage auto-scales | Multi-AZ synchronous standby with automatic failover | Automatic failover typically <60s | KMS key, subnet group, security group |
+
 | ElastiCache | Session cache, hot-read cache | Cluster mode scales shards horizontally | Multi-AZ with automatic failover (Redis) | Replica promoted automatically on primary failure | VPC subnet group, security group |
+
 | S3 | Object storage for uploads, static assets, logs | Effectively unlimited | 11 nines durability, multi-AZ by design within a region | Versioning protects against accidental overwrite/delete | KMS key (if SSE-KMS), IAM bucket policy |
 
 Each component above is designed to fail independently without cascading: an AZ-level failure removes at most one-third of ALB targets, one Aurora Multi-AZ standby relationship failover event, and one-third of ElastiCache shard replicas — none of which individually take the system down, which is the entire point of the failure-isolation design principle introduced in Section 3.1.
@@ -414,6 +441,7 @@ Each component above is designed to fail independently without cascading: an AZ-
 **Validation** occurs at multiple gates: `terraform validate` and `tflint` pre-plan, automated smoke tests against the new target group before it receives production traffic, and post-deployment synthetic canary checks (CloudWatch Synthetics) that continuously validate critical user journeys.
 
 ```mermaid
+
 sequenceDiagram
     participant Dev as Developer
     participant CI as CI/CD Pipeline
@@ -437,6 +465,7 @@ sequenceDiagram
     else Unhealthy
         CI->>AWS: Roll back to blue automatically
     end
+
 ```
 
 ---
@@ -446,9 +475,13 @@ sequenceDiagram
 The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addresses subdivided into **/24 subnets** per tier per AZ — small enough to avoid IP exhaustion concerns for this workload profile, large enough to leave room for future subnet additions without re-architecting the VPC.
 
 | Subnet Tier | AZ-A | AZ-B | AZ-C | Purpose |
+
 |---|---|---|---|---|
+
 | Public | 10.0.0.0/24 | 10.0.1.0/24 | 10.0.2.0/24 | ALB, NAT Gateways, bastion/SSM endpoints |
+
 | Private App | 10.0.10.0/24 | 10.0.11.0/24 | 10.0.12.0/24 | EC2 application instances |
+
 | Private Data | 10.0.20.0/24 | 10.0.21.0/24 | 10.0.22.0/24 | Aurora, ElastiCache |
 
 **Public subnets** host only internet-facing load balancers and NAT Gateways — never application or database instances directly. **Private app subnets** host the application tier, reachable only from the ALB and outbound to the internet via NAT Gateway (for package updates, third-party API calls). **Private data subnets** host Aurora and ElastiCache, reachable only from the private app subnet's security group, with no route to the internet at all — not even via NAT — because the data tier has no legitimate reason to initiate outbound internet connections.
@@ -476,6 +509,7 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
 **IAM Policies** attached to workload roles follow least privilege scoped to specific resource ARNs wherever the AWS service supports resource-level permissions, rather than wildcard `Resource: "*"` grants. A representative least-privilege policy for the application tier's access to its own S3 bucket:
 
 ```json
+
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -505,6 +539,7 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
     }
   ]
 }
+
 ```
 
 **Resource Policies** (bucket policies, KMS key policies, SQS queue policies) provide the resource-side complement to identity-side IAM policies, and are used specifically for cross-account access grants and to enforce account-wide guardrails (e.g., a bucket policy denying any request not using TLS, regardless of which identity is calling).
@@ -552,13 +587,21 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
 **Threat model summary:**
 
 | Attack Vector | Mitigation |
+
 |---|---|
+
 | DDoS (volumetric/protocol) | CloudFront + Shield Standard/Advanced, ALB elastic capacity |
+
 | Application-layer attacks (SQLi, XSS) | WAF managed rule groups, parameterized queries, output encoding |
+
 | Credential stuffing / brute force | WAF rate-based rules, MFA on human accounts, account lockout policies |
+
 | Data exfiltration via compromised instance | Least-privilege IAM, VPC endpoints (no NAT path needed for AWS API calls), GuardDuty anomaly detection |
+
 | Insider threat / privilege misuse | CloudTrail immutable audit logs, least privilege, permission boundaries, quarterly access reviews |
+
 | Supply chain (compromised dependency) | Inspector/dependency scanning in CI/CD, SBoM generation, signed artifacts |
+
 | Misconfiguration drift | AWS Config continuous evaluation, Terraform as sole change path (no console drift) |
 
 ---
@@ -590,10 +633,15 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
 **Disaster recovery strategy classification** for this baseline is **Backup and Restore** (the lowest-cost, highest-RTO tier) upgraded selectively to **Pilot Light** for the specific data tier (a minimal, continuously-updated Aurora Global Database secondary cluster kept warm in the DR region) — a deliberate hybrid, because full **Warm Standby** or **Multi-Site Active-Active** would roughly double infrastructure cost for a business whose actual RTO/RPO requirements (Section 2.3: RTO ≤30 min, RPO ≤5 min) do not require it.
 
 | DR Strategy | RTO | RPO | Relative Cost | Used In This Architecture? |
+
 |---|---|---|---|---|
+
 | Backup and Restore | Hours | Hours | 1x (lowest) | Compute tier |
+
 | Pilot Light | 10s of minutes | Minutes | ~1.2–1.5x | Data tier (Aurora Global DB) |
+
 | Warm Standby | Minutes | Seconds–minutes | ~1.7–2x | Not used (over-engineered for stated NFRs) |
+
 | Multi-Site Active-Active | Near-zero | Near-zero | 2x+ | Not used (reserved for 99.99%+ SLA tiers) |
 
 ---
@@ -629,15 +677,25 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
 *(Illustrative figures for us-east-1, subject to change with AWS pricing updates — always validate against the AWS Pricing Calculator before presenting to stakeholders.)*
 
 | Component | Small (Startup) | Medium (Growth) | Enterprise |
+
 |---|---|---|---|
+
 | EC2 App Tier (Auto Scaling) | 2× t3.medium (~$60) | 4–8× m6i.large (~$500) | 12–30× m6i.xlarge (~$3,500+) |
+
 | ALB | ~$20 | ~$50 | ~$200+ |
+
 | Aurora | 1 writer db.t4g.medium (~$100) | Writer + 2 readers db.r6g.large (~$900) | Writer + 4 readers db.r6g.2xlarge (~$5,000+) |
+
 | ElastiCache | 1 node cache.t4g.micro (~$15) | 3-node cluster cache.r6g.large (~$450) | Multi-shard cache.r6g.xlarge cluster (~$2,000+) |
+
 | CloudFront + Data Transfer | ~$30 | ~$400 | ~$3,000+ |
+
 | NAT Gateway (3x) | ~$100 | ~$150 | ~$300+ |
+
 | S3 + Lifecycle | ~$20 | ~$200 | ~$1,500+ |
+
 | CloudWatch/Logging | ~$20 | ~$150 | ~$1,000+ |
+
 | **Approximate Total** | **~$365/mo** | **~$2,800/mo** | **~$16,500+/mo** |
 
 > **Warning:** These figures exclude Reserved Instance/Savings Plan discounts (typically 20–40% off On-Demand for 1-year commitments), data transfer between regions if applicable, and third-party licensing. Treat this table as an ordering-of-magnitude sanity check, never as a substitute for a proper Cost Explorer forecast against your actual traffic profile.
@@ -684,6 +742,7 @@ The VPC uses a **/16 CIDR block** (e.g., `10.0.0.0/16`), providing 65,536 addres
 The following is a representative, modular Terraform structure for the baseline architecture. Directory layout:
 
 ```
+
 infrastructure/
 ├── modules/
 │   ├── networking/
@@ -694,12 +753,15 @@ infrastructure/
 │   ├── prod/
 │   └── staging/
 └── backend.tf
+
 ```
 
 **Remote state backend:**
 
 ```hcl
+
 # backend.tf
+
 terraform {
   required_version = ">= 1.7.0"
 
@@ -730,12 +792,15 @@ provider "aws" {
     }
   }
 }
+
 ```
 
 **Variables (root module):**
 
 ```hcl
+
 # variables.tf
+
 variable "aws_region" {
   description = "Primary AWS region for deployment"
   type        = string
@@ -770,12 +835,15 @@ variable "db_instance_class" {
   type        = string
   default     = "db.r6g.large"
 }
+
 ```
 
 **Networking module (excerpt):**
 
 ```hcl
+
 # modules/networking/main.tf
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
@@ -815,12 +883,15 @@ resource "aws_eip" "nat" {
   for_each = toset(var.azs)
   domain   = "vpc"
 }
+
 ```
 
 **Compute module (excerpt) — Auto Scaling Group with launch template:**
 
 ```hcl
+
 # modules/compute/main.tf
+
 resource "aws_launch_template" "app" {
   name_prefix   = "${var.environment}-app-"
   image_id      = var.app_ami_id
@@ -880,12 +951,15 @@ resource "aws_autoscaling_policy" "target_tracking" {
     target_value = 500
   }
 }
+
 ```
 
 **IAM module (excerpt) — least-privilege instance role:**
 
 ```hcl
+
 # modules/security/iam.tf
+
 resource "aws_iam_role" "app_instance_role" {
   name = "${var.environment}-app-instance-role"
 
@@ -914,12 +988,15 @@ resource "aws_iam_role_policy" "app_secrets_access" {
     }]
   })
 }
+
 ```
 
 **Outputs (root module):**
 
 ```hcl
+
 # outputs.tf
+
 output "alb_dns_name" {
   description = "DNS name of the Application Load Balancer"
   value       = module.compute.alb_dns_name
@@ -934,6 +1011,7 @@ output "aurora_writer_endpoint" {
 output "vpc_id" {
   value = module.networking.vpc_id
 }
+
 ```
 
 **Best practices applied above:** remote state with locking, `for_each` over static resource duplication, `permissions_boundary` on all created roles, `http_tokens = "required"` enforcing IMDSv2 to prevent SSRF-based credential theft, target-tracking Auto Scaling tied to a request-based metric rather than CPU alone, and `sensitive` output marking for anything that could leak credentials into CI logs.
@@ -943,21 +1021,29 @@ output "vpc_id" {
 ## 19. AWS CLI Examples
 
 **Deployment validation:**
+
 ```bash
+
 # Verify Auto Scaling Group health after deployment
+
 aws autoscaling describe-auto-scaling-groups \
   --auto-scaling-group-names prod-app-asg \
   --query 'AutoScalingGroups[0].Instances[*].[InstanceId,HealthStatus,LifecycleState]' \
   --output table
 
 # Check target group health behind the ALB
+
 aws elbv2 describe-target-health \
   --target-group-arn arn:aws:elasticloadbalancing:us-east-1:111122223333:targetgroup/prod-app-tg/abc123
+
 ```
 
 **Monitoring:**
+
 ```bash
+
 # Pull recent 5xx error rate from the ALB
+
 aws cloudwatch get-metric-statistics \
   --namespace AWS/ApplicationELB \
   --metric-name HTTPCode_Target_5XX_Count \
@@ -968,6 +1054,7 @@ aws cloudwatch get-metric-statistics \
   --statistics Sum
 
 # Check Aurora replica lag
+
 aws cloudwatch get-metric-statistics \
   --namespace AWS/RDS \
   --metric-name AuroraReplicaLag \
@@ -976,11 +1063,15 @@ aws cloudwatch get-metric-statistics \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
   --period 60 \
   --statistics Average
+
 ```
 
 **Troubleshooting:**
+
 ```bash
+
 # Tail recent application logs via CloudWatch Logs Insights
+
 aws logs start-query \
   --log-group-name "/prod/app" \
   --start-time $(date -d '15 minutes ago' +%s) \
@@ -988,24 +1079,31 @@ aws logs start-query \
   --query-string 'fields @timestamp, @message | filter @message like /ERROR/ | sort @timestamp desc | limit 50'
 
 # Inspect recent SQS DLQ messages without deleting them
+
 aws sqs receive-message \
   --queue-url https://sqs.us-east-1.amazonaws.com/111122223333/prod-worker-dlq \
   --max-number-of-messages 10 \
   --visibility-timeout 0
+
 ```
 
 **Cleanup (staging/ephemeral environments):**
+
 ```bash
+
 # Scale down staging ASG to zero outside business hours
+
 aws autoscaling update-auto-scaling-group \
   --auto-scaling-group-name staging-app-asg \
   --min-size 0 --max-size 0 --desired-capacity 0
 
 # Identify unattached EBS volumes for cost cleanup
+
 aws ec2 describe-volumes \
   --filters Name=status,Values=available \
   --query 'Volumes[*].[VolumeId,Size,CreateTime]' \
   --output table
+
 ```
 
 ---
@@ -1013,15 +1111,21 @@ aws ec2 describe-volumes \
 ## 20. CI/CD Integration
 
 | Platform | Typical Role in This Architecture | Notes |
+
 |---|---|---|
+
 | GitHub Actions | Terraform plan/apply pipeline, application build/test/deploy | Preferred when source is already on GitHub; OIDC federation to AWS avoids long-lived access keys in CI |
+
 | GitLab CI | Equivalent role for GitLab-hosted source | Native Terraform integration via GitLab's Infrastructure-as-Code features |
+
 | Jenkins | Legacy/enterprise environments with existing Jenkins investment | Requires more manual plugin/credential management than GitHub Actions/GitLab OIDC |
+
 | AWS CodePipeline | AWS-native alternative, tightly integrated with CodeBuild/CodeDeploy | Preferred when the organization wants to minimize third-party CI tooling and stay within the AWS console/IAM boundary |
 
 **Terraform pipeline pattern (GitHub Actions excerpt):**
 
 ```yaml
+
 name: terraform-plan-apply
 on:
   pull_request:
@@ -1049,6 +1153,7 @@ jobs:
       - run: tflint --chdir=infrastructure/environments/prod
       - run: checkov -d infrastructure/environments/prod --compact
       - run: terraform -chdir=infrastructure/environments/prod plan -out=tfplan
+
 ```
 
 **Validation and security scanning** are non-negotiable pipeline gates: `terraform validate` for syntax correctness, `tflint` for provider-specific best-practice linting, and `checkov`/`tfsec` for security misconfiguration scanning (unencrypted resources, overly permissive security groups, public S3 buckets) — all run before a plan is ever presented for human approval.
@@ -1112,21 +1217,37 @@ jobs:
 ## 24. Failure Scenarios
 
 | # | Scenario | Symptoms | Root Cause | Detection | Resolution | Prevention |
+
 |---|---|---|---|---|---|---|
+
 | 1 | Single AZ outage | Elevated latency briefly, some 5xx during ALB re-routing | AWS infrastructure event in one AZ | ALB target health checks fail for that AZ's instances; GuardDuty/Health Dashboard | ALB automatically stops routing to affected AZ; Auto Scaling replaces instances elsewhere | Multi-AZ design (already in place); regularly test AZ failure via chaos engineering |
+
 | 2 | Aurora writer failover | Brief (10-60s) connection errors from application | Underlying host failure or maintenance-triggered failover | RDS Event Subscription, CloudWatch `DatabaseConnections` drop | Application-level retry with exponential backoff rides out the failover | RDS Proxy to smooth failover; test failover quarterly with `reboot --force-failover` |
+
 | 3 | NAT Gateway exhaustion | Outbound connections from app tier time out | Port exhaustion under high outbound connection volume | CloudWatch `ErrorPortAllocation` metric on NAT Gateway | Add additional NAT Gateway capacity or reduce unnecessary outbound calls | Use VPC endpoints for AWS API calls to avoid NAT dependency entirely |
+
 | 4 | Auto Scaling flapping | Instances continuously launched and terminated | Health check failing due to slow application warm-up, not an actual fault | ASG activity history shows repeated launch/terminate cycles | Increase health check grace period; fix underlying slow-start issue | Load-test application startup time before setting grace period |
+
 | 5 | SQS DLQ silently filling | No customer-visible symptom initially; eventual data staleness noticed downstream | Consumer bug causing repeated processing failure | CloudWatch alarm on DLQ `ApproximateNumberOfMessagesVisible` > 0 | Fix consumer bug, redrive DLQ messages | Always alarm on DLQ depth, never assume "zero incoming" means "healthy" |
+
 | 6 | Runaway Lambda cost | Unexpected bill spike | Infinite retry loop from a misconfigured event source mapping | Cost Anomaly Detection alert | Fix retry/backoff configuration, add reserved concurrency cap | Set Lambda reserved concurrency limits and budget alarms proactively |
+
 | 7 | CloudFront serving stale content | Users report seeing outdated data after a deploy | Cache-Control headers not set correctly for dynamic content, or invalidation not triggered | User reports, synthetic canary detecting stale version marker | Manual invalidation, fix Cache-Control headers/cache policy | Version static asset filenames; explicit short/no-cache policy for dynamic API responses |
+
 | 8 | Credential leakage in logs | Secret value appears in CloudWatch Logs | Application accidentally logs full request/response body including Authorization header | Automated secret-scanning of log groups (e.g., via a Lambda or third-party tool) | Rotate the leaked credential immediately, scrub logs, fix logging code | Structured logging with an explicit denylist of sensitive fields; never log raw request/response bodies |
+
 | 9 | IAM policy over-permissioning | Security review or IAM Access Analyzer flags unused broad permissions | Policy written with `Resource: "*"` for convenience during initial build, never tightened | IAM Access Analyzer, quarterly access review | Tighten policy to specific resource ARNs actually used | Enforce least-privilege review as a PR gate for any new IAM policy |
+
 | 10 | Regional service degradation (control plane) | Terraform applies fail, Auto Scaling actions delayed | AWS regional API-plane issue (rare but real) | AWS Health Dashboard, elevated API error rates in CloudTrail | Wait out the AWS-side event; avoid making risky changes during a known regional event | Multi-region architecture for workloads that cannot tolerate this (see later chapters) |
+
 | 11 | Bad deployment (application bug) | Elevated error rate immediately after deploy | Insufficient test coverage or bad canary/bake logic | CloudWatch alarm on post-deploy error rate during bake period | Automatic or manual rollback to previous target group (Section 8) | Mandatory bake period with automated rollback trigger, never skip it under delivery pressure |
+
 | 12 | ElastiCache node failure | Elevated latency, increased database load (cache misses) | Underlying node hardware failure | CloudWatch `CurrEngineCPUUtilization`/health metrics for the cluster | Automatic replica promotion (Multi-AZ enabled) | Ensure Multi-AZ is actually enabled — a common oversight in initial ElastiCache setup |
+
 | 13 | Certificate expiration | TLS handshake failures, browser warnings | Manually-managed certificate not renewed (should not occur with ACM auto-renewal, but occurs with third-party certs imported into ACM) | Synthetic canary detecting TLS errors, ACM expiration notification | Renew/re-import certificate | Use ACM-issued (not imported) certificates wherever possible for automatic renewal |
+
 | 14 | Cross-AZ data transfer cost spike | Unexpected data transfer line-item increase | Application tier not AZ-aware, routing requests to database replicas in a different AZ unnecessarily | Cost Explorer breakdown by usage type | Configure AZ-aware routing/read-replica selection | Design for AZ affinity where cost-sensitive, understanding the resilience/cost trade-off |
+
 | 15 | Secrets Manager rotation failure | Application suddenly failing to authenticate to database | Rotation Lambda function bug or insufficient permissions | CloudWatch alarm on rotation Lambda errors, application connection failures | Manually complete/rollback the rotation, fix Lambda | Test rotation in staging before enabling in production; alarm explicitly on rotation failures |
 
 ---
@@ -1134,16 +1255,27 @@ jobs:
 ## 25. Troubleshooting Guide
 
 | Problem | Symptoms | Likely Cause | Diagnosis | AWS CLI Commands | Resolution |
+
 |---|---|---|---|---|---|
+
 | High p99 latency | Slow responses under load | Database contention, missing index, or undersized instance | Check Aurora Performance Insights, X-Ray trace breakdown | `aws rds describe-db-instances`, X-Ray console/API | Add index, scale up/out, add caching layer |
+
 | 5xx spike after deploy | Error rate climbs immediately post-deployment | Bad application code or misconfiguration in new version | Compare error rate before/after deploy timestamp in CloudWatch | `aws cloudwatch get-metric-statistics --metric-name HTTPCode_Target_5XX_Count` | Roll back to previous target group |
+
 | Instances failing health checks | ASG continuously replacing instances | Application not listening on expected port, or slow startup | Check target group health reasons, instance system log | `aws elbv2 describe-target-health`, `aws ec2 get-console-output` | Fix startup script/health endpoint, adjust grace period |
+
 | Database connection exhaustion | "too many connections" errors | Application not using connection pooling / RDS Proxy | Check `DatabaseConnections` metric vs. max_connections parameter | `aws cloudwatch get-metric-statistics --metric-name DatabaseConnections` | Introduce RDS Proxy, fix connection leak in application code |
+
 | SQS messages not being processed | Growing queue depth | Worker ASG scaled to zero, or consumer throwing exceptions | Check worker ASG desired capacity, CloudWatch Logs for consumer errors | `aws sqs get-queue-attributes`, `aws autoscaling describe-auto-scaling-groups` | Scale workers up, fix consumer bug, redrive DLQ |
+
 | Unexpected AWS bill increase | Cost Explorer shows spike | New resource left running, data transfer spike, or retry storm | Cost Explorer by service/usage type, Cost Anomaly Detection findings | `aws ce get-cost-and-usage` | Identify and terminate/rightsize offending resource |
+
 | WAF blocking legitimate traffic | Customers report 403 errors | Overly aggressive managed rule group or rate-based rule | Check WAF sampled requests for the blocking rule | `aws wafv2 get-sampled-requests` | Tune rule exclusion or rate threshold |
+
 | TLS handshake failures | Clients cannot connect via HTTPS | Certificate expired or misconfigured security policy | Check ACM certificate status, CloudFront/ALB security policy | `aws acm describe-certificate` | Renew certificate, correct minimum TLS version setting |
+
 | Terraform apply fails midway | Partial resource creation, state drift | Race condition, IAM permission gap, or AWS service limit hit | Review Terraform error output, check Service Quotas | `aws service-quotas get-service-quota` | Fix permissions/quota, `terraform apply` again (idempotent) |
+
 | GuardDuty finding: unusual API activity | Security alert generated | Compromised credential or legitimate but unusual admin action | Review CloudTrail event history for the flagged principal/time window | `aws cloudtrail lookup-events` | Rotate compromised credential if confirmed malicious; otherwise document as expected activity |
 
 ---
@@ -1213,11 +1345,17 @@ jobs:
 ## 28. Alternatives
 
 | Alternative | Advantages | Disadvantages | Relative Cost | Operational Complexity | Security | Performance |
+
 |---|---|---|---|---|---|---|
+
 | **Serverless (Lambda + API Gateway + DynamoDB)** | No server management, scales to zero, pay-per-use | Cold starts, 15-min execution ceiling, DynamoDB access-pattern rigidity | Lower at low/variable traffic, higher at very high sustained traffic | Lower (no patching/capacity mgmt) | Comparable, smaller attack surface (no OS to patch) | Excellent for spiky load, cold-start penalty for latency-sensitive first requests |
+
 | **Containerized (ECS/EKS + Fargate + Aurora)** | Portability, finer-grained bin-packing, ecosystem (Helm, Kubernetes tooling) | Kubernetes (EKS) has a real learning curve and control-plane cost | Moderate; Fargate carries a premium over equivalent EC2 | Moderate to high (especially EKS) | Comparable; container image scanning becomes an additional control surface | Comparable to EC2 baseline once warmed |
+
 | **Monolith on a single large EC2 instance (no Auto Scaling)** | Simplest to reason about, cheapest at very low traffic | No horizontal scale, single point of failure, manual scaling | Lowest at tiny scale | Lowest initially, but manual ops burden grows | Weaker (single instance is a bigger blast radius) | Fine at low traffic, hard ceiling at moderate traffic |
+
 | **Multi-region active-active** | Tolerates full regional failure, lowest possible RTO/RPO | Roughly 2x infrastructure cost, data consistency complexity (conflict resolution) | Highest | Highest (cross-region deployment, data replication, DNS-based routing) | Comparable, larger overall footprint to secure | Best possible latency for globally distributed users |
+
 | **Managed PaaS (e.g., AWS App Runner / Elastic Beanstalk)** | Fastest initial time-to-production, less Terraform to write | Less control over underlying infrastructure, potential lock-in to the platform's opinionated deployment model | Comparable to EC2 baseline at small scale | Lowest (platform manages most operational concerns) | Comparable, less visibility into underlying configuration | Good for straightforward web apps, less flexible for unusual architectures |
 
 The baseline architecture in this chapter (EC2 Auto Scaling + Aurora Multi-AZ + CloudFront) sits deliberately in the middle of this spectrum: more operational control than serverless or PaaS, less complexity and cost than multi-region active-active, matched to the requirements profile defined in Section 2. Chapters covering each alternative in this book will make the same requirements-first case for when that alternative is the better-fitting choice.
@@ -1245,6 +1383,7 @@ The baseline architecture in this chapter (EC2 Auto Scaling + Aurora Multi-AZ + 
 ## 30. Architecture Decision Record (ADR)
 
 ```markdown
+
 # ADR-001: Adopt Multi-AZ Three-Tier Architecture with Aurora and Auto Scaling
 
 ## Status
@@ -1309,6 +1448,7 @@ or sooner if peak traffic exceeds 40x baseline (the current design's
 tested ceiling) or if a 99.99%+ availability SLA is contractually
 required, at which point the multi-region active-active alternative
 (see later chapters) should be re-evaluated.
+
 ```
 
 ---
@@ -1468,6 +1608,7 @@ Commonly encountered AWS service quotas at this architecture's growth stage incl
 ## Evolution Path
 
 ```
+
 Startup (single instance, single AZ, manual deploys)
         ↓
 Small Production (Auto Scaling introduced, Multi-AZ RDS, basic CI/CD)
@@ -1488,6 +1629,7 @@ Global Enterprise (multi-account landing zone via AWS Organizations/Control
                     connectivity, centralized identity federation, dedicated
                     platform engineering team owning shared infrastructure
                     as an internal product)
+
 ```
 
 Each transition is driven by a specific, named constraint being hit — not by calendar time or by a desire to "modernize." The Startup → Small Production transition is typically driven by the first real outage or the first customer contract requiring an uptime commitment. Small Production → Highly Available is driven by traffic variability exceeding what a single-AZ database failover tolerance and unscheduled manual scaling can absorb — precisely the trigger in this chapter's case study. Highly Available → Microservices is driven by team scaling (multiple teams needing independent deployability of different parts of the system) more often than by a purely technical scaling limit. Microservices → Multi-Region is driven by either a genuine 99.99%+ availability commitment or true global user-latency requirements. Multi-Region → Global Enterprise is driven by organizational scale — multiple business units or acquired companies needing a shared, governed platform rather than independently-managed AWS accounts.
@@ -1495,18 +1637,31 @@ Each transition is driven by a specific, named constraint being hit — not by c
 ## Decision Matrix
 
 | Criteria | This Baseline (3-Tier HA) | Serverless-First | Single-Instance Monolith | Multi-Region Active-Active |
+
 |---|---|---|---|---|
+
 | Cost | 3 | 4 (at low/variable traffic) | 5 (at tiny scale only) | 1 |
+
 | Complexity | 3 | 3 | 5 (simple, but deceptively so) | 1 |
+
 | Performance | 4 | 3 (cold starts) | 2 | 5 |
+
 | Reliability | 4 | 4 | 1 | 5 |
+
 | Scalability | 4 | 5 | 1 | 5 |
+
 | Security | 4 | 4 | 2 | 4 |
+
 | Operational Effort | 3 | 4 (less to manage) | 2 (deceptively low, grows with scale) | 1 |
+
 | Maintainability | 4 | 3 | 2 | 3 |
+
 | Compliance Readiness | 4 | 3 | 1 | 4 |
+
 | Time to Market | 3 | 4 | 5 | 1 |
+
 | Developer Experience | 4 | 3 | 3 | 2 |
+
 | **Overall Recommendation** | **Best default for mid-market production workloads with moderate scale and compliance needs** | **Best for variable/low-baseline traffic and small teams** | **Only for true MVP/pre-PMF stage** | **Only when 99.99%+ SLA or true global latency is contractually required** |
 
 *(Scale: 1 = worst/lowest, 5 = best/highest, on relevant axis for each criterion — for Cost and Complexity, higher score means more favorable/lower actual cost or complexity.)*
