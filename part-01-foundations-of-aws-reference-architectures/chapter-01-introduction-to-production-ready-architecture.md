@@ -1226,9 +1226,11 @@ The baseline architecture in this chapter (EC2 Auto Scaling + Aurora Multi-AZ + 
 # ADR-001: Adopt Multi-AZ Three-Tier Architecture with Aurora and Auto Scaling
 
 ## Status
+
 Accepted
 
 ## Context
+
 The current on-premises/single-instance architecture cannot absorb the
 organization's peak traffic multiplier (observed up to 25-28x baseline
 during seasonal peaks) without manual, error-prone capacity intervention,
@@ -1237,6 +1239,7 @@ multi-hour customer-facing outages during the two most recent peak
 seasons.
 
 ## Decision
+
 Adopt a three-tier architecture on AWS consisting of: CloudFront + WAF
 at the edge, an Application Load Balancer fronting an EC2 Auto Scaling
 Group across three Availability Zones, Aurora (PostgreSQL-compatible)
@@ -1244,6 +1247,7 @@ in Multi-AZ configuration with read replicas, and ElastiCache for
 session/cache data, provisioned entirely via Terraform.
 
 ## Alternatives Considered
+
 1. Serverless (Lambda + API Gateway + DynamoDB) — rejected due to the
    application's existing relational data model and the engineering
    cost of a full DynamoDB single-table redesign within the required
@@ -1257,6 +1261,7 @@ session/cache data, provisioned entirely via Terraform.
    which would not meet the next peak season deadline.
 
 ## Consequences
+
 Positive: elastic capacity absorbing traffic spikes without manual
 intervention; automatic Multi-AZ database failover; improved security
 posture via WAF, GuardDuty, and least-privilege IAM; audit-ready
@@ -1269,12 +1274,14 @@ externalization application change identified as a migration
 prerequisite.
 
 ## Risks
+
 Session-state externalization is on the critical path and carries
 schedule risk (realized during implementation — see Chapter 1, Section
 29 case study). NAT Gateway data-processing costs were initially
 underestimated and required a follow-up cost-model correction.
 
 ## Review Date
+
 This decision will be revisited 12 months after production cutover,
 or sooner if peak traffic exceeds 40x baseline (the current design's
 tested ceiling) or if a 99.99%+ availability SLA is contractually
