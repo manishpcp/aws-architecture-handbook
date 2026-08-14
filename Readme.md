@@ -2,11 +2,88 @@
 
 ### *100 Production-Ready Cloud Architectures — with Terraform, AI, Security, FinOps & Enterprise Design Patterns*
 
-> **Publishing schedule:** One part per week. Bookmark this page — the table of contents updates as each part goes live.
+> **Publishing schedule:** One part per week. Star ⭐ this repo to get notified when new parts drop.
 
 ---
 
-## 📦 How This Book Is Structured
+## 🎯 What This Book Is
+
+This is not a collection of diagrams. Each of the 100 chapters is a **complete, production-grade architecture reference** that covers the full lifecycle of a real AWS workload — from business requirements and design decisions, through Terraform implementation, security hardening, cost optimization, failure scenarios, and operational runbooks.
+
+Every chapter answers the questions that matter in a real architecture review:
+
+- Why this design over the alternatives?
+- What are the honest trade-offs and limitations?
+- What does it cost, and how do you control that cost?
+- What breaks, how do you detect it, and how do you recover?
+- What does production-ready Terraform actually look like for this pattern?
+
+If you have ever sat in an architecture review and wished someone had written down the reasoning behind the decisions — not just the diagram — this book is for you.
+
+> This handbook is free and always will be. If it saves you hours of research, a bad architecture decision, or an awkward review meeting — consider buying me a coffee. It keeps new chapters coming every week.
+
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="manishpcp" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+---
+
+## 👥 Who This Is For
+
+| Role | What You'll Get |
+|------|----------------|
+| **Cloud Architects** | A decision framework and vocabulary for evaluating design trade-offs across 100 real patterns |
+| **Senior Engineers** | Production-ready Terraform, AWS CLI examples, and failure-mode analysis for every architecture |
+| **Engineering Managers** | Business-case framing, cost estimates, and risk/trade-off summaries for stakeholder conversations |
+| **DevOps / Platform Engineers** | Deployment flows, CI/CD patterns, monitoring strategies, and operational runbooks |
+| **Security Engineers** | Threat models, IAM patterns, encryption strategies, and compliance control mappings per architecture |
+| **FinOps Practitioners** | Cost breakdowns, Savings Plan guidance, and cost-optimization levers for every pattern |
+
+---
+
+## 📐 What Every Chapter Covers
+
+Each chapter follows the same battle-tested structure so you can navigate directly to what you need:
+
+| Section | What You'll Find |
+|---------|-----------------|
+| **Executive Summary** | The business problem this architecture solves and when to use it |
+| **Business Requirements** | NFRs, RPO/RTO targets, scalability goals, compliance requirements |
+| **Architecture Overview** | Design philosophy, core components, and how they interact |
+| **AWS Services Used** | Why each service was chosen, alternatives considered, limitations, pricing |
+| **Architecture Diagram** | Full Mermaid diagram of the complete system |
+| **End-to-End Request Flow** | Step-by-step walkthrough of a request through the system |
+| **Deployment Flow** | CI/CD pipeline, blue-green/canary strategy, rollback procedures |
+| **Network Topology** | VPC design, subnet layout, security groups, routing |
+| **Identity and Access** | IAM roles, policies, least-privilege patterns, cross-account access |
+| **Security Architecture** | Encryption, WAF, threat model, compliance controls |
+| **High Availability** | AZ failure handling, instance failure, failover behavior |
+| **Disaster Recovery** | Backup strategy, DR tier classification, tested RTO/RPO |
+| **Scalability** | Auto Scaling, database scaling, queue scaling, known limits |
+| **Performance Optimization** | Caching strategy, connection pooling, CDN, async offloading |
+| **Cost Optimization** | Estimated monthly costs by size, Savings Plans, FinOps levers |
+| **AI-Assisted Operations** | Amazon Q, Bedrock, AI-assisted troubleshooting and capacity planning |
+| **Terraform Implementation** | Production-ready, modular IaC with best practices applied |
+| **AWS CLI Examples** | Deployment validation, monitoring, troubleshooting, cleanup |
+| **CI/CD Integration** | GitHub Actions, GitLab CI, CodePipeline patterns |
+| **Monitoring** | CloudWatch dashboards, SLIs, SLOs, error budgets, burn-rate alerting |
+| **Logging** | Centralized logging, retention strategy, Athena for ad hoc queries |
+| **Operational Excellence** | Runbooks, patch management, change management, incident response |
+| **Failure Scenarios** | 10–15 real failure modes with detection, resolution, and prevention |
+| **Troubleshooting Guide** | Symptom → cause → diagnosis → CLI commands → resolution |
+| **Best Practices** | 25–30 actionable, specific rules for this architecture |
+| **Anti-Patterns** | What not to do, why it fails, and the correct approach |
+| **Alternatives** | Comparison table of alternative architectures with trade-offs |
+| **Real Enterprise Case Study** | A composite real-world scenario with challenges and lessons learned |
+| **Architecture Decision Record** | A ready-to-use ADR template for this architecture |
+| **Architecture Review Checklist** | Security, networking, operations, cost, compliance gates |
+| **Architect's Corner** | Hidden trade-offs, scaling limits, evolution path, decision matrix |
+
+> Writing 100 chapters at this depth takes a serious amount of time. If this structure is already more useful than most paid resources you've seen, a coffee goes a long way toward keeping the publishing schedule on track.
+
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="manishpcp" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+---
+
+## 📦 Book Structure & Progress
 
 | Symbol | Meaning |
 |--------|---------|
@@ -17,40 +94,49 @@
 ---
 
 ## ✅ Part 1 — Foundations of AWS Reference Architectures
+**Chapters 01–04 · Status: Complete**
 
-> *The vocabulary, principles, and decision frameworks every architect needs before touching a single service.*
+> The vocabulary, principles, and decision frameworks every architect needs before touching a single service. Covers what a reference architecture actually is (not just a diagram), the AWS Well-Architected Framework as a scoring lens, Architecture Decision Records, and the core design principles that recur across all 100 chapters.
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 01 | [Introduction to Production-Ready Architecture](./part-01-foundations-of-aws-reference-architectures/chapter-01-introduction-to-production-ready-architecture.md) | ✅ Live |
-| 02 | [AWS Building Blocks](./part-01-foundations-of-aws-reference-architectures/chapter-02-aws-building-blocks.md) | ✅ Live |
-| 03 | [Enterprise Design Principles](./part-01-foundations-of-aws-reference-architectures/chapter-03-enterprise-design-principles.md) | ✅ Live |
-| 04 | [Architecture Documentation & ADRs](./part-01-foundations-of-aws-reference-architectures/chapter-04-architecture-documentation.md) | ✅ Live |
+→ [Browse Part 1](./part-01-foundations-of-aws-reference-architectures/README.md)
+
+| # | Chapter | Key Topics |
+|---|---------|-----------|
+| 01 | [Introduction to Production-Ready Architecture](./part-01-foundations-of-aws-reference-architectures/chapter-01-introduction-to-production-ready-architecture.md) | Reference architecture definition, Well-Architected Framework, architecture maturity levels, design principles |
+| 02 | [AWS Building Blocks](./part-01-foundations-of-aws-reference-architectures/chapter-02-aws-building-blocks.md) | Core AWS service categories, service selection criteria, managed vs. self-managed trade-offs |
+| 03 | [Enterprise Design Principles](./part-01-foundations-of-aws-reference-architectures/chapter-03-enterprise-design-principles.md) | Failure isolation, loose coupling, immutable infrastructure, least privilege, cost-awareness |
+| 04 | [Architecture Documentation & ADRs](./part-01-foundations-of-aws-reference-architectures/chapter-04-architecture-documentation.md) | ADR format and lifecycle, documentation as code, review processes |
 
 ---
 
 ## ✅ Part 2 — Core Infrastructure Architectures
+**Chapters 05–14 · Status: Complete**
 
-> *The battle-tested compute and infrastructure patterns that underpin every production AWS workload.*
+> The battle-tested compute and infrastructure patterns that underpin every production AWS workload. From a single production EC2 instance to canary deployments — each chapter covers the full spectrum from when to use the pattern to how to operate it under real failure conditions.
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 05 | [Single EC2 Production Architecture](./part-02-core-infrastructure-architectures/chapter-05-single-ec2-production-architecture.md) | ✅ Live |
-| 06 | [Highly Available Multi-AZ Web Application](./part-02-core-infrastructure-architectures/chapter-06-highly-available-multi-az-web-application.md) | ✅ Live |
-| 07 | [Three-Tier Enterprise Architecture](./part-02-core-infrastructure-architectures/chapter-07-three-tier-enterprise-architecture.md) | ✅ Live |
-| 08 | [Auto Scaling Architecture](./part-02-core-infrastructure-architectures/chapter-08-auto-scaling-architecture.md) | ✅ Live |
-| 09 | [Shared Services Architecture](./part-02-core-infrastructure-architectures/chapter-09-shared-services-architecture.md) | ✅ Live |
-| 10 | [Bastionless Infrastructure with SSM](./part-02-core-infrastructure-architectures/chapter-10-bastionless-infrastructure-with-ssm.md) | ✅ Live |
-| 11 | [Golden AMI Architecture](./part-02-core-infrastructure-architectures/chapter-11-golden-ami-architecture.md) | ✅ Live |
-| 12 | [Immutable Infrastructure](./part-02-core-infrastructure-architectures/chapter-12-immutable-infrastructure.md) | ✅ Live |
-| 13 | [Blue-Green Infrastructure](./part-02-core-infrastructure-architectures/chapter-13-blue-green-infrastructure.md) | ✅ Live |
-| 14 | [Canary Infrastructure](./part-02-core-infrastructure-architectures/chapter-14-canary-infrastructure.md) | ✅ Live |
+→ [Browse Part 2](./part-02-core-infrastructure-architectures/README.md)
+
+| # | Chapter | Key Topics |
+|---|---------|-----------|
+| 05 | [Single EC2 Production Architecture](./part-02-core-infrastructure-architectures/chapter-05-single-ec2-production-architecture.md) | EC2 Auto Recovery, AWS Backup, Session Manager, honest availability trade-offs |
+| 06 | [Highly Available Multi-AZ Web Application](./part-02-core-infrastructure-architectures/chapter-06-highly-available-multi-az-web-application.md) | ALB, Multi-AZ ASG, Aurora Multi-AZ, 99.95% availability design |
+| 07 | [Three-Tier Enterprise Architecture](./part-02-core-infrastructure-architectures/chapter-07-three-tier-enterprise-architecture.md) | Presentation, application, and data tier separation, network segmentation |
+| 08 | [Auto Scaling Architecture](./part-02-core-infrastructure-architectures/chapter-08-auto-scaling-architecture.md) | Target tracking, step scaling, scheduled scaling, warm pools |
+| 09 | [Shared Services Architecture](./part-02-core-infrastructure-architectures/chapter-09-shared-services-architecture.md) | Centralized networking, shared tooling, cross-account service consumption |
+| 10 | [Bastionless Infrastructure with SSM](./part-02-core-infrastructure-architectures/chapter-10-bastionless-infrastructure-with-ssm.md) | Session Manager, no SSH keys, VPC endpoints, audit trail |
+| 11 | [Golden AMI Architecture](./part-02-core-infrastructure-architectures/chapter-11-golden-ami-architecture.md) | EC2 Image Builder, AMI pipelines, hardened base images, patch baking |
+| 12 | [Immutable Infrastructure](./part-02-core-infrastructure-architectures/chapter-12-immutable-infrastructure.md) | Replace-not-patch, pipeline-built AMIs, configuration drift elimination |
+| 13 | [Blue-Green Infrastructure](./part-02-core-infrastructure-architectures/chapter-13-blue-green-infrastructure.md) | Zero-downtime deployments, traffic shifting, automated rollback |
+| 14 | [Canary Infrastructure](./part-02-core-infrastructure-architectures/chapter-14-canary-infrastructure.md) | Weighted routing, progressive traffic shifting, automated rollback triggers |
 
 ---
 
 ## 🔒 Part 3 — Network Architectures
+**Chapters 15–24 · Status: Planned**
 
-> *VPCs, Transit Gateways, hybrid connectivity, and edge delivery — the plumbing that holds everything together.*
+> VPCs, Transit Gateways, hybrid connectivity, and edge delivery — the plumbing that holds everything together.
+
+→ [Browse Part 3](./part-03-network-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -68,8 +154,11 @@
 ---
 
 ## 🔒 Part 4 — Serverless Architectures
+**Chapters 25–34 · Status: Planned**
 
-> *Lambda, API Gateway, EventBridge, and Step Functions — building systems that scale to zero and to infinity.*
+> Lambda, API Gateway, EventBridge, and Step Functions — building systems that scale to zero and to infinity.
+
+→ [Browse Part 4](./part-04-serverless-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -87,8 +176,11 @@
 ---
 
 ## 🔒 Part 5 — Container & Kubernetes Architectures
+**Chapters 35–42 · Status: Planned**
 
-> *ECS, EKS, service meshes, GitOps, and GPU workloads — containers done right at enterprise scale.*
+> ECS, EKS, service meshes, GitOps, and GPU workloads — containers done right at enterprise scale.
+
+→ [Browse Part 5](./part-05-container-and-kubernetes-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -104,8 +196,11 @@
 ---
 
 ## 🔒 Part 6 — Data Platform Architectures
+**Chapters 43–50 · Status: Planned**
 
-> *Aurora, DynamoDB, data lakes, lake houses, streaming analytics, and multi-database patterns.*
+> Aurora, DynamoDB, data lakes, lake houses, streaming analytics, and multi-database patterns.
+
+→ [Browse Part 6](./part-06-data-platform-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -121,8 +216,11 @@
 ---
 
 ## 🔒 Part 7 — AI & Machine Learning Architectures
+**Chapters 51–58 · Status: Planned**
 
-> *Bedrock, RAG, vector databases, AI agents, MLOps pipelines, and production-grade generative AI.*
+> Bedrock, RAG, vector databases, AI agents, MLOps pipelines, and production-grade generative AI.
+
+→ [Browse Part 7](./part-07-ai-and-machine-learning-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -138,8 +236,11 @@
 ---
 
 ## 🔒 Part 8 — Enterprise Application Architectures
+**Chapters 59–66 · Status: Planned**
 
-> *SaaS multi-tenancy, B2B platforms, CRM/ERP integration, API marketplaces, and identity federation.*
+> SaaS multi-tenancy, B2B platforms, CRM/ERP integration, API marketplaces, and identity federation.
+
+→ [Browse Part 8](./part-08-enterprise-application-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -155,8 +256,11 @@
 ---
 
 ## 🔒 Part 9 — Industry-Specific Architectures
+**Chapters 67–76 · Status: Planned**
 
-> *Regulated, compliance-heavy reference architectures for banking, healthcare, retail, gaming, and more.*
+> Regulated, compliance-heavy reference architectures for banking, healthcare, retail, gaming, and more.
+
+→ [Browse Part 9](./part-09-industry-specific-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -174,8 +278,11 @@
 ---
 
 ## 🔒 Part 10 — Modern Architecture Patterns
+**Chapters 77–86 · Status: Planned**
 
-> *Microservices, CQRS, event sourcing, saga, circuit breaker, strangler fig, and more — the patterns behind resilient systems.*
+> Microservices, CQRS, event sourcing, saga, circuit breaker, strangler fig, and more — the patterns behind resilient systems.
+
+→ [Browse Part 10](./part-10-modern-architecture-patterns/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -193,8 +300,11 @@
 ---
 
 ## 🔒 Part 11 — Security Reference Architectures
+**Chapters 87–94 · Status: Planned**
 
-> *Zero trust, multi-account security, IAM Identity Center, secrets management, encryption, SOC operations, and compliance.*
+> Zero trust, multi-account security, IAM Identity Center, secrets management, encryption, SOC operations, and compliance.
+
+→ [Browse Part 11](./part-11-security-reference-architectures/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -210,8 +320,11 @@
 ---
 
 ## 🔒 Part 12 — Resilience, Operations & Cost
+**Chapters 95–100 · Status: Planned**
 
-> *Disaster recovery, observability, FinOps, multi-region active-active, landing zones, and future-proof cloud architecture.*
+> Disaster recovery, observability, FinOps, multi-region active-active, landing zones, and future-proof cloud architecture.
+
+→ [Browse Part 12](./part-12-resilience-operations-and-cost/README.md)
 
 | # | Chapter | Status |
 |---|---------|--------|
@@ -224,32 +337,31 @@
 
 ---
 
-## 📖 What Every Chapter Covers
+## 🗺️ How to Navigate This Book
 
-Each of the 100 chapters follows the same battle-tested structure so you can navigate directly to what you need:
+**If you're new to AWS architecture**, start with Part 1. Chapter 1 establishes the vocabulary and decision framework used throughout the entire book.
 
-| Section | What You'll Find |
-|---------|-----------------|
-| Executive Summary | The business problem this architecture solves |
-| Business Requirements | NFRs, RPO/RTO, scalability targets |
-| Architecture Overview | Design philosophy and core components |
-| AWS Services Used | Why each service was chosen over alternatives |
-| Architecture Diagram | Full Mermaid diagram |
-| End-to-End Request Flow | Step-by-step walkthrough |
-| Deployment Flow | CI/CD, blue-green, rollback |
-| Network Topology | VPC, subnets, security groups |
-| Security Architecture | Encryption, IAM, WAF, threat model |
-| High Availability | AZ failure, instance failure, failover |
-| Disaster Recovery | Backup strategy, DR tiers, RTO/RPO |
-| Scalability | Auto Scaling, database scaling, limits |
-| Cost Optimization | Estimated costs, Savings Plans, FinOps |
-| Terraform Implementation | Production-ready IaC modules |
-| AWS CLI Examples | Deployment, monitoring, troubleshooting |
-| Failure Scenarios | 10–15 real failure modes with mitigations |
-| Best Practices | 25–30 actionable rules |
-| Anti-Patterns | What not to do, and why |
-| Architect's Corner | Hidden trade-offs, pitfalls, evolution path |
-| ADR | Architecture Decision Record template |
+**If you're looking for a specific pattern**, jump directly to the relevant part. Each part README has a quick-reference guide to help you pick the right chapter.
+
+**If you're preparing for an architecture review**, use the checklist at the end of the relevant chapter. Every chapter has a ready-to-use review checklist covering security, networking, operations, cost, and compliance.
+
+**If you're evaluating whether a pattern fits your requirements**, go to the "Alternatives" and "Architect's Corner" sections of the relevant chapter. These sections explicitly compare the pattern against its alternatives and tell you when *not* to use it.
+
+**If you're troubleshooting a live system**, go directly to the "Failure Scenarios" and "Troubleshooting Guide" sections of the relevant chapter.
+
+---
+
+## 🔗 Quick Reference by Use Case
+
+| I need to... | Start here |
+|---|---|
+| Understand AWS architecture fundamentals | [Part 1](./part-01-foundations-of-aws-reference-architectures/README.md) |
+| Deploy a production web application | [Ch. 06](./part-02-core-infrastructure-architectures/chapter-06-highly-available-multi-az-web-application.md) or [Ch. 07](./part-02-core-infrastructure-architectures/chapter-07-three-tier-enterprise-architecture.md) |
+| Run a small internal tool cost-effectively | [Ch. 05](./part-02-core-infrastructure-architectures/chapter-05-single-ec2-production-architecture.md) |
+| Eliminate bastion hosts | [Ch. 10](./part-02-core-infrastructure-architectures/chapter-10-bastionless-infrastructure-with-ssm.md) |
+| Implement zero-downtime deployments | [Ch. 13](./part-02-core-infrastructure-architectures/chapter-13-blue-green-infrastructure.md) or [Ch. 14](./part-02-core-infrastructure-architectures/chapter-14-canary-infrastructure.md) |
+| Design Auto Scaling for unpredictable traffic | [Ch. 08](./part-02-core-infrastructure-architectures/chapter-08-auto-scaling-architecture.md) |
+| Standardize base images across a fleet | [Ch. 11](./part-02-core-infrastructure-architectures/chapter-11-golden-ami-architecture.md) |
 
 ---
 
@@ -258,6 +370,16 @@ Each of the 100 chapters follows the same battle-tested structure so you can nav
 If this is useful, **star the repo** so you get notified when new parts drop.
 
 Found an error or want to suggest a topic? Open an issue — all feedback is welcome.
+
+---
+
+## ☕ Support This Project
+
+100 chapters. Every one written to the same depth as a paid architecture course. No paywalls, no newsletter gates, no upsells — just the content.
+
+If this handbook has saved you time, helped you make a better architecture decision, or given you something concrete to bring into a review — consider buying me a coffee. It directly funds the next part.
+
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="manishpcp" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
 
 ---
 
