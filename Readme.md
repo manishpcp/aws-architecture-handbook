@@ -29,22 +29,22 @@
 
 ---
 
-## 🔜 Part 2 — Core Infrastructure Architectures
+## ✅ Part 2 — Core Infrastructure Architectures
 
 > *The battle-tested compute and infrastructure patterns that underpin every production AWS workload.*
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 05 | [Single EC2 Production Architecture](./part-02-core-infrastructure-architectures/chapter-05-single-ec2-production-architecture.md) | 🔜 Coming Soon |
-| 06 | [Highly Available Multi-AZ Web Application](./part-02-core-infrastructure-architectures/chapter-06-highly-available-multi-az-web-application.md) | 🔜 Coming Soon |
-| 07 | [Three-Tier Enterprise Architecture](./part-02-core-infrastructure-architectures/chapter-07-three-tier-enterprise-architecture.md) | 🔜 Coming Soon |
-| 08 | [Auto Scaling Architecture](./part-02-core-infrastructure-architectures/chapter-08-auto-scaling-architecture.md) | 🔜 Coming Soon |
-| 09 | [Shared Services Architecture](./part-02-core-infrastructure-architectures/chapter-09-shared-services-architecture.md) | 🔜 Coming Soon |
-| 10 | [Bastionless Infrastructure with SSM](./part-02-core-infrastructure-architectures/chapter-10-bastionless-infrastructure-with-ssm.md) | 🔜 Coming Soon |
-| 11 | [Golden AMI Architecture](./part-02-core-infrastructure-architectures/chapter-11-golden-ami-architecture.md) | 🔜 Coming Soon |
-| 12 | [Immutable Infrastructure](./part-02-core-infrastructure-architectures/chapter-12-immutable-infrastructure.md) | 🔜 Coming Soon |
-| 13 | [Blue-Green Infrastructure](./part-02-core-infrastructure-architectures/chapter-13-blue-green-infrastructure.md) | 🔜 Coming Soon |
-| 14 | [Canary Infrastructure](./part-02-core-infrastructure-architectures/chapter-14-canary-infrastructure.md) | 🔜 Coming Soon |
+| 05 | [Single EC2 Production Architecture](./part-02-core-infrastructure-architectures/chapter-05-single-ec2-production-architecture.md) | ✅ Live |
+| 06 | [Highly Available Multi-AZ Web Application](./part-02-core-infrastructure-architectures/chapter-06-highly-available-multi-az-web-application.md) | ✅ Live |
+| 07 | [Three-Tier Enterprise Architecture](./part-02-core-infrastructure-architectures/chapter-07-three-tier-enterprise-architecture.md) | ✅ Live |
+| 08 | [Auto Scaling Architecture](./part-02-core-infrastructure-architectures/chapter-08-auto-scaling-architecture.md) | ✅ Live |
+| 09 | [Shared Services Architecture](./part-02-core-infrastructure-architectures/chapter-09-shared-services-architecture.md) | ✅ Live |
+| 10 | [Bastionless Infrastructure with SSM](./part-02-core-infrastructure-architectures/chapter-10-bastionless-infrastructure-with-ssm.md) | ✅ Live |
+| 11 | [Golden AMI Architecture](./part-02-core-infrastructure-architectures/chapter-11-golden-ami-architecture.md) | ✅ Live |
+| 12 | [Immutable Infrastructure](./part-02-core-infrastructure-architectures/chapter-12-immutable-infrastructure.md) | ✅ Live |
+| 13 | [Blue-Green Infrastructure](./part-02-core-infrastructure-architectures/chapter-13-blue-green-infrastructure.md) | ✅ Live |
+| 14 | [Canary Infrastructure](./part-02-core-infrastructure-architectures/chapter-14-canary-infrastructure.md) | ✅ Live |
 
 ---
 
