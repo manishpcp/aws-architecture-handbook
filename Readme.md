@@ -22,7 +22,7 @@ If you have ever sat in an architecture review and wished someone had written do
 
 > This handbook is free and always will be. If it saves you hours of research, a bad architecture decision, or an awkward review meeting — consider buying me a coffee. It keeps new chapters coming every week.
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="manishpcp" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+[![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=manishpcp&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/manishpcp)
 
 ---
 
@@ -79,7 +79,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 > Writing 100 chapters at this depth takes a serious amount of time. If this structure is already more useful than most paid resources you've seen, a coffee goes a long way toward keeping the publishing schedule on track.
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="manishpcp" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+[![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=manishpcp&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/manishpcp)
 
 ---
 
@@ -379,7 +379,7 @@ Found an error or want to suggest a topic? Open an issue — all feedback is wel
 
 If this handbook has saved you time, helped you make a better architecture decision, or given you something concrete to bring into a review — consider buying me a coffee. It directly funds the next part.
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="manishpcp" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+[![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=manishpcp&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/manishpcp)
 
 ---
 
