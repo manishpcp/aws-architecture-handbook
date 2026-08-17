@@ -131,47 +131,47 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 ---
 
-## 🔒 Part 3 — Network Architectures
-**Chapters 15–24 · Status: Planned**
+## ✅ Part 3 — Network Architectures
+**Chapters 15–24 · Status: Complete**
 
-> VPCs, Transit Gateways, hybrid connectivity, and edge delivery — the plumbing that holds everything together.
+> VPCs, Transit Gateways, hybrid connectivity, and edge delivery — the foundational networking layer that every other architecture in this book runs on top of.
 
 → [Browse Part 3](./part-03-network-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 15 | [Enterprise VPC](./part-03-network-architectures/chapter-15-enterprise-vpc.md) | 🔒 Planned |
-| 16 | [Hub-and-Spoke Networking](./part-03-network-architectures/chapter-16-hub-and-spoke-networking.md) | 🔒 Planned |
-| 17 | [Transit Gateway](./part-03-network-architectures/chapter-17-transit-gateway.md) | 🔒 Planned |
-| 18 | [Cloud WAN](./part-03-network-architectures/chapter-18-cloud-wan.md) | 🔒 Planned |
-| 19 | [Shared Services VPC](./part-03-network-architectures/chapter-19-shared-services-vpc.md) | 🔒 Planned |
-| 20 | [PrivateLink Architecture](./part-03-network-architectures/chapter-20-privatelink-architecture.md) | 🔒 Planned |
-| 21 | [Global Accelerator](./part-03-network-architectures/chapter-21-global-accelerator.md) | 🔒 Planned |
-| 22 | [CloudFront Edge Architecture](./part-03-network-architectures/chapter-22-cloudfront-edge-architecture.md) | 🔒 Planned |
-| 23 | [Hybrid VPN](./part-03-network-architectures/chapter-23-hybrid-vpn.md) | 🔒 Planned |
-| 24 | [Direct Connect Enterprise](./part-03-network-architectures/chapter-24-direct-connect-enterprise.md) | 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 15 | [Enterprise VPC](./part-03-network-architectures/chapter-15-enterprise-vpc.md) | CIDR planning, subnet tiering, route tables, VPC endpoints, IPAM, Flow Logs |
+| 16 | [Hub-and-Spoke Networking](./part-03-network-architectures/chapter-16-hub-and-spoke-networking.md) | Hub VPC design, centralized egress, cross-account sharing, RAM |
+| 17 | [Transit Gateway](./part-03-network-architectures/chapter-17-transit-gateway.md) | TGW route tables, attachment types, inter-region peering, centralized inspection |
+| 18 | [Cloud WAN](./part-03-network-architectures/chapter-18-cloud-wan.md) | Global network policy, segments, inter-region backbone, TGW migration |
+| 19 | [Shared Services VPC](./part-03-network-architectures/chapter-19-shared-services-vpc.md) | Centralized DNS, NAT egress, Network Firewall, Private CA, cost allocation |
+| 20 | [PrivateLink Architecture](./part-03-network-architectures/chapter-20-privatelink-architecture.md) | VPC endpoint services, NLB, cross-account exposure, DNS resolution |
+| 21 | [Global Accelerator](./part-03-network-architectures/chapter-21-global-accelerator.md) | Anycast IPs, health-check failover, traffic dial, Shield integration |
+| 22 | [CloudFront Edge Architecture](./part-03-network-architectures/chapter-22-cloudfront-edge-architecture.md) | Cache behaviors, Lambda@Edge, WAF at edge, signed URLs, origin failover |
+| 23 | [Hybrid VPN](./part-03-network-architectures/chapter-23-hybrid-vpn.md) | Site-to-Site VPN, BGP routing, redundant tunnels, TGW attachment |
+| 24 | [Direct Connect Enterprise](./part-03-network-architectures/chapter-24-direct-connect-enterprise.md) | Dedicated connections, Virtual Interfaces, DX Gateway, resilience models |
 
 ---
 
-## 🔒 Part 4 — Serverless Architectures
-**Chapters 25–34 · Status: Planned**
+## ✅ Part 4 — Serverless Architectures
+**Chapters 25–34 · Status: Complete**
 
-> Lambda, API Gateway, EventBridge, and Step Functions — building systems that scale to zero and to infinity.
+> Lambda, API Gateway, EventBridge, and Step Functions — building systems that scale to zero and to infinity without managing servers.
 
 → [Browse Part 4](./part-04-serverless-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 25 | [REST APIs](./part-04-serverless-architectures/chapter-25-rest-apis.md) | 🔒 Planned |
-| 26 | [Event-Driven Systems](./part-04-serverless-architectures/chapter-26-event-driven-systems.md) | 🔒 Planned |
-| 27 | [Lambda Microservices](./part-04-serverless-architectures/chapter-27-lambda-microservices.md) | 🔒 Planned |
-| 28 | [Step Functions Orchestration](./part-04-serverless-architectures/chapter-28-step-functions.md) | 🔒 Planned |
-| 29 | [Webhook Processing](./part-04-serverless-architectures/chapter-29-webhook-processing.md) | 🔒 Planned |
-| 30 | [Real-Time APIs](./part-04-serverless-architectures/chapter-30-real-time-apis.md) | 🔒 Planned |
-| 31 | [Scheduled Processing](./part-04-serverless-architectures/chapter-31-scheduled-processing.md) | 🔒 Planned |
-| 32 | [Serverless ETL](./part-04-serverless-architectures/chapter-32-serverless-etl.md) | 🔒 Planned |
-| 33 | [EventBridge Integration](./part-04-serverless-architectures/chapter-33-eventbridge-integration.md) | 🔒 Planned |
-| 34 | [Multi-Account Serverless](./part-04-serverless-architectures/chapter-34-multi-account-serverless.md) | 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 25 | [REST APIs](./part-04-serverless-architectures/chapter-25-rest-apis.md) | API Gateway REST vs HTTP API, Lambda proxy, Cognito authorizer, cold starts, cost break-even |
+| 26 | [Event-Driven Systems](./part-04-serverless-architectures/chapter-26-event-driven-systems.md) | SNS fan-out, SQS, EventBridge routing, idempotent consumers, DLQ strategy |
+| 27 | [Lambda Microservices](./part-04-serverless-architectures/chapter-27-lambda-microservices.md) | Function boundaries, per-function IAM, Lambda layers, versioning and aliases |
+| 28 | [Step Functions Orchestration](./part-04-serverless-architectures/chapter-28-step-functions.md) | Standard vs Express workflows, ASL, error handling, SDK integrations |
+| 29 | [Webhook Processing](./part-04-serverless-architectures/chapter-29-webhook-processing.md) | Fast acknowledgment, SQS buffering, signature verification, DLQ, replay |
+| 30 | [Real-Time APIs](./part-04-serverless-architectures/chapter-30-real-time-apis.md) | WebSocket API, connection management, DynamoDB, broadcasting, AppSync |
+| 31 | [Scheduled Processing](./part-04-serverless-architectures/chapter-31-scheduled-processing.md) | EventBridge Scheduler, flexible time windows, idempotent jobs, missed execution monitoring |
+| 32 | [Serverless ETL](./part-04-serverless-architectures/chapter-32-serverless-etl.md) | S3-triggered Lambda, AWS Glue, Data Catalog, Lambda vs Glue decision framework |
+| 33 | [EventBridge Integration](./part-04-serverless-architectures/chapter-33-eventbridge-integration.md) | Custom event buses, schema registry, archive and replay, API destinations, Pipes |
+| 34 | [Multi-Account Serverless](./part-04-serverless-architectures/chapter-34-multi-account-serverless.md) | Cross-account Lambda, cross-account EventBridge, shared API Gateway, centralized observability |
 
 ---
 
