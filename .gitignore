@@ -33,8 +33,10 @@ desktop.ini
 *.tmp
 *.bak
 
-# PowerShell
-*.ps1.bak
+# Non-markdown files (scripts, utilities)
+*.py
+*.ps1
+*.sh
 
 # Terraform (if any local testing)
 .terraform/
