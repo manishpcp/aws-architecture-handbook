@@ -32,6 +32,7 @@ This part covers the architectural patterns that underpin enterprise software pr
 ## Chapters at a Glance
 
 ### Chapter 59 — SaaS Multi-Tenant
+
 **[Read →](./chapter-59-saas-multitenant.md)** · 🔒 Coming soon
 
 The foundational SaaS architecture decision: how to isolate tenant data, compute, and configuration in a shared infrastructure model — with the silo, pool, and bridge tenancy models, their cost and isolation trade-offs, and the tenant context propagation pattern that threads tenant identity through every layer of the stack.
@@ -41,6 +42,7 @@ The foundational SaaS architecture decision: how to isolate tenant data, compute
 ---
 
 ### Chapter 60 — B2B SaaS
+
 **[Read →](./chapter-60-b2b-saas.md)** · 🔒 Coming soon
 
 SaaS architecture specifically for enterprise B2B customers — where each customer has their own identity provider, their own compliance requirements, their own data residency preferences, and their own procurement and contractual expectations that the architecture must accommodate without becoming a bespoke deployment per customer.
@@ -50,6 +52,7 @@ SaaS architecture specifically for enterprise B2B customers — where each custo
 ---
 
 ### Chapter 61 — CRM Platform
+
 **[Read →](./chapter-61-crm-platform.md)** · 🔒 Coming soon
 
 The architecture for a customer relationship management platform — contact and account management, activity tracking, pipeline management, and the integration layer that connects CRM data to marketing automation, support systems, and financial systems.
@@ -59,6 +62,7 @@ The architecture for a customer relationship management platform — contact and
 ---
 
 ### Chapter 62 — ERP Integration
+
 **[Read →](./chapter-62-erp-integration.md)** · 🔒 Coming soon
 
 Integrating AWS workloads with enterprise ERP systems — SAP, Oracle, Microsoft Dynamics — using AWS integration services to bridge the gap between modern cloud-native applications and legacy on-premises ERP systems without tight coupling.
@@ -68,6 +72,7 @@ Integrating AWS workloads with enterprise ERP systems — SAP, Oracle, Microsoft
 ---
 
 ### Chapter 63 — API Marketplace
+
 **[Read →](./chapter-63-api-marketplace.md)** · 🔒 Coming soon
 
 The architecture for a platform that exposes, manages, and monetizes APIs to external developers — with API Gateway as the managed entry point, usage plans and API keys for access control, a developer portal for discovery and onboarding, and the billing integration that turns API consumption into revenue.
@@ -77,6 +82,7 @@ The architecture for a platform that exposes, manages, and monetizes APIs to ext
 ---
 
 ### Chapter 64 — Identity Federation
+
 **[Read →](./chapter-64-identity-federation.md)** · 🔒 Coming soon
 
 Federating identity across organizational boundaries — connecting corporate identity providers (Active Directory, Okta, Azure AD) to AWS workloads, enabling cross-organization trust, and managing the IAM Identity Center configuration that gives the right people the right access across a multi-account AWS organization.
@@ -86,6 +92,7 @@ Federating identity across organizational boundaries — connecting corporate id
 ---
 
 ### Chapter 65 — Enterprise Portal
+
 **[Read →](./chapter-65-enterprise-portal.md)** · 🔒 Coming soon
 
 A self-service portal for employees or customers — built on a modern frontend architecture with CloudFront, S3, and API Gateway, backed by a federated identity layer, with the personalization, role-based content, and audit trail that enterprise portals require.
@@ -95,6 +102,7 @@ A self-service portal for employees or customers — built on a modern frontend 
 ---
 
 ### Chapter 66 — Workflow Automation
+
 **[Read →](./chapter-66-workflow-automation.md)** · 🔒 Coming soon
 
 Automating multi-step business processes — employee onboarding, purchase approvals, contract review, incident escalation — using Step Functions for orchestration, human task integration for approval steps, and the audit trail that makes automated business processes compliant and auditable.

@@ -32,6 +32,7 @@ This part covers the full container and Kubernetes stack on AWS — from ECS Far
 ## Chapters at a Glance
 
 ### Chapter 35 — ECS Fargate
+
 **[Read →](./chapter-35-ecs-fargate.md)** · 🔒 Coming soon
 
 AWS Fargate on ECS as the managed container platform for teams that want the portability and consistency of containers without the operational burden of managing EC2 node groups or a Kubernetes control plane. The right starting point for most container workloads.
@@ -41,6 +42,7 @@ AWS Fargate on ECS as the managed container platform for teams that want the por
 ---
 
 ### Chapter 36 — Amazon EKS
+
 **[Read →](./chapter-36-amazon-eks.md)** · 🔒 Coming soon
 
 Amazon EKS as the managed Kubernetes platform for organizations that need the full Kubernetes ecosystem — Helm charts, custom controllers, the CNCF tooling landscape — with AWS managing the control plane and the operator managing the data plane.
@@ -50,6 +52,7 @@ Amazon EKS as the managed Kubernetes platform for organizations that need the fu
 ---
 
 ### Chapter 37 — Service Mesh
+
 **[Read →](./chapter-37-service-mesh.md)** · 🔒 Coming soon
 
 AWS App Mesh and Istio on EKS for managing service-to-service communication in a microservices architecture — mutual TLS, traffic shaping, circuit breaking, retries, and distributed tracing — without modifying application code.
@@ -59,6 +62,7 @@ AWS App Mesh and Istio on EKS for managing service-to-service communication in a
 ---
 
 ### Chapter 38 — GitOps Platform
+
 **[Read →](./chapter-38-gitops-platform.md)** · 🔒 Coming soon
 
 GitOps as the deployment model for Kubernetes — Git as the single source of truth for cluster state, with ArgoCD or Flux continuously reconciling the cluster toward the declared state, eliminating manual kubectl applies and providing an automatic audit trail of every change.
@@ -68,6 +72,7 @@ GitOps as the deployment model for Kubernetes — Git as the single source of tr
 ---
 
 ### Chapter 39 — Multi-Cluster Kubernetes
+
 **[Read →](./chapter-39-multicluster-kubernetes.md)** · 🔒 Coming soon
 
 The patterns for running workloads across multiple Kubernetes clusters — for regional isolation, environment separation, blast radius reduction, or workload-type separation — with cross-cluster service discovery, traffic routing, and unified observability.
@@ -77,6 +82,7 @@ The patterns for running workloads across multiple Kubernetes clusters — for r
 ---
 
 ### Chapter 40 — Platform Engineering
+
 **[Read →](./chapter-40-platform-engineering.md)** · 🔒 Coming soon
 
 Building an Internal Developer Platform (IDP) on top of Kubernetes and AWS — a self-service layer that lets application teams deploy, scale, and operate their workloads without deep infrastructure expertise, while the platform team maintains guardrails, security controls, and operational standards.
@@ -86,6 +92,7 @@ Building an Internal Developer Platform (IDP) on top of Kubernetes and AWS — a
 ---
 
 ### Chapter 41 — Batch Containers
+
 **[Read →](./chapter-41-batch-containers.md)** · 🔒 Coming soon
 
 AWS Batch for running large-scale parallel and batch processing jobs in containers — genomics pipelines, financial simulations, media transcoding, ML training data preparation — with managed job queues, compute environments, and Spot Instance integration for cost-optimized execution.
@@ -95,6 +102,7 @@ AWS Batch for running large-scale parallel and batch processing jobs in containe
 ---
 
 ### Chapter 42 — GPU Workloads
+
 **[Read →](./chapter-42-gpu-workloads.md)** · 🔒 Coming soon
 
 Running GPU-accelerated workloads on AWS — deep learning training, inference serving, video processing — on EC2 GPU instances, EKS with GPU node groups, or SageMaker, with the instance selection, driver management, and cost optimization strategies that make GPU infrastructure economically viable.

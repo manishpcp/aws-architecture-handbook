@@ -19,6 +19,7 @@ If you are new to AWS architecture, read these chapters in order before jumping 
 ## Chapters at a Glance
 
 ### Chapter 01 — Introduction to Production-Ready Architecture
+
 **[Read →](./chapter-01-introduction-to-production-ready-architecture.md)**
 
 Establishes what a reference architecture actually is — a documented set of decisions, constraints, and trade-offs, not merely a diagram — and why organizations that invest in them recover faster, audit cheaper, and scale more predictably than those that don't.
@@ -36,6 +37,7 @@ Establishes what a reference architecture actually is — a documented set of de
 ---
 
 ### Chapter 02 — AWS Building Blocks
+
 **[Read →](./chapter-02-aws-building-blocks.md)**
 
 A structured tour of the AWS service landscape organized by category — compute, storage, networking, database, messaging, security, and observability — with selection criteria for choosing between services rather than just describing what each one does.
@@ -52,6 +54,7 @@ A structured tour of the AWS service landscape organized by category — compute
 ---
 
 ### Chapter 03 — Enterprise Design Principles
+
 **[Read →](./chapter-03-enterprise-design-principles.md)**
 
 The principles that recur across all 100 architectures in this book — not as abstract ideals, but as concrete, actionable design constraints with specific implementation guidance and real consequences when violated.
@@ -70,6 +73,7 @@ The principles that recur across all 100 architectures in this book — not as a
 ---
 
 ### Chapter 04 — Architecture Documentation & ADRs
+
 **[Read →](./chapter-04-architecture-documentation.md)**
 
 Architecture Decision Records (ADRs) are the artifact that makes a design decision auditable, reversible, and transferable — rather than tribal knowledge that walks out the door when a senior engineer leaves. This chapter covers the ADR format, lifecycle, and the discipline of treating documentation as code.

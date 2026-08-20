@@ -34,6 +34,7 @@ This part covers production-grade reference architectures for ten regulated and 
 ## Chapters at a Glance
 
 ### Chapter 67 — Banking
+
 **[Read →](./chapter-67-banking.md)** · 🔒 Coming soon
 
 Architecture for banking and financial services workloads — core banking integration, payment processing, fraud detection, and the PCI-DSS, SOX, and GLBA compliance controls that every financial services architecture must demonstrate to regulators and auditors.
@@ -43,6 +44,7 @@ Architecture for banking and financial services workloads — core banking integ
 ---
 
 ### Chapter 68 — Healthcare
+
 **[Read →](./chapter-68-healthcare.md)** · 🔒 Coming soon
 
 Architecture for healthcare workloads handling Protected Health Information (PHI) — HIPAA Security Rule compliance, HL7 FHIR API design, EHR integration, medical imaging storage, and the Business Associate Agreement (BAA) requirements that govern every AWS service used in a HIPAA-eligible workload.
@@ -52,6 +54,7 @@ Architecture for healthcare workloads handling Protected Health Information (PHI
 ---
 
 ### Chapter 69 — Insurance
+
 **[Read →](./chapter-69-insurance.md)** · 🔒 Coming soon
 
 Architecture for insurance workloads — policy management, claims processing, underwriting automation, and the actuarial data platforms that support risk modeling, with the state-level regulatory compliance and data residency requirements that vary across jurisdictions.
@@ -61,6 +64,7 @@ Architecture for insurance workloads — policy management, claims processing, u
 ---
 
 ### Chapter 70 — Government
+
 **[Read →](./chapter-70-government.md)** · 🔒 Coming soon
 
 Architecture for federal, state, and local government workloads — FedRAMP authorization, FISMA compliance, AWS GovCloud deployment, and the specific security controls, audit requirements, and procurement constraints that govern government cloud deployments.
@@ -70,6 +74,7 @@ Architecture for federal, state, and local government workloads — FedRAMP auth
 ---
 
 ### Chapter 71 — Retail
+
 **[Read →](./chapter-71-retail.md)** · 🔒 Coming soon
 
 Architecture for retail and e-commerce workloads — product catalog, inventory management, order processing, and the peak traffic handling (Black Friday, Cyber Monday) that separates a retail architecture that works from one that becomes a news story.
@@ -79,6 +84,7 @@ Architecture for retail and e-commerce workloads — product catalog, inventory 
 ---
 
 ### Chapter 72 — Manufacturing
+
 **[Read →](./chapter-72-manufacturing.md)** · 🔒 Coming soon
 
 Architecture for manufacturing workloads — industrial IoT data ingestion from factory floor sensors, predictive maintenance ML models, supply chain visibility, and the OT/IT convergence patterns that connect operational technology (PLCs, SCADA) to cloud analytics.
@@ -88,6 +94,7 @@ Architecture for manufacturing workloads — industrial IoT data ingestion from 
 ---
 
 ### Chapter 73 — Telecommunications
+
 **[Read →](./chapter-73-telecommunications.md)** · 🔒 Coming soon
 
 Architecture for telecommunications workloads — network function virtualization, subscriber data management, real-time billing and mediation, and the ultra-low latency requirements of 5G core network functions deployed on AWS.
@@ -97,6 +104,7 @@ Architecture for telecommunications workloads — network function virtualizatio
 ---
 
 ### Chapter 74 — Media Streaming
+
 **[Read →](./chapter-74-media-streaming.md)** · 🔒 Coming soon
 
 Architecture for media and streaming workloads — video ingestion, transcoding, adaptive bitrate delivery, live streaming, and the content protection and rights management systems that media companies require for premium content distribution.
@@ -106,6 +114,7 @@ Architecture for media and streaming workloads — video ingestion, transcoding,
 ---
 
 ### Chapter 75 — Education
+
 **[Read →](./chapter-75-education.md)** · 🔒 Coming soon
 
 Architecture for education and EdTech workloads — learning management systems, video lecture delivery, student data platforms, and the FERPA compliance requirements that govern student data in US educational institutions.
@@ -115,6 +124,7 @@ Architecture for education and EdTech workloads — learning management systems,
 ---
 
 ### Chapter 76 — Gaming
+
 **[Read →](./chapter-76-gaming.md)** · 🔒 Coming soon
 
 Architecture for online gaming workloads — game server hosting, matchmaking, leaderboards, player data management, and the live service operations that keep a game running reliably for millions of concurrent players across global regions.

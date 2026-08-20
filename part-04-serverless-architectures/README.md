@@ -34,6 +34,7 @@ This part covers the full serverless stack on AWS — REST and real-time APIs, e
 ## Chapters at a Glance
 
 ### Chapter 25 — REST APIs
+
 **[Read →](./chapter-25-rest-apis.md)**
 
 API Gateway + Lambda as the standard serverless REST API pattern — request routing, authentication, throttling, and Lambda integration, with the honest cost and cold start trade-offs that determine whether this pattern fits your workload's traffic profile.
@@ -43,6 +44,7 @@ API Gateway + Lambda as the standard serverless REST API pattern — request rou
 ---
 
 ### Chapter 26 — Event-Driven Systems
+
 **[Read →](./chapter-26-event-driven-systems.md)**
 
 The architecture for systems that react to things that happen — orders placed, files uploaded, records changed — rather than systems that wait for requests. SNS, SQS, EventBridge, and Lambda wired together into a reliable, observable, loosely coupled event processing platform.
@@ -52,6 +54,7 @@ The architecture for systems that react to things that happen — orders placed,
 ---
 
 ### Chapter 27 — Lambda Microservices
+
 **[Read →](./chapter-27-lambda-microservices.md)**
 
 Lambda functions as independently deployable microservices — each owning a bounded domain, with its own IAM role, its own deployment pipeline, and its own data store — without the container orchestration overhead of ECS or EKS.
@@ -61,6 +64,7 @@ Lambda functions as independently deployable microservices — each owning a bou
 ---
 
 ### Chapter 28 — Step Functions Orchestration
+
 **[Read →](./chapter-28-step-functions.md)**
 
 AWS Step Functions for orchestrating multi-step workflows where each step is a Lambda function, an AWS SDK call, or a human approval task — with built-in retry logic, error handling, branching, and a visual execution history that makes debugging async workflows tractable.
@@ -70,6 +74,7 @@ AWS Step Functions for orchestrating multi-step workflows where each step is a L
 ---
 
 ### Chapter 29 — Webhook Processing
+
 **[Read →](./chapter-29-webhook-processing.md)**
 
 The reliable pattern for receiving, validating, queuing, and processing inbound webhooks from third-party services — where the sender expects a fast HTTP 200 acknowledgment and the actual processing happens asynchronously, with retry handling for failures that occur after acknowledgment.
@@ -79,6 +84,7 @@ The reliable pattern for receiving, validating, queuing, and processing inbound 
 ---
 
 ### Chapter 30 — Real-Time APIs
+
 **[Read →](./chapter-30-real-time-apis.md)**
 
 WebSocket APIs with API Gateway for bidirectional real-time communication — chat, live dashboards, collaborative editing, push notifications — without managing persistent connection infrastructure.
@@ -88,6 +94,7 @@ WebSocket APIs with API Gateway for bidirectional real-time communication — ch
 ---
 
 ### Chapter 31 — Scheduled Processing
+
 **[Read →](./chapter-31-scheduled-processing.md)**
 
 EventBridge Scheduler and Lambda for running recurring jobs — nightly reports, hourly data syncs, daily cleanup tasks — without managing cron infrastructure, with reliable execution guarantees and built-in retry handling.
@@ -97,6 +104,7 @@ EventBridge Scheduler and Lambda for running recurring jobs — nightly reports,
 ---
 
 ### Chapter 32 — Serverless ETL
+
 **[Read →](./chapter-32-serverless-etl.md)**
 
 Lambda and AWS Glue for extract-transform-load pipelines that process data from S3, databases, and streaming sources — without managing ETL servers, with pay-per-execution pricing and automatic scaling for variable data volumes.
@@ -106,6 +114,7 @@ Lambda and AWS Glue for extract-transform-load pipelines that process data from 
 ---
 
 ### Chapter 33 — EventBridge Integration
+
 **[Read →](./chapter-33-eventbridge-integration.md)**
 
 EventBridge as the integration backbone for routing events between AWS services, custom applications, and SaaS partners — with content-based filtering, schema registry, event replay, and archive capabilities that make it the most capable event routing layer in the AWS ecosystem.
@@ -115,6 +124,7 @@ EventBridge as the integration backbone for routing events between AWS services,
 ---
 
 ### Chapter 34 — Multi-Account Serverless
+
 **[Read →](./chapter-34-multi-account-serverless.md)**
 
 The patterns for running serverless workloads across multiple AWS accounts — cross-account Lambda invocation, cross-account EventBridge event routing, shared API Gateway with per-account backends, and the IAM patterns that make cross-account serverless secure and auditable.

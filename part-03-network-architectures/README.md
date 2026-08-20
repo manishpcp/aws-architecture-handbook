@@ -36,6 +36,7 @@ If your organization is running more than one VPC, has on-premises connectivity 
 ## Chapters at a Glance
 
 ### Chapter 15 — Enterprise VPC
+
 **[Read →](./chapter-15-enterprise-vpc.md)**
 
 The foundational VPC design for a single enterprise workload — CIDR planning that won't need to be re-done in 18 months, subnet tier separation that satisfies a compliance auditor, routing tables that enforce the intended traffic flow, and the VPC endpoint strategy that eliminates unnecessary NAT Gateway cost and internet exposure for AWS API calls.
@@ -45,6 +46,7 @@ The foundational VPC design for a single enterprise workload — CIDR planning t
 ---
 
 ### Chapter 16 — Hub-and-Spoke Networking
+
 **[Read →](./chapter-16-hub-and-spoke-networking.md)**
 
 The pattern for organizations running multiple VPCs across accounts that need controlled, auditable connectivity between them — without the management overhead of a full mesh of VPC peering connections that becomes unmanageable past a handful of VPCs.
@@ -54,6 +56,7 @@ The pattern for organizations running multiple VPCs across accounts that need co
 ---
 
 ### Chapter 17 — Transit Gateway
+
 **[Read →](./chapter-17-transit-gateway.md)**
 
 AWS Transit Gateway as the managed, scalable backbone for connecting VPCs, accounts, VPNs, and Direct Connect gateways through a single hub — replacing the operational complexity of VPC peering meshes with a centrally managed routing layer.
@@ -63,6 +66,7 @@ AWS Transit Gateway as the managed, scalable backbone for connecting VPCs, accou
 ---
 
 ### Chapter 18 — Cloud WAN
+
 **[Read →](./chapter-18-cloud-wan.md)**
 
 AWS Cloud WAN as a managed global network service that builds a unified WAN across AWS regions and on-premises locations — abstracting the complexity of managing individual Transit Gateways per region into a single global policy-driven network.
@@ -72,6 +76,7 @@ AWS Cloud WAN as a managed global network service that builds a unified WAN acro
 ---
 
 ### Chapter 19 — Shared Services VPC
+
 **[Read →](./chapter-19-shared-services-vpc.md)**
 
 The pattern for centralizing shared infrastructure — DNS resolvers, NAT egress, security inspection, Active Directory, internal certificate authorities — in a dedicated VPC that all workload VPCs consume, rather than duplicating these services per workload account.
@@ -81,6 +86,7 @@ The pattern for centralizing shared infrastructure — DNS resolvers, NAT egress
 ---
 
 ### Chapter 20 — PrivateLink Architecture
+
 **[Read →](./chapter-20-privatelink-architecture.md)**
 
 AWS PrivateLink for exposing services privately across VPC and account boundaries without VPC peering, route table changes, or internet exposure — the cleanest pattern for SaaS providers exposing services to customers, and for internal platform teams exposing shared services to workload accounts.
@@ -90,6 +96,7 @@ AWS PrivateLink for exposing services privately across VPC and account boundarie
 ---
 
 ### Chapter 21 — Global Accelerator
+
 **[Read →](./chapter-21-global-accelerator.md)**
 
 AWS Global Accelerator for routing user traffic through AWS's private global network from the nearest edge location to the application origin — improving latency, availability, and failover speed for globally distributed users compared to standard internet routing.
@@ -99,6 +106,7 @@ AWS Global Accelerator for routing user traffic through AWS's private global net
 ---
 
 ### Chapter 22 — CloudFront Edge Architecture
+
 **[Read →](./chapter-22-cloudfront-edge-architecture.md)**
 
 CloudFront as a full edge platform — not just a CDN for static assets, but a programmable edge layer for security enforcement, request routing, authentication, and API acceleration, with WAF integration and Lambda@Edge for custom logic at the edge.
@@ -108,6 +116,7 @@ CloudFront as a full edge platform — not just a CDN for static assets, but a p
 ---
 
 ### Chapter 23 — Hybrid VPN
+
 **[Read →](./chapter-23-hybrid-vpn.md)**
 
 Site-to-Site VPN for connecting on-premises networks to AWS over the public internet — the fastest path to hybrid connectivity, with redundant tunnels, BGP dynamic routing, and Transit Gateway integration for connecting multiple VPCs through a single VPN connection.
@@ -117,6 +126,7 @@ Site-to-Site VPN for connecting on-premises networks to AWS over the public inte
 ---
 
 ### Chapter 24 — Direct Connect Enterprise
+
 **[Read →](./chapter-24-direct-connect-enterprise.md)**
 
 AWS Direct Connect for dedicated, private network connectivity between on-premises data centers and AWS — the pattern for organizations with consistent high-bandwidth transfer requirements, latency-sensitive workloads, or compliance obligations that prohibit internet-traversing connectivity.

@@ -94,6 +94,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## ✅ Part 1 — Foundations of AWS Reference Architectures
+
 **Chapters 01–04 · Status: Complete**
 
 > The vocabulary, principles, and decision frameworks every architect needs before touching a single service. Covers what a reference architecture actually is (not just a diagram), the AWS Well-Architected Framework as a scoring lens, Architecture Decision Records, and the core design principles that recur across all 100 chapters.
@@ -110,6 +111,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## ✅ Part 2 — Core Infrastructure Architectures
+
 **Chapters 05–14 · Status: Complete**
 
 > The battle-tested compute and infrastructure patterns that underpin every production AWS workload. From a single production EC2 instance to canary deployments — each chapter covers the full spectrum from when to use the pattern to how to operate it under real failure conditions.
@@ -132,6 +134,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## ✅ Part 3 — Network Architectures
+
 **Chapters 15–24 · Status: Complete**
 
 > VPCs, Transit Gateways, hybrid connectivity, and edge delivery — the foundational networking layer that every other architecture in this book runs on top of.
@@ -154,6 +157,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## ✅ Part 4 — Serverless Architectures
+
 **Chapters 25–34 · Status: Complete**
 
 > Lambda, API Gateway, EventBridge, and Step Functions — building systems that scale to zero and to infinity without managing servers.
@@ -176,6 +180,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 5 — Container & Kubernetes Architectures
+
 **Chapters 35–42 · Status: Planned**
 
 > ECS, EKS, service meshes, GitOps, and GPU workloads — containers done right at enterprise scale.
@@ -196,6 +201,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 6 — Data Platform Architectures
+
 **Chapters 43–50 · Status: Planned**
 
 > Aurora, DynamoDB, data lakes, lake houses, streaming analytics, and multi-database patterns.
@@ -216,6 +222,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 7 — AI & Machine Learning Architectures
+
 **Chapters 51–58 · Status: Planned**
 
 > Bedrock, RAG, vector databases, AI agents, MLOps pipelines, and production-grade generative AI.
@@ -236,6 +243,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 8 — Enterprise Application Architectures
+
 **Chapters 59–66 · Status: Planned**
 
 > SaaS multi-tenancy, B2B platforms, CRM/ERP integration, API marketplaces, and identity federation.
@@ -256,6 +264,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 9 — Industry-Specific Architectures
+
 **Chapters 67–76 · Status: Planned**
 
 > Regulated, compliance-heavy reference architectures for banking, healthcare, retail, gaming, and more.
@@ -278,6 +287,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 10 — Modern Architecture Patterns
+
 **Chapters 77–86 · Status: Planned**
 
 > Microservices, CQRS, event sourcing, saga, circuit breaker, strangler fig, and more — the patterns behind resilient systems.
@@ -300,6 +310,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 11 — Security Reference Architectures
+
 **Chapters 87–94 · Status: Planned**
 
 > Zero trust, multi-account security, IAM Identity Center, secrets management, encryption, SOC operations, and compliance.
@@ -320,6 +331,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 ---
 
 ## 🔒 Part 12 — Resilience, Operations & Cost
+
 **Chapters 95–100 · Status: Planned**
 
 > Disaster recovery, observability, FinOps, multi-region active-active, landing zones, and future-proof cloud architecture.

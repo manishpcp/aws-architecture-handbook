@@ -34,6 +34,7 @@ This part covers ten patterns that appear repeatedly in production distributed s
 ## Chapters at a Glance
 
 ### Chapter 77 — Microservices
+
 **[Read →](./chapter-77-microservices.md)** · 🔒 Coming soon
 
 Decomposing a monolith into independently deployable services — each owning its domain, its data store, and its deployment pipeline — with the service boundary design, inter-service communication patterns, and operational discipline that makes microservices a genuine improvement over a monolith rather than a distributed monolith.
@@ -43,6 +44,7 @@ Decomposing a monolith into independently deployable services — each owning it
 ---
 
 ### Chapter 78 — CQRS
+
 **[Read →](./chapter-78-cqrs.md)** · 🔒 Coming soon
 
 Command Query Responsibility Segregation — separating the write model (commands that change state) from the read model (queries that return data) — allowing each to be optimized, scaled, and evolved independently, with the eventual consistency model that bridges the two.
@@ -52,6 +54,7 @@ Command Query Responsibility Segregation — separating the write model (command
 ---
 
 ### Chapter 79 — Event Sourcing
+
 **[Read →](./chapter-79-event-sourcing.md)** · 🔒 Coming soon
 
 Storing the complete history of state changes as an immutable sequence of events — rather than storing only current state — enabling full audit trails, temporal queries, event replay for rebuilding projections, and the ability to derive new read models from historical events without touching the source data.
@@ -61,6 +64,7 @@ Storing the complete history of state changes as an immutable sequence of events
 ---
 
 ### Chapter 80 — Saga Pattern
+
 **[Read →](./chapter-80-saga-pattern.md)** · 🔒 Coming soon
 
 Managing data consistency across multiple services in a distributed transaction — without two-phase commit — using a sequence of local transactions coordinated by either a central orchestrator (Step Functions) or choreographed through events, with compensating transactions for rollback when a step fails.
@@ -70,6 +74,7 @@ Managing data consistency across multiple services in a distributed transaction 
 ---
 
 ### Chapter 81 — Outbox Pattern
+
 **[Read →](./chapter-81-outbox-pattern.md)** · 🔒 Coming soon
 
 Guaranteeing that a database write and an event publication happen atomically — without distributed transactions — by writing the event to an outbox table in the same database transaction as the business data, then reliably delivering it to the message broker via a separate process.
@@ -79,6 +84,7 @@ Guaranteeing that a database write and an event publication happen atomically �
 ---
 
 ### Chapter 82 — Bulkhead
+
 **[Read →](./chapter-82-bulkhead.md)** · 🔒 Coming soon
 
 Isolating system components into separate resource pools — thread pools, connection pools, Lambda reserved concurrency, separate Auto Scaling Groups — so that a surge or failure in one component cannot exhaust shared resources and take down unrelated components.
@@ -88,6 +94,7 @@ Isolating system components into separate resource pools — thread pools, conne
 ---
 
 ### Chapter 83 — Circuit Breaker
+
 **[Read →](./chapter-83-circuit-breaker.md)** · 🔒 Coming soon
 
 Stopping cascading failures by detecting when a downstream service is degraded and short-circuiting calls to it — returning a fast failure or a cached fallback instead of waiting for a timeout — giving the downstream service time to recover without the caller accumulating thread/connection exhaustion.
@@ -97,6 +104,7 @@ Stopping cascading failures by detecting when a downstream service is degraded a
 ---
 
 ### Chapter 84 — Strangler Fig
+
 **[Read →](./chapter-84-strangler-fig.md)** · 🔒 Coming soon
 
 Migrating a monolith to microservices incrementally — by routing specific functionality to new services while the monolith continues to handle everything else — until the monolith is fully replaced without a big-bang rewrite and without a flag-day cutover.
@@ -106,6 +114,7 @@ Migrating a monolith to microservices incrementally — by routing specific func
 ---
 
 ### Chapter 85 — Sidecar Pattern
+
 **[Read →](./chapter-85-sidecar-pattern.md)** · 🔒 Coming soon
 
 Deploying a secondary container alongside the primary application container to handle cross-cutting concerns — logging, metrics collection, mTLS, service discovery, configuration management — without modifying the application code, enabling these concerns to be managed and updated independently.
@@ -115,6 +124,7 @@ Deploying a secondary container alongside the primary application container to h
 ---
 
 ### Chapter 86 — API Gateway Pattern
+
 **[Read →](./chapter-86-api-gateway-pattern.md)** · 🔒 Coming soon
 
 The API Gateway as the single entry point to a microservices system — handling cross-cutting concerns (authentication, rate limiting, request routing, protocol translation, response aggregation) at the edge, so individual services don't need to implement them independently.

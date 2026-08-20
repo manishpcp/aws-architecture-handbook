@@ -32,6 +32,7 @@ This part covers the full data platform stack on AWS — relational databases, g
 ## Chapters at a Glance
 
 ### Chapter 43 — Relational Database
+
 **[Read →](./chapter-43-relational-database.md)** · 🔒 Coming soon
 
 Amazon RDS and Aurora for transactional relational workloads — the production configuration, Multi-AZ setup, read replica strategy, connection pooling, schema migration approach, and the honest performance ceiling that tells you when to scale up, scale out, or reconsider the data model.
@@ -41,6 +42,7 @@ Amazon RDS and Aurora for transactional relational workloads — the production 
 ---
 
 ### Chapter 44 — Aurora Global Database
+
 **[Read →](./chapter-44-aurora-global-database.md)** · 🔒 Coming soon
 
 Aurora Global Database for a relational database that spans multiple AWS regions — with sub-second replication lag, regional read scaling, and the ability to promote a secondary region to primary in under a minute for disaster recovery or planned regional failover.
@@ -50,6 +52,7 @@ Aurora Global Database for a relational database that spans multiple AWS regions
 ---
 
 ### Chapter 45 — DynamoDB
+
 **[Read →](./chapter-45-dynamodb.md)** · 🔒 Coming soon
 
 DynamoDB for workloads that need single-digit millisecond latency at effectively unlimited scale — with the single-table design patterns, access pattern modeling, GSI strategy, and capacity planning that determine whether a DynamoDB implementation ages well or becomes a schema migration nightmare.
@@ -59,6 +62,7 @@ DynamoDB for workloads that need single-digit millisecond latency at effectively
 ---
 
 ### Chapter 46 — Data Lake
+
 **[Read →](./chapter-46-data-lake.md)** · 🔒 Coming soon
 
 S3 as the foundation of a data lake — with the ingestion patterns, storage organization, partitioning strategy, access control model, and query layer that turn a bucket of files into a governed, queryable, cost-efficient analytical platform.
@@ -68,6 +72,7 @@ S3 as the foundation of a data lake — with the ingestion patterns, storage org
 ---
 
 ### Chapter 47 — Lake House
+
 **[Read →](./chapter-47-lake-house.md)** · 🔒 Coming soon
 
 The lake house architecture combines a data lake (S3) with a data warehouse (Redshift) in a unified platform — where raw and historical data lives cost-efficiently in S3, hot analytical data lives in Redshift for fast query performance, and Redshift Spectrum bridges the two without data movement.
@@ -77,6 +82,7 @@ The lake house architecture combines a data lake (S3) with a data warehouse (Red
 ---
 
 ### Chapter 48 — Streaming Analytics
+
 **[Read →](./chapter-48-streaming-analytics.md)** · 🔒 Coming soon
 
 The architecture for processing and analyzing data streams in near real-time — clickstreams, IoT sensor data, application events, financial transactions — using Kinesis Data Streams, Kinesis Data Firehose, and Apache Flink on Amazon Managed Service for Apache Flink.
@@ -86,6 +92,7 @@ The architecture for processing and analyzing data streams in near real-time —
 ---
 
 ### Chapter 49 — Data Warehouse
+
 **[Read →](./chapter-49-data-warehouse.md)** · 🔒 Coming soon
 
 Amazon Redshift as the managed data warehouse for complex analytical queries across large datasets — with the cluster configuration, distribution and sort key design, workload management, and query optimization strategies that determine whether Redshift delivers sub-second query performance or frustrating timeouts.
@@ -95,6 +102,7 @@ Amazon Redshift as the managed data warehouse for complex analytical queries acr
 ---
 
 ### Chapter 50 — Multi-Database Architecture
+
 **[Read →](./chapter-50-multi-database-architecture.md)** · 🔒 Coming soon
 
 The pattern for systems that use multiple database types — relational for transactional integrity, DynamoDB for high-throughput key-value access, ElastiCache for hot-read caching, OpenSearch for full-text search, and S3 for analytical queries — each serving the access pattern it's best suited for, with the data synchronization and consistency model that keeps them coherent.
