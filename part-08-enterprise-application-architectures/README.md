@@ -1,6 +1,6 @@
 # Part 8 — Enterprise Application Architectures
 
-**Chapters 59–66 · Status: 🔒 Planned**
+**Chapters 59–66 · Status: 🔜 Coming Soon**
 
 ← [Back to Main README](../Readme.md) · [← Part 7](../part-07-ai-and-machine-learning-architectures/README.md) · [Part 9 →](../part-09-industry-specific-architectures/README.md)
 

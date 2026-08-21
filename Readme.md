@@ -88,7 +88,7 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 | Symbol | Meaning |
 |--------|---------|
 | ✅ | Published & available |
-| 🔜 | Coming soon |
+| 🔜 | Coming soon (next up) |
 | 🔒 | Planned |
 
 ---
@@ -179,51 +179,51 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 ---
 
-## 🔒 Part 5 — Container & Kubernetes Architectures
+## ✅ Part 5 — Container & Kubernetes Architectures
 
-**Chapters 35–42 · Status: Planned**
+**Chapters 35–42 · Status: Complete**
 
 > ECS, EKS, service meshes, GitOps, and GPU workloads — containers done right at enterprise scale.
 
 → [Browse Part 5](./part-05-container-and-kubernetes-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 35 | [ECS Fargate](./part-05-container-and-kubernetes-architectures/chapter-35-ecs-fargate.md) | 🔒 Planned |
-| 36 | [Amazon EKS](./part-05-container-and-kubernetes-architectures/chapter-36-amazon-eks.md) | 🔒 Planned |
-| 37 | [Service Mesh](./part-05-container-and-kubernetes-architectures/chapter-37-service-mesh.md) | 🔒 Planned |
-| 38 | [GitOps Platform](./part-05-container-and-kubernetes-architectures/chapter-38-gitops-platform.md) | 🔒 Planned |
-| 39 | [Multi-Cluster Kubernetes](./part-05-container-and-kubernetes-architectures/chapter-39-multicluster-kubernetes.md) | 🔒 Planned |
-| 40 | [Platform Engineering](./part-05-container-and-kubernetes-architectures/chapter-40-platform-engineering.md) | 🔒 Planned |
-| 41 | [Batch Containers](./part-05-container-and-kubernetes-architectures/chapter-41-batch-containers.md) | 🔒 Planned |
-| 42 | [GPU Workloads](./part-05-container-and-kubernetes-architectures/chapter-42-gpu-workloads.md) | 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 35 | [ECS Fargate](./part-05-container-and-kubernetes-architectures/chapter-35-ecs-fargate.md) | Task definitions, Fargate vs EC2 launch type, ALB integration, Cloud Map, Fargate Spot |
+| 36 | [Amazon EKS](./part-05-container-and-kubernetes-architectures/chapter-36-amazon-eks.md) | Managed node groups, IRSA, ALB Ingress Controller, Karpenter, EKS Blueprints |
+| 37 | [Service Mesh](./part-05-container-and-kubernetes-architectures/chapter-37-service-mesh.md) | Envoy sidecar, mTLS, traffic shifting, circuit breaking, X-Ray tracing |
+| 38 | [GitOps Platform](./part-05-container-and-kubernetes-architectures/chapter-38-gitops-platform.md) | ArgoCD vs Flux, multi-environment promotion, drift detection, Sealed Secrets |
+| 39 | [Multi-Cluster Kubernetes](./part-05-container-and-kubernetes-architectures/chapter-39-multicluster-kubernetes.md) | Cluster federation, cross-cluster service discovery, global load balancing, unified observability |
+| 40 | [Platform Engineering](./part-05-container-and-kubernetes-architectures/chapter-40-platform-engineering.md) | Internal developer platform, Backstage, golden path templates, OPA/Gatekeeper, cost showback |
+| 41 | [Batch Containers](./part-05-container-and-kubernetes-architectures/chapter-41-batch-containers.md) | AWS Batch, job queues, Spot integration, array jobs, DAG workflows |
+| 42 | [GPU Workloads](./part-05-container-and-kubernetes-architectures/chapter-42-gpu-workloads.md) | GPU instance families, EKS GPU node groups, MIG/time-slicing, Inferentia, Trainium |
 
 ---
 
-## 🔒 Part 6 — Data Platform Architectures
+## ✅ Part 6 — Data Platform Architectures
 
-**Chapters 43–50 · Status: Planned**
+**Chapters 43–50 · Status: Complete**
 
 > Aurora, DynamoDB, data lakes, lake houses, streaming analytics, and multi-database patterns.
 
 → [Browse Part 6](./part-06-data-platform-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 43 | [Relational Database](./part-06-data-platform-architectures/chapter-43-relational-database.md) | 🔒 Planned |
-| 44 | [Aurora Global Database](./part-06-data-platform-architectures/chapter-44-aurora-global-database.md) | 🔒 Planned |
-| 45 | [DynamoDB](./part-06-data-platform-architectures/chapter-45-dynamodb.md) | 🔒 Planned |
-| 46 | [Data Lake](./part-06-data-platform-architectures/chapter-46-data-lake.md) | 🔒 Planned |
-| 47 | [Lake House](./part-06-data-platform-architectures/chapter-47-lake-house.md) | 🔒 Planned |
-| 48 | [Streaming Analytics](./part-06-data-platform-architectures/chapter-48-streaming-analytics.md) | 🔒 Planned |
-| 49 | [Data Warehouse](./part-06-data-platform-architectures/chapter-49-data-warehouse.md) | 🔒 Planned |
-| 50 | [Multi-Database Architecture](./part-06-data-platform-architectures/chapter-50-multi-database-architecture.md) | 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 43 | [Relational Database](./part-06-data-platform-architectures/chapter-43-relational-database.md) | RDS vs Aurora, Multi-AZ, read replicas, RDS Proxy, Performance Insights, zero-downtime migration |
+| 44 | [Aurora Global Database](./part-06-data-platform-architectures/chapter-44-aurora-global-database.md) | Global cluster, sub-second replication, regional read scaling, managed failover, write forwarding |
+| 45 | [DynamoDB](./part-06-data-platform-architectures/chapter-45-dynamodb.md) | Single-table design, partition key selection, GSI/LSI, DAX, Streams, global tables |
+| 46 | [Data Lake](./part-06-data-platform-architectures/chapter-46-data-lake.md) | S3 zone architecture, Glue Data Catalog, Athena, Lake Formation, Parquet/ORC, lifecycle policies |
+| 47 | [Lake House](./part-06-data-platform-architectures/chapter-47-lake-house.md) | Redshift Spectrum, data tiering, Redshift data sharing, Lake Formation governance |
+| 48 | [Streaming Analytics](./part-06-data-platform-architectures/chapter-48-streaming-analytics.md) | Kinesis Data Streams, Firehose, Apache Flink, windowing, MSK, exactly-once semantics |
+| 49 | [Data Warehouse](./part-06-data-platform-architectures/chapter-49-data-warehouse.md) | Redshift Serverless vs provisioned, distribution styles, sort keys, WLM, AQUA |
+| 50 | [Multi-Database Architecture](./part-06-data-platform-architectures/chapter-50-multi-database-architecture.md) | Polyglot persistence, CDC with DMS, cache invalidation, search sync, eventual consistency |
 
 ---
 
-## 🔒 Part 7 — AI & Machine Learning Architectures
+## 🔜 Part 7 — AI & Machine Learning Architectures
 
-**Chapters 51–58 · Status: Planned**
+**Chapters 51–58 · Status: Coming Soon**
 
 > Bedrock, RAG, vector databases, AI agents, MLOps pipelines, and production-grade generative AI.
 
@@ -231,20 +231,20 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 51 | [Generative AI Platform](./part-07-ai-and-machine-learning-architectures/chapter-51-generative-ai-platform.md) | 🔒 Planned |
-| 52 | [RAG Architecture](./part-07-ai-and-machine-learning-architectures/chapter-52-rag-architecture.md) | 🔒 Planned |
-| 53 | [Vector Database](./part-07-ai-and-machine-learning-architectures/chapter-53-vector-database.md) | 🔒 Planned |
-| 54 | [AI Chatbot](./part-07-ai-and-machine-learning-architectures/chapter-54-ai-chatbot.md) | 🔒 Planned |
-| 55 | [Model Serving](./part-07-ai-and-machine-learning-architectures/chapter-55-model-serving.md) | 🔒 Planned |
-| 56 | [AI Agent Architecture](./part-07-ai-and-machine-learning-architectures/chapter-56-ai-agent-architecture.md) | 🔒 Planned |
-| 57 | [Document Intelligence](./part-07-ai-and-machine-learning-architectures/chapter-57-document-intelligence.md) | 🔒 Planned |
-| 58 | [MLOps Pipeline](./part-07-ai-and-machine-learning-architectures/chapter-58-mlops-pipeline.md) | 🔒 Planned |
+| 51 | [Generative AI Platform](./part-07-ai-and-machine-learning-architectures/chapter-51-generative-ai-platform.md) | 🔜 Coming Soon |
+| 52 | [RAG Architecture](./part-07-ai-and-machine-learning-architectures/chapter-52-rag-architecture.md) | 🔜 Coming Soon |
+| 53 | [Vector Database](./part-07-ai-and-machine-learning-architectures/chapter-53-vector-database.md) | 🔜 Coming Soon |
+| 54 | [AI Chatbot](./part-07-ai-and-machine-learning-architectures/chapter-54-ai-chatbot.md) | 🔜 Coming Soon |
+| 55 | [Model Serving](./part-07-ai-and-machine-learning-architectures/chapter-55-model-serving.md) | 🔜 Coming Soon |
+| 56 | [AI Agent Architecture](./part-07-ai-and-machine-learning-architectures/chapter-56-ai-agent-architecture.md) | 🔜 Coming Soon |
+| 57 | [Document Intelligence](./part-07-ai-and-machine-learning-architectures/chapter-57-document-intelligence.md) | 🔜 Coming Soon |
+| 58 | [MLOps Pipeline](./part-07-ai-and-machine-learning-architectures/chapter-58-mlops-pipeline.md) | 🔜 Coming Soon |
 
 ---
 
-## 🔒 Part 8 — Enterprise Application Architectures
+## 🔜 Part 8 — Enterprise Application Architectures
 
-**Chapters 59–66 · Status: Planned**
+**Chapters 59–66 · Status: Coming Soon**
 
 > SaaS multi-tenancy, B2B platforms, CRM/ERP integration, API marketplaces, and identity federation.
 
@@ -252,14 +252,14 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 59 | [SaaS Multi-Tenant](./part-08-enterprise-application-architectures/chapter-59-saas-multitenant.md) | 🔒 Planned |
-| 60 | [B2B SaaS](./part-08-enterprise-application-architectures/chapter-60-b2b-saas.md) | 🔒 Planned |
-| 61 | [CRM Platform](./part-08-enterprise-application-architectures/chapter-61-crm-platform.md) | 🔒 Planned |
-| 62 | [ERP Integration](./part-08-enterprise-application-architectures/chapter-62-erp-integration.md) | 🔒 Planned |
-| 63 | [API Marketplace](./part-08-enterprise-application-architectures/chapter-63-api-marketplace.md) | 🔒 Planned |
-| 64 | [Identity Federation](./part-08-enterprise-application-architectures/chapter-64-identity-federation.md) | 🔒 Planned |
-| 65 | [Enterprise Portal](./part-08-enterprise-application-architectures/chapter-65-enterprise-portal.md) | 🔒 Planned |
-| 66 | [Workflow Automation](./part-08-enterprise-application-architectures/chapter-66-workflow-automation.md) | 🔒 Planned |
+| 59 | [SaaS Multi-Tenant](./part-08-enterprise-application-architectures/chapter-59-saas-multitenant.md) | 🔜 Coming Soon |
+| 60 | [B2B SaaS](./part-08-enterprise-application-architectures/chapter-60-b2b-saas.md) | 🔜 Coming Soon |
+| 61 | [CRM Platform](./part-08-enterprise-application-architectures/chapter-61-crm-platform.md) | 🔜 Coming Soon |
+| 62 | [ERP Integration](./part-08-enterprise-application-architectures/chapter-62-erp-integration.md) | 🔜 Coming Soon |
+| 63 | [API Marketplace](./part-08-enterprise-application-architectures/chapter-63-api-marketplace.md) | 🔜 Coming Soon |
+| 64 | [Identity Federation](./part-08-enterprise-application-architectures/chapter-64-identity-federation.md) | 🔜 Coming Soon |
+| 65 | [Enterprise Portal](./part-08-enterprise-application-architectures/chapter-65-enterprise-portal.md) | 🔜 Coming Soon |
+| 66 | [Workflow Automation](./part-08-enterprise-application-architectures/chapter-66-workflow-automation.md) | 🔜 Coming Soon |
 
 ---
 

@@ -1,6 +1,6 @@
 # Part 5 — Container & Kubernetes Architectures
 
-**Chapters 35–42 · Status: 🔒 Planned**
+**Chapters 35–42 · Status: ✅ Complete**
 
 ← [Back to Main README](../Readme.md) · [← Part 4](../part-04-serverless-architectures/README.md) · [Part 6 →](../part-06-data-platform-architectures/README.md)
 

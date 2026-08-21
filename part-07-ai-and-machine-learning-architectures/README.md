@@ -1,6 +1,6 @@
 # Part 7 — AI & Machine Learning Architectures
 
-**Chapters 51–58 · Status: 🔒 Planned**
+**Chapters 51–58 · Status: 🔜 Coming Soon**
 
 ← [Back to Main README](../Readme.md) · [← Part 6](../part-06-data-platform-architectures/README.md) · [Part 8 →](../part-08-enterprise-application-architectures/README.md)
 
