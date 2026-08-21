@@ -103,8 +103,8 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Key Topics |
 |---|---------|-----------|
-| 01 | [Introduction to Production-Ready Architecture](./part-01-foundations-of-aws-reference-architectures/chapter-01-introduction-to-production-ready-architecture.md) | Reference architecture definition, Well-Architected Framework, architecture maturity levels, design principles |
-| 02 | [AWS Building Blocks](./part-01-foundations-of-aws-reference-architectures/chapter-02-aws-building-blocks.md) | Core AWS service categories, service selection criteria, managed vs. self-managed trade-offs |
+| 01 | [Introduction to Production-Ready Architecture](./part-01-foundations-of-aws-reference-architectures/chapter-01-introduction-to-production-ready-architecture.md) | Well-Architected Framework, architecture maturity levels, design principles |
+| 02 | [AWS Building Blocks](./part-01-foundations-of-aws-reference-architectures/chapter-02-aws-building-blocks.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="16"/> <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> <img src="https://icon.icepanel.io/AWS/svg/Database/RDS.svg" width="16"/> Core service categories, selection criteria, managed vs. self-managed |
 | 03 | [Enterprise Design Principles](./part-01-foundations-of-aws-reference-architectures/chapter-03-enterprise-design-principles.md) | Failure isolation, loose coupling, immutable infrastructure, least privilege, cost-awareness |
 | 04 | [Architecture Documentation & ADRs](./part-01-foundations-of-aws-reference-architectures/chapter-04-architecture-documentation.md) | ADR format and lifecycle, documentation as code, review processes |
 
@@ -120,16 +120,16 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Key Topics |
 |---|---------|-----------|
-| 05 | [Single EC2 Production Architecture](./part-02-core-infrastructure-architectures/chapter-05-single-ec2-production-architecture.md) | EC2 Auto Recovery, AWS Backup, Session Manager, honest availability trade-offs |
-| 06 | [Highly Available Multi-AZ Web Application](./part-02-core-infrastructure-architectures/chapter-06-highly-available-multi-az-web-application.md) | ALB, Multi-AZ ASG, Aurora Multi-AZ, 99.95% availability design |
-| 07 | [Three-Tier Enterprise Architecture](./part-02-core-infrastructure-architectures/chapter-07-three-tier-enterprise-architecture.md) | Presentation, application, and data tier separation, network segmentation |
-| 08 | [Auto Scaling Architecture](./part-02-core-infrastructure-architectures/chapter-08-auto-scaling-architecture.md) | Target tracking, step scaling, scheduled scaling, warm pools |
-| 09 | [Shared Services Architecture](./part-02-core-infrastructure-architectures/chapter-09-shared-services-architecture.md) | Centralized networking, shared tooling, cross-account service consumption |
-| 10 | [Bastionless Infrastructure with SSM](./part-02-core-infrastructure-architectures/chapter-10-bastionless-infrastructure-with-ssm.md) | Session Manager, no SSH keys, VPC endpoints, audit trail |
-| 11 | [Golden AMI Architecture](./part-02-core-infrastructure-architectures/chapter-11-golden-ami-architecture.md) | EC2 Image Builder, AMI pipelines, hardened base images, patch baking |
-| 12 | [Immutable Infrastructure](./part-02-core-infrastructure-architectures/chapter-12-immutable-infrastructure.md) | Replace-not-patch, pipeline-built AMIs, configuration drift elimination |
-| 13 | [Blue-Green Infrastructure](./part-02-core-infrastructure-architectures/chapter-13-blue-green-infrastructure.md) | Zero-downtime deployments, traffic shifting, automated rollback |
-| 14 | [Canary Infrastructure](./part-02-core-infrastructure-architectures/chapter-14-canary-infrastructure.md) | Weighted routing, progressive traffic shifting, automated rollback triggers |
+| 05 | [Single EC2 Production Architecture](./part-02-core-infrastructure-architectures/chapter-05-single-ec2-production-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="16"/> EC2 Auto Recovery, <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="16"/> AWS Backup, <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Systems-Manager.svg" width="16"/> Session Manager |
+| 06 | [Highly Available Multi-AZ Web Application](./part-02-core-infrastructure-architectures/chapter-06-highly-available-multi-az-web-application.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="16"/> ALB, <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2-Auto-Scaling.svg" width="16"/> Multi-AZ ASG, <img src="https://icon.icepanel.io/AWS/svg/Database/Aurora.svg" width="16"/> Aurora Multi-AZ, 99.95% availability |
+| 07 | [Three-Tier Enterprise Architecture](./part-02-core-infrastructure-architectures/chapter-07-three-tier-enterprise-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="16"/> VPC, <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="16"/> ALB, <img src="https://icon.icepanel.io/AWS/svg/Database/Aurora.svg" width="16"/> Aurora, network segmentation |
+| 08 | [Auto Scaling Architecture](./part-02-core-infrastructure-architectures/chapter-08-auto-scaling-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2-Auto-Scaling.svg" width="16"/> Target tracking, step scaling, scheduled scaling, warm pools |
+| 09 | [Shared Services Architecture](./part-02-core-infrastructure-architectures/chapter-09-shared-services-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="16"/> Centralized networking, <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Organizations.svg" width="16"/> cross-account service consumption |
+| 10 | [Bastionless Infrastructure with SSM](./part-02-core-infrastructure-architectures/chapter-10-bastionless-infrastructure-with-ssm.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Systems-Manager.svg" width="16"/> Session Manager, no SSH keys, <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="16"/> VPC endpoints, audit trail |
+| 11 | [Golden AMI Architecture](./part-02-core-infrastructure-architectures/chapter-11-golden-ami-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2-Image-Builder.svg" width="16"/> EC2 Image Builder, AMI pipelines, hardened base images |
+| 12 | [Immutable Infrastructure](./part-02-core-infrastructure-architectures/chapter-12-immutable-infrastructure.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2-Image-Builder.svg" width="16"/> Pipeline-built AMIs, replace-not-patch, drift elimination |
+| 13 | [Blue-Green Infrastructure](./part-02-core-infrastructure-architectures/chapter-13-blue-green-infrastructure.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="16"/> ALB traffic shifting, <img src="https://icon.icepanel.io/AWS/svg/Developer-Tools/CodeDeploy.svg" width="16"/> CodeDeploy, automated rollback |
+| 14 | [Canary Infrastructure](./part-02-core-infrastructure-architectures/chapter-14-canary-infrastructure.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Route-53.svg" width="16"/> Route 53 weighted routing, <img src="https://icon.icepanel.io/AWS/svg/Developer-Tools/CodeDeploy.svg" width="16"/> CodeDeploy canary, rollback triggers |
 
 ---
 
@@ -143,16 +143,16 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Key Topics |
 |---|---------|----------|
-| 15 | [Enterprise VPC](./part-03-network-architectures/chapter-15-enterprise-vpc.md) | CIDR planning, subnet tiering, route tables, VPC endpoints, IPAM, Flow Logs |
-| 16 | [Hub-and-Spoke Networking](./part-03-network-architectures/chapter-16-hub-and-spoke-networking.md) | Hub VPC design, centralized egress, cross-account sharing, RAM |
-| 17 | [Transit Gateway](./part-03-network-architectures/chapter-17-transit-gateway.md) | TGW route tables, attachment types, inter-region peering, centralized inspection |
-| 18 | [Cloud WAN](./part-03-network-architectures/chapter-18-cloud-wan.md) | Global network policy, segments, inter-region backbone, TGW migration |
-| 19 | [Shared Services VPC](./part-03-network-architectures/chapter-19-shared-services-vpc.md) | Centralized DNS, NAT egress, Network Firewall, Private CA, cost allocation |
-| 20 | [PrivateLink Architecture](./part-03-network-architectures/chapter-20-privatelink-architecture.md) | VPC endpoint services, NLB, cross-account exposure, DNS resolution |
-| 21 | [Global Accelerator](./part-03-network-architectures/chapter-21-global-accelerator.md) | Anycast IPs, health-check failover, traffic dial, Shield integration |
-| 22 | [CloudFront Edge Architecture](./part-03-network-architectures/chapter-22-cloudfront-edge-architecture.md) | Cache behaviors, Lambda@Edge, WAF at edge, signed URLs, origin failover |
-| 23 | [Hybrid VPN](./part-03-network-architectures/chapter-23-hybrid-vpn.md) | Site-to-Site VPN, BGP routing, redundant tunnels, TGW attachment |
-| 24 | [Direct Connect Enterprise](./part-03-network-architectures/chapter-24-direct-connect-enterprise.md) | Dedicated connections, Virtual Interfaces, DX Gateway, resilience models |
+| 15 | [Enterprise VPC](./part-03-network-architectures/chapter-15-enterprise-vpc.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="16"/> CIDR planning, subnet tiering, route tables, VPC endpoints, Flow Logs |
+| 16 | [Hub-and-Spoke Networking](./part-03-network-architectures/chapter-16-hub-and-spoke-networking.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="16"/> Hub VPC design, centralized egress, <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Resource-Access-Manager.svg" width="16"/> RAM cross-account sharing |
+| 17 | [Transit Gateway](./part-03-network-architectures/chapter-17-transit-gateway.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Transit-Gateway.svg" width="16"/> TGW route tables, attachment types, inter-region peering, centralized inspection |
+| 18 | [Cloud WAN](./part-03-network-architectures/chapter-18-cloud-wan.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Cloud-WAN.svg" width="16"/> Global network policy, segments, inter-region backbone, TGW migration |
+| 19 | [Shared Services VPC](./part-03-network-architectures/chapter-19-shared-services-vpc.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="16"/> Centralized DNS, <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Network-Firewall.svg" width="16"/> Network Firewall, NAT egress |
+| 20 | [PrivateLink Architecture](./part-03-network-architectures/chapter-20-privatelink-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/PrivateLink.svg" width="16"/> VPC endpoint services, NLB, cross-account exposure, DNS resolution |
+| 21 | [Global Accelerator](./part-03-network-architectures/chapter-21-global-accelerator.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Global-Accelerator.svg" width="16"/> Anycast IPs, health-check failover, traffic dial, Shield integration |
+| 22 | [CloudFront Edge Architecture](./part-03-network-architectures/chapter-22-cloudfront-edge-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="16"/> Cache behaviors, Lambda@Edge, <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/WAF.svg" width="16"/> WAF at edge, signed URLs |
+| 23 | [Hybrid VPN](./part-03-network-architectures/chapter-23-hybrid-vpn.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Site-to-Site-VPN.svg" width="16"/> Site-to-Site VPN, BGP routing, redundant tunnels, TGW attachment |
+| 24 | [Direct Connect Enterprise](./part-03-network-architectures/chapter-24-direct-connect-enterprise.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Direct-Connect.svg" width="16"/> Dedicated connections, Virtual Interfaces, DX Gateway, resilience models |
 
 ---
 
@@ -166,16 +166,16 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Key Topics |
 |---|---------|----------|
-| 25 | [REST APIs](./part-04-serverless-architectures/chapter-25-rest-apis.md) | API Gateway REST vs HTTP API, Lambda proxy, Cognito authorizer, cold starts, cost break-even |
-| 26 | [Event-Driven Systems](./part-04-serverless-architectures/chapter-26-event-driven-systems.md) | SNS fan-out, SQS, EventBridge routing, idempotent consumers, DLQ strategy |
-| 27 | [Lambda Microservices](./part-04-serverless-architectures/chapter-27-lambda-microservices.md) | Function boundaries, per-function IAM, Lambda layers, versioning and aliases |
-| 28 | [Step Functions Orchestration](./part-04-serverless-architectures/chapter-28-step-functions.md) | Standard vs Express workflows, ASL, error handling, SDK integrations |
-| 29 | [Webhook Processing](./part-04-serverless-architectures/chapter-29-webhook-processing.md) | Fast acknowledgment, SQS buffering, signature verification, DLQ, replay |
-| 30 | [Real-Time APIs](./part-04-serverless-architectures/chapter-30-real-time-apis.md) | WebSocket API, connection management, DynamoDB, broadcasting, AppSync |
-| 31 | [Scheduled Processing](./part-04-serverless-architectures/chapter-31-scheduled-processing.md) | EventBridge Scheduler, flexible time windows, idempotent jobs, missed execution monitoring |
-| 32 | [Serverless ETL](./part-04-serverless-architectures/chapter-32-serverless-etl.md) | S3-triggered Lambda, AWS Glue, Data Catalog, Lambda vs Glue decision framework |
-| 33 | [EventBridge Integration](./part-04-serverless-architectures/chapter-33-eventbridge-integration.md) | Custom event buses, schema registry, archive and replay, API destinations, Pipes |
-| 34 | [Multi-Account Serverless](./part-04-serverless-architectures/chapter-34-multi-account-serverless.md) | Cross-account Lambda, cross-account EventBridge, shared API Gateway, centralized observability |
+| 25 | [REST APIs](./part-04-serverless-architectures/chapter-25-rest-apis.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> API Gateway, <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> Lambda proxy, Cognito authorizer, cold starts |
+| 26 | [Event-Driven Systems](./part-04-serverless-architectures/chapter-26-event-driven-systems.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Notification-Service.svg" width="16"/> SNS fan-out, <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Queue-Service.svg" width="16"/> SQS, <img src="https://icon.icepanel.io/AWS/svg/App-Integration/EventBridge.svg" width="16"/> EventBridge routing, DLQ strategy |
+| 27 | [Lambda Microservices](./part-04-serverless-architectures/chapter-27-lambda-microservices.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> Function boundaries, per-function IAM, Lambda layers, versioning and aliases |
+| 28 | [Step Functions Orchestration](./part-04-serverless-architectures/chapter-28-step-functions.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> Standard vs Express workflows, ASL, error handling, SDK integrations |
+| 29 | [Webhook Processing](./part-04-serverless-architectures/chapter-29-webhook-processing.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> API Gateway, <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Queue-Service.svg" width="16"/> SQS buffering, signature verification, DLQ |
+| 30 | [Real-Time APIs](./part-04-serverless-architectures/chapter-30-real-time-apis.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> WebSocket API, <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> DynamoDB connections, <img src="https://icon.icepanel.io/AWS/svg/App-Integration/AppSync.svg" width="16"/> AppSync |
+| 31 | [Scheduled Processing](./part-04-serverless-architectures/chapter-31-scheduled-processing.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/EventBridge.svg" width="16"/> EventBridge Scheduler, flexible time windows, <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> Lambda jobs |
+| 32 | [Serverless ETL](./part-04-serverless-architectures/chapter-32-serverless-etl.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> S3-triggered Lambda, <img src="https://icon.icepanel.io/AWS/svg/Analytics/Glue.svg" width="16"/> AWS Glue, Data Catalog |
+| 33 | [EventBridge Integration](./part-04-serverless-architectures/chapter-33-eventbridge-integration.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/EventBridge.svg" width="16"/> Custom event buses, schema registry, archive and replay, API destinations |
+| 34 | [Multi-Account Serverless](./part-04-serverless-architectures/chapter-34-multi-account-serverless.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> Cross-account Lambda, <img src="https://icon.icepanel.io/AWS/svg/App-Integration/EventBridge.svg" width="16"/> cross-account EventBridge, shared API Gateway |
 
 ---
 
@@ -189,14 +189,14 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Key Topics |
 |---|---------|----------|
-| 35 | [ECS Fargate](./part-05-container-and-kubernetes-architectures/chapter-35-ecs-fargate.md) | Task definitions, Fargate vs EC2 launch type, ALB integration, Cloud Map, Fargate Spot |
-| 36 | [Amazon EKS](./part-05-container-and-kubernetes-architectures/chapter-36-amazon-eks.md) | Managed node groups, IRSA, ALB Ingress Controller, Karpenter, EKS Blueprints |
-| 37 | [Service Mesh](./part-05-container-and-kubernetes-architectures/chapter-37-service-mesh.md) | Envoy sidecar, mTLS, traffic shifting, circuit breaking, X-Ray tracing |
-| 38 | [GitOps Platform](./part-05-container-and-kubernetes-architectures/chapter-38-gitops-platform.md) | ArgoCD vs Flux, multi-environment promotion, drift detection, Sealed Secrets |
-| 39 | [Multi-Cluster Kubernetes](./part-05-container-and-kubernetes-architectures/chapter-39-multicluster-kubernetes.md) | Cluster federation, cross-cluster service discovery, global load balancing, unified observability |
-| 40 | [Platform Engineering](./part-05-container-and-kubernetes-architectures/chapter-40-platform-engineering.md) | Internal developer platform, Backstage, golden path templates, OPA/Gatekeeper, cost showback |
-| 41 | [Batch Containers](./part-05-container-and-kubernetes-architectures/chapter-41-batch-containers.md) | AWS Batch, job queues, Spot integration, array jobs, DAG workflows |
-| 42 | [GPU Workloads](./part-05-container-and-kubernetes-architectures/chapter-42-gpu-workloads.md) | GPU instance families, EKS GPU node groups, MIG/time-slicing, Inferentia, Trainium |
+| 35 | [ECS Fargate](./part-05-container-and-kubernetes-architectures/chapter-35-ecs-fargate.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Container-Service.svg" width="16"/> ECS task definitions, <img src="https://icon.icepanel.io/AWS/svg/Containers/Fargate.svg" width="16"/> Fargate vs EC2, ALB integration, Cloud Map, Fargate Spot |
+| 36 | [Amazon EKS](./part-05-container-and-kubernetes-architectures/chapter-36-amazon-eks.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> Managed node groups, IRSA, ALB Ingress Controller, Karpenter, EKS Blueprints |
+| 37 | [Service Mesh](./part-05-container-and-kubernetes-architectures/chapter-37-service-mesh.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> Envoy sidecar, mTLS, traffic shifting, circuit breaking, <img src="https://icon.icepanel.io/AWS/svg/Developer-Tools/X-Ray.svg" width="16"/> X-Ray tracing |
+| 38 | [GitOps Platform](./part-05-container-and-kubernetes-architectures/chapter-38-gitops-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> ArgoCD vs Flux, multi-environment promotion, drift detection, Sealed Secrets |
+| 39 | [Multi-Cluster Kubernetes](./part-05-container-and-kubernetes-architectures/chapter-39-multicluster-kubernetes.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> Cluster federation, cross-cluster service discovery, <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Global-Accelerator.svg" width="16"/> global load balancing |
+| 40 | [Platform Engineering](./part-05-container-and-kubernetes-architectures/chapter-40-platform-engineering.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> Internal developer platform, golden path templates, OPA/Gatekeeper, cost showback |
+| 41 | [Batch Containers](./part-05-container-and-kubernetes-architectures/chapter-41-batch-containers.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/Batch.svg" width="16"/> AWS Batch, job queues, Spot integration, array jobs, DAG workflows |
+| 42 | [GPU Workloads](./part-05-container-and-kubernetes-architectures/chapter-42-gpu-workloads.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="16"/> GPU instance families, <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> EKS GPU node groups, MIG/time-slicing, Inferentia, Trainium |
 
 ---
 
@@ -210,14 +210,14 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Key Topics |
 |---|---------|----------|
-| 43 | [Relational Database](./part-06-data-platform-architectures/chapter-43-relational-database.md) | RDS vs Aurora, Multi-AZ, read replicas, RDS Proxy, Performance Insights, zero-downtime migration |
-| 44 | [Aurora Global Database](./part-06-data-platform-architectures/chapter-44-aurora-global-database.md) | Global cluster, sub-second replication, regional read scaling, managed failover, write forwarding |
-| 45 | [DynamoDB](./part-06-data-platform-architectures/chapter-45-dynamodb.md) | Single-table design, partition key selection, GSI/LSI, DAX, Streams, global tables |
-| 46 | [Data Lake](./part-06-data-platform-architectures/chapter-46-data-lake.md) | S3 zone architecture, Glue Data Catalog, Athena, Lake Formation, Parquet/ORC, lifecycle policies |
-| 47 | [Lake House](./part-06-data-platform-architectures/chapter-47-lake-house.md) | Redshift Spectrum, data tiering, Redshift data sharing, Lake Formation governance |
-| 48 | [Streaming Analytics](./part-06-data-platform-architectures/chapter-48-streaming-analytics.md) | Kinesis Data Streams, Firehose, Apache Flink, windowing, MSK, exactly-once semantics |
-| 49 | [Data Warehouse](./part-06-data-platform-architectures/chapter-49-data-warehouse.md) | Redshift Serverless vs provisioned, distribution styles, sort keys, WLM, AQUA |
-| 50 | [Multi-Database Architecture](./part-06-data-platform-architectures/chapter-50-multi-database-architecture.md) | Polyglot persistence, CDC with DMS, cache invalidation, search sync, eventual consistency |
+| 43 | [Relational Database](./part-06-data-platform-architectures/chapter-43-relational-database.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/RDS.svg" width="16"/> RDS vs <img src="https://icon.icepanel.io/AWS/svg/Database/Aurora.svg" width="16"/> Aurora, Multi-AZ, read replicas, RDS Proxy, Performance Insights |
+| 44 | [Aurora Global Database](./part-06-data-platform-architectures/chapter-44-aurora-global-database.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/Aurora.svg" width="16"/> Global cluster, sub-second replication, regional read scaling, managed failover |
+| 45 | [DynamoDB](./part-06-data-platform-architectures/chapter-45-dynamodb.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> Single-table design, partition key selection, GSI/LSI, DAX, Streams, global tables |
+| 46 | [Data Lake](./part-06-data-platform-architectures/chapter-46-data-lake.md) | <img src="https://icon.icepanel.io/AWS/svg/Storage/Simple-Storage-Service.svg" width="16"/> S3 zone architecture, <img src="https://icon.icepanel.io/AWS/svg/Analytics/Glue.svg" width="16"/> Glue Data Catalog, <img src="https://icon.icepanel.io/AWS/svg/Analytics/Athena.svg" width="16"/> Athena, Lake Formation |
+| 47 | [Lake House](./part-06-data-platform-architectures/chapter-47-lake-house.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/Redshift.svg" width="16"/> Redshift Spectrum, data tiering, Redshift data sharing, <img src="https://icon.icepanel.io/AWS/svg/Analytics/Lake-Formation.svg" width="16"/> Lake Formation |
+| 48 | [Streaming Analytics](./part-06-data-platform-architectures/chapter-48-streaming-analytics.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/Kinesis-Data-Streams.svg" width="16"/> Kinesis Data Streams, <img src="https://icon.icepanel.io/AWS/svg/Analytics/Managed-Streaming-for-Apache-Kafka.svg" width="16"/> MSK, Apache Flink, windowing |
+| 49 | [Data Warehouse](./part-06-data-platform-architectures/chapter-49-data-warehouse.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/Redshift.svg" width="16"/> Redshift Serverless vs provisioned, distribution styles, sort keys, WLM |
+| 50 | [Multi-Database Architecture](./part-06-data-platform-architectures/chapter-50-multi-database-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> DynamoDB, <img src="https://icon.icepanel.io/AWS/svg/Database/ElastiCache.svg" width="16"/> ElastiCache, <img src="https://icon.icepanel.io/AWS/svg/Analytics/OpenSearch-Service.svg" width="16"/> OpenSearch, CDC with DMS |
 
 ---
 
@@ -231,14 +231,14 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 51 | [Generative AI Platform](./part-07-ai-and-machine-learning-architectures/chapter-51-generative-ai-platform.md) | 🔜 Coming Soon |
-| 52 | [RAG Architecture](./part-07-ai-and-machine-learning-architectures/chapter-52-rag-architecture.md) | 🔜 Coming Soon |
-| 53 | [Vector Database](./part-07-ai-and-machine-learning-architectures/chapter-53-vector-database.md) | 🔜 Coming Soon |
-| 54 | [AI Chatbot](./part-07-ai-and-machine-learning-architectures/chapter-54-ai-chatbot.md) | 🔜 Coming Soon |
-| 55 | [Model Serving](./part-07-ai-and-machine-learning-architectures/chapter-55-model-serving.md) | 🔜 Coming Soon |
-| 56 | [AI Agent Architecture](./part-07-ai-and-machine-learning-architectures/chapter-56-ai-agent-architecture.md) | 🔜 Coming Soon |
-| 57 | [Document Intelligence](./part-07-ai-and-machine-learning-architectures/chapter-57-document-intelligence.md) | 🔜 Coming Soon |
-| 58 | [MLOps Pipeline](./part-07-ai-and-machine-learning-architectures/chapter-58-mlops-pipeline.md) | 🔜 Coming Soon |
+| 51 | [Generative AI Platform](./part-07-ai-and-machine-learning-architectures/chapter-51-generative-ai-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
+| 52 | [RAG Architecture](./part-07-ai-and-machine-learning-architectures/chapter-52-rag-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
+| 53 | [Vector Database](./part-07-ai-and-machine-learning-architectures/chapter-53-vector-database.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/OpenSearch-Service.svg" width="16"/> 🔜 Coming Soon |
+| 54 | [AI Chatbot](./part-07-ai-and-machine-learning-architectures/chapter-54-ai-chatbot.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
+| 55 | [Model Serving](./part-07-ai-and-machine-learning-architectures/chapter-55-model-serving.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/SageMaker.svg" width="16"/> 🔜 Coming Soon |
+| 56 | [AI Agent Architecture](./part-07-ai-and-machine-learning-architectures/chapter-56-ai-agent-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
+| 57 | [Document Intelligence](./part-07-ai-and-machine-learning-architectures/chapter-57-document-intelligence.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Textract.svg" width="16"/> 🔜 Coming Soon |
+| 58 | [MLOps Pipeline](./part-07-ai-and-machine-learning-architectures/chapter-58-mlops-pipeline.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/SageMaker.svg" width="16"/> 🔜 Coming Soon |
 
 ---
 
@@ -252,14 +252,14 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 59 | [SaaS Multi-Tenant](./part-08-enterprise-application-architectures/chapter-59-saas-multitenant.md) | 🔜 Coming Soon |
-| 60 | [B2B SaaS](./part-08-enterprise-application-architectures/chapter-60-b2b-saas.md) | 🔜 Coming Soon |
-| 61 | [CRM Platform](./part-08-enterprise-application-architectures/chapter-61-crm-platform.md) | 🔜 Coming Soon |
-| 62 | [ERP Integration](./part-08-enterprise-application-architectures/chapter-62-erp-integration.md) | 🔜 Coming Soon |
-| 63 | [API Marketplace](./part-08-enterprise-application-architectures/chapter-63-api-marketplace.md) | 🔜 Coming Soon |
-| 64 | [Identity Federation](./part-08-enterprise-application-architectures/chapter-64-identity-federation.md) | 🔜 Coming Soon |
-| 65 | [Enterprise Portal](./part-08-enterprise-application-architectures/chapter-65-enterprise-portal.md) | 🔜 Coming Soon |
-| 66 | [Workflow Automation](./part-08-enterprise-application-architectures/chapter-66-workflow-automation.md) | 🔜 Coming Soon |
+| 59 | [SaaS Multi-Tenant](./part-08-enterprise-application-architectures/chapter-59-saas-multitenant.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔜 Coming Soon |
+| 60 | [B2B SaaS](./part-08-enterprise-application-architectures/chapter-60-b2b-saas.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="16"/> 🔜 Coming Soon |
+| 61 | [CRM Platform](./part-08-enterprise-application-architectures/chapter-61-crm-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/OpenSearch-Service.svg" width="16"/> 🔜 Coming Soon |
+| 62 | [ERP Integration](./part-08-enterprise-application-architectures/chapter-62-erp-integration.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/MQ.svg" width="16"/> 🔜 Coming Soon |
+| 63 | [API Marketplace](./part-08-enterprise-application-architectures/chapter-63-api-marketplace.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔜 Coming Soon |
+| 64 | [Identity Federation](./part-08-enterprise-application-architectures/chapter-64-identity-federation.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="16"/> 🔜 Coming Soon |
+| 65 | [Enterprise Portal](./part-08-enterprise-application-architectures/chapter-65-enterprise-portal.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="16"/> 🔜 Coming Soon |
+| 66 | [Workflow Automation](./part-08-enterprise-application-architectures/chapter-66-workflow-automation.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> 🔜 Coming Soon |
 
 ---
 
@@ -273,16 +273,16 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 67 | [Banking](./part-09-industry-specific-architectures/chapter-67-banking.md) | 🔒 Planned |
-| 68 | [Healthcare](./part-09-industry-specific-architectures/chapter-68-healthcare.md) | 🔒 Planned |
-| 69 | [Insurance](./part-09-industry-specific-architectures/chapter-69-insurance.md) | 🔒 Planned |
-| 70 | [Government](./part-09-industry-specific-architectures/chapter-70-government.md) | 🔒 Planned |
-| 71 | [Retail](./part-09-industry-specific-architectures/chapter-71-retail.md) | 🔒 Planned |
-| 72 | [Manufacturing](./part-09-industry-specific-architectures/chapter-72-manufacturing.md) | 🔒 Planned |
-| 73 | [Telecommunications](./part-09-industry-specific-architectures/chapter-73-telecommunications.md) | 🔒 Planned |
-| 74 | [Media Streaming](./part-09-industry-specific-architectures/chapter-74-media-streaming.md) | 🔒 Planned |
-| 75 | [Education](./part-09-industry-specific-architectures/chapter-75-education.md) | 🔒 Planned |
-| 76 | [Gaming](./part-09-industry-specific-architectures/chapter-76-gaming.md) | 🔒 Planned |
+| 67 | [Banking](./part-09-industry-specific-architectures/chapter-67-banking.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/WAF.svg" width="16"/> 🔒 Planned |
+| 68 | [Healthcare](./part-09-industry-specific-architectures/chapter-68-healthcare.md) | <img src="https://icon.icepanel.io/AWS/svg/Business-Applications/HealthLake.svg" width="16"/> 🔒 Planned |
+| 69 | [Insurance](./part-09-industry-specific-architectures/chapter-69-insurance.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> 🔒 Planned |
+| 70 | [Government](./part-09-industry-specific-architectures/chapter-70-government.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Organizations.svg" width="16"/> 🔒 Planned |
+| 71 | [Retail](./part-09-industry-specific-architectures/chapter-71-retail.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/OpenSearch-Service.svg" width="16"/> 🔒 Planned |
+| 72 | [Manufacturing](./part-09-industry-specific-architectures/chapter-72-manufacturing.md) | <img src="https://icon.icepanel.io/AWS/svg/Internet-of-Things/IoT-Core.svg" width="16"/> 🔒 Planned |
+| 73 | [Telecommunications](./part-09-industry-specific-architectures/chapter-73-telecommunications.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> 🔒 Planned |
+| 74 | [Media Streaming](./part-09-industry-specific-architectures/chapter-74-media-streaming.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="16"/> 🔒 Planned |
+| 75 | [Education](./part-09-industry-specific-architectures/chapter-75-education.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="16"/> 🔒 Planned |
+| 76 | [Gaming](./part-09-industry-specific-architectures/chapter-76-gaming.md) | <img src="https://icon.icepanel.io/AWS/svg/Game-Development/GameLift.svg" width="16"/> 🔒 Planned |
 
 ---
 
@@ -296,16 +296,16 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 77 | [Microservices](./part-10-modern-architecture-patterns/chapter-77-microservices.md) | 🔒 Planned |
-| 78 | [CQRS](./part-10-modern-architecture-patterns/chapter-78-cqrs.md) | 🔒 Planned |
-| 79 | [Event Sourcing](./part-10-modern-architecture-patterns/chapter-79-event-sourcing.md) | 🔒 Planned |
-| 80 | [Saga Pattern](./part-10-modern-architecture-patterns/chapter-80-saga-pattern.md) | 🔒 Planned |
-| 81 | [Outbox Pattern](./part-10-modern-architecture-patterns/chapter-81-outbox-pattern.md) | 🔒 Planned |
-| 82 | [Bulkhead](./part-10-modern-architecture-patterns/chapter-82-bulkhead.md) | 🔒 Planned |
-| 83 | [Circuit Breaker](./part-10-modern-architecture-patterns/chapter-83-circuit-breaker.md) | 🔒 Planned |
-| 84 | [Strangler Fig](./part-10-modern-architecture-patterns/chapter-84-strangler-fig.md) | 🔒 Planned |
-| 85 | [Sidecar Pattern](./part-10-modern-architecture-patterns/chapter-85-sidecar-pattern.md) | 🔒 Planned |
-| 86 | [API Gateway Pattern](./part-10-modern-architecture-patterns/chapter-86-api-gateway-pattern.md) | 🔒 Planned |
+| 77 | [Microservices](./part-10-modern-architecture-patterns/chapter-77-microservices.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔒 Planned |
+| 78 | [CQRS](./part-10-modern-architecture-patterns/chapter-78-cqrs.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> 🔒 Planned |
+| 79 | [Event Sourcing](./part-10-modern-architecture-patterns/chapter-79-event-sourcing.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/Kinesis-Data-Streams.svg" width="16"/> 🔒 Planned |
+| 80 | [Saga Pattern](./part-10-modern-architecture-patterns/chapter-80-saga-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> 🔒 Planned |
+| 81 | [Outbox Pattern](./part-10-modern-architecture-patterns/chapter-81-outbox-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/EventBridge.svg" width="16"/> 🔒 Planned |
+| 82 | [Bulkhead](./part-10-modern-architecture-patterns/chapter-82-bulkhead.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> 🔒 Planned |
+| 83 | [Circuit Breaker](./part-10-modern-architecture-patterns/chapter-83-circuit-breaker.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/App-Mesh.svg" width="16"/> 🔒 Planned |
+| 84 | [Strangler Fig](./part-10-modern-architecture-patterns/chapter-84-strangler-fig.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔒 Planned |
+| 85 | [Sidecar Pattern](./part-10-modern-architecture-patterns/chapter-85-sidecar-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> 🔒 Planned |
+| 86 | [API Gateway Pattern](./part-10-modern-architecture-patterns/chapter-86-api-gateway-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔒 Planned |
 
 ---
 
@@ -319,14 +319,14 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 87 | [Zero Trust](./part-11-security-reference-architectures/chapter-87-zero-trust.md) | 🔒 Planned |
-| 88 | [Multi-Account Security](./part-11-security-reference-architectures/chapter-88-multi-account-security.md) | 🔒 Planned |
-| 89 | [IAM Identity Center](./part-11-security-reference-architectures/chapter-89-iam-identity-center.md) | 🔒 Planned |
-| 90 | [Secrets Management](./part-11-security-reference-architectures/chapter-90-secrets-management.md) | 🔒 Planned |
-| 91 | [Encryption](./part-11-security-reference-architectures/chapter-91-encryption.md) | 🔒 Planned |
-| 92 | [SOC Operations](./part-11-security-reference-architectures/chapter-92-soc-operations.md) | 🔒 Planned |
-| 93 | [Threat Detection](./part-11-security-reference-architectures/chapter-93-threat-detection.md) | 🔒 Planned |
-| 94 | [Compliance](./part-11-security-reference-architectures/chapter-94-compliance.md) | 🔒 Planned |
+| 87 | [Zero Trust](./part-11-security-reference-architectures/chapter-87-zero-trust.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM.svg" width="16"/> 🔒 Planned |
+| 88 | [Multi-Account Security](./part-11-security-reference-architectures/chapter-88-multi-account-security.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Organizations.svg" width="16"/> 🔒 Planned |
+| 89 | [IAM Identity Center](./part-11-security-reference-architectures/chapter-89-iam-identity-center.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="16"/> 🔒 Planned |
+| 90 | [Secrets Management](./part-11-security-reference-architectures/chapter-90-secrets-management.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Secrets-Manager.svg" width="16"/> 🔒 Planned |
+| 91 | [Encryption](./part-11-security-reference-architectures/chapter-91-encryption.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Key-Management-Service.svg" width="16"/> 🔒 Planned |
+| 92 | [SOC Operations](./part-11-security-reference-architectures/chapter-92-soc-operations.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Security-Hub.svg" width="16"/> 🔒 Planned |
+| 93 | [Threat Detection](./part-11-security-reference-architectures/chapter-93-threat-detection.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/GuardDuty.svg" width="16"/> 🔒 Planned |
+| 94 | [Compliance](./part-11-security-reference-architectures/chapter-94-compliance.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Config.svg" width="16"/> 🔒 Planned |
 
 ---
 
@@ -340,12 +340,12 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 95 | [Disaster Recovery](./part-12-resilience-operations-and-cost/chapter-95-disaster-recovery.md) | 🔒 Planned |
-| 96 | [Observability Platform](./part-12-resilience-operations-and-cost/chapter-96-observability-platform.md) | 🔒 Planned |
-| 97 | [FinOps Architecture](./part-12-resilience-operations-and-cost/chapter-97-finops-architecture.md) | 🔒 Planned |
-| 98 | [Multi-Region Active-Active](./part-12-resilience-operations-and-cost/chapter-98-multi-region-active-active.md) | 🔒 Planned |
-| 99 | [Reference Landing Zone](./part-12-resilience-operations-and-cost/chapter-99-reference-landing-zone.md) | 🔒 Planned |
-| 100 | [Future-Proof Cloud Architecture](./part-12-resilience-operations-and-cost/chapter-100-future-proof-cloud-architecture.md) | 🔒 Planned |
+| 95 | [Disaster Recovery](./part-12-resilience-operations-and-cost/chapter-95-disaster-recovery.md) | <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="16"/> 🔒 Planned |
+| 96 | [Observability Platform](./part-12-resilience-operations-and-cost/chapter-96-observability-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="16"/> 🔒 Planned |
+| 97 | [FinOps Architecture](./part-12-resilience-operations-and-cost/chapter-97-finops-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Business-Applications/Cost-Explorer.svg" width="16"/> 🔒 Planned |
+| 98 | [Multi-Region Active-Active](./part-12-resilience-operations-and-cost/chapter-98-multi-region-active-active.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Route-53.svg" width="16"/> 🔒 Planned |
+| 99 | [Reference Landing Zone](./part-12-resilience-operations-and-cost/chapter-99-reference-landing-zone.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Control-Tower.svg" width="16"/> 🔒 Planned |
+| 100 | [Future-Proof Cloud Architecture](./part-12-resilience-operations-and-cost/chapter-100-future-proof-cloud-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Well-Architected-Tool.svg" width="16"/> 🔒 Planned |
 
 ---
 
