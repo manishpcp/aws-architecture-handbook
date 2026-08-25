@@ -1,6 +1,6 @@
 # Part 7 — AI & Machine Learning Architectures
 
-**Chapters 51–58 · Status: 🔜 Coming Soon**
+**Chapters 51–58 · Status: Complete**
 
 ← [Back to Main README](../Readme.md) · [← Part 6](../part-06-data-platform-architectures/README.md) · [Part 8 →](../part-08-enterprise-application-architectures/README.md)
 
@@ -33,7 +33,7 @@ This part covers the full production AI and ML stack on AWS — generative AI pl
 
 ### Chapter 51 — Generative AI Platform
 
-**[Read →](./chapter-51-generative-ai-platform.md)** · 🔒 Coming soon
+**[Read →](./chapter-51-generative-ai-platform.md)** · ✅ Published
 
 Amazon Bedrock as the foundation for a production generative AI platform — model selection, API integration, prompt management, guardrails for safety and compliance, cost controls, and the observability layer that makes AI system behavior auditable and debuggable.
 
@@ -43,7 +43,7 @@ Amazon Bedrock as the foundation for a production generative AI platform — mod
 
 ### Chapter 52 — RAG Architecture
 
-**[Read →](./chapter-52-rag-architecture.md)** · 🔒 Coming soon
+**[Read →](./chapter-52-rag-architecture.md)** · ✅ Published
 
 Retrieval-Augmented Generation for grounding LLM responses in an organization's private knowledge — documents, wikis, databases, support tickets — without fine-tuning, with the chunking strategy, embedding model selection, retrieval pipeline, and re-ranking approach that determines answer quality.
 
@@ -53,7 +53,7 @@ Retrieval-Augmented Generation for grounding LLM responses in an organization's 
 
 ### Chapter 53 — Vector Database
 
-**[Read →](./chapter-53-vector-database.md)** · 🔒 Coming soon
+**[Read →](./chapter-53-vector-database.md)** · ✅ Published
 
 Vector databases for storing and querying high-dimensional embeddings — the infrastructure layer that makes semantic search, recommendation systems, and RAG retrieval fast at scale, with the index type, distance metric, and filtering strategy that determines query performance.
 
@@ -63,7 +63,7 @@ Vector databases for storing and querying high-dimensional embeddings — the in
 
 ### Chapter 54 — AI Chatbot
 
-**[Read →](./chapter-54-ai-chatbot.md)** · 🔒 Coming soon
+**[Read →](./chapter-54-ai-chatbot.md)** · ✅ Published
 
 A production AI chatbot architecture — multi-turn conversation management, RAG integration for knowledge grounding, intent routing, escalation to human agents, safety guardrails, and the session management and observability layer that makes chatbot behavior auditable and improvable over time.
 
@@ -73,7 +73,7 @@ A production AI chatbot architecture — multi-turn conversation management, RAG
 
 ### Chapter 55 — Model Serving
 
-**[Read →](./chapter-55-model-serving.md)** · 🔒 Coming soon
+**[Read →](./chapter-55-model-serving.md)** · ✅ Published
 
 The infrastructure for serving ML models at production latency and throughput — SageMaker real-time endpoints, multi-model endpoints for cost efficiency, auto scaling for variable inference load, and the deployment patterns (blue-green, canary, shadow) that make model updates safe.
 
@@ -83,7 +83,7 @@ The infrastructure for serving ML models at production latency and throughput �
 
 ### Chapter 56 — AI Agent Architecture
 
-**[Read →](./chapter-56-ai-agent-architecture.md)** · 🔒 Coming soon
+**[Read →](./chapter-56-ai-agent-architecture.md)** · ✅ Published
 
 Autonomous AI agents that use tools, call APIs, query databases, and take multi-step actions to complete complex tasks — with the tool definition, memory management, safety guardrails, and human-in-the-loop approval patterns that make agents reliable and auditable in production.
 
@@ -93,7 +93,7 @@ Autonomous AI agents that use tools, call APIs, query databases, and take multi-
 
 ### Chapter 57 — Document Intelligence
 
-**[Read →](./chapter-57-document-intelligence.md)** · 🔒 Coming soon
+**[Read →](./chapter-57-document-intelligence.md)** · ✅ Published
 
 Extracting structured data from unstructured documents at scale — contracts, invoices, medical records, forms — using Amazon Textract for OCR and structure extraction, Comprehend for entity recognition, and Bedrock for complex reasoning over extracted content.
 
@@ -103,7 +103,7 @@ Extracting structured data from unstructured documents at scale — contracts, i
 
 ### Chapter 58 — MLOps Pipeline
 
-**[Read →](./chapter-58-mlops-pipeline.md)** · 🔒 Coming soon
+**[Read →](./chapter-58-mlops-pipeline.md)** · ✅ Published
 
 The full ML model lifecycle platform — data preparation, model training, evaluation, registry, deployment, and monitoring — built on SageMaker Pipelines, with the CI/CD integration, model governance, and drift detection that make ML models as operationally rigorous as application code.
 

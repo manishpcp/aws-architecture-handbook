@@ -221,45 +221,45 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 ---
 
-## 🔜 Part 7 — AI & Machine Learning Architectures
+## ✅ Part 7 — AI & Machine Learning Architectures
 
-**Chapters 51–58 · Status: Coming Soon**
+**Chapters 51–58 · Status: Complete**
 
 > Bedrock, RAG, vector databases, AI agents, MLOps pipelines, and production-grade generative AI.
 
 → [Browse Part 7](./part-07-ai-and-machine-learning-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 51 | [Generative AI Platform](./part-07-ai-and-machine-learning-architectures/chapter-51-generative-ai-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
-| 52 | [RAG Architecture](./part-07-ai-and-machine-learning-architectures/chapter-52-rag-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
-| 53 | [Vector Database](./part-07-ai-and-machine-learning-architectures/chapter-53-vector-database.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/OpenSearch-Service.svg" width="16"/> 🔜 Coming Soon |
-| 54 | [AI Chatbot](./part-07-ai-and-machine-learning-architectures/chapter-54-ai-chatbot.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
-| 55 | [Model Serving](./part-07-ai-and-machine-learning-architectures/chapter-55-model-serving.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/SageMaker.svg" width="16"/> 🔜 Coming Soon |
-| 56 | [AI Agent Architecture](./part-07-ai-and-machine-learning-architectures/chapter-56-ai-agent-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Bedrock.svg" width="16"/> 🔜 Coming Soon |
-| 57 | [Document Intelligence](./part-07-ai-and-machine-learning-architectures/chapter-57-document-intelligence.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/Textract.svg" width="16"/> 🔜 Coming Soon |
-| 58 | [MLOps Pipeline](./part-07-ai-and-machine-learning-architectures/chapter-58-mlops-pipeline.md) | <img src="https://icon.icepanel.io/AWS/svg/Machine-Learning/SageMaker.svg" width="16"/> 🔜 Coming Soon |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 51 | [Generative AI Platform](./part-07-ai-and-machine-learning-architectures/chapter-51-generative-ai-platform.md) | Bedrock model selection, provisioned throughput, prompt management, guardrails, cost controls, observability |
+| 52 | [RAG Architecture](./part-07-ai-and-machine-learning-architectures/chapter-52-rag-architecture.md) | RAG pipeline, chunking strategies, embedding models, vector search, hybrid search, Bedrock Knowledge Bases |
+| 53 | [Vector Database](./part-07-ai-and-machine-learning-architectures/chapter-53-vector-database.md) | Vector embeddings, ANN algorithms, OpenSearch k-NN, pgvector, MemoryDB, metadata filtering |
+| 54 | [AI Chatbot](./part-07-ai-and-machine-learning-architectures/chapter-54-ai-chatbot.md) | Multi-turn conversation, RAG integration, intent routing, Bedrock Guardrails, human escalation, Amazon Connect |
+| 55 | [Model Serving](./part-07-ai-and-machine-learning-architectures/chapter-55-model-serving.md) | SageMaker endpoints, multi-model endpoints, auto scaling, blue-green/canary/shadow, Inferentia2 |
+| 56 | [AI Agent Architecture](./part-07-ai-and-machine-learning-architectures/chapter-56-ai-agent-architecture.md) | Bedrock Agents, action groups, knowledge base integration, ReAct pattern, human approval, multi-agent orchestration |
+| 57 | [Document Intelligence](./part-07-ai-and-machine-learning-architectures/chapter-57-document-intelligence.md) | Textract OCR, Comprehend NER, Bedrock reasoning, A2I human review, document classification |
+| 58 | [MLOps Pipeline](./part-07-ai-and-machine-learning-architectures/chapter-58-mlops-pipeline.md) | SageMaker Pipelines, Feature Store, Model Registry, model evaluation, Model Monitor, Clarify |
 
 ---
 
-## 🔜 Part 8 — Enterprise Application Architectures
+## ✅ Part 8 — Enterprise Application Architectures
 
-**Chapters 59–66 · Status: Coming Soon**
+**Chapters 59–66 · Status: Complete**
 
 > SaaS multi-tenancy, B2B platforms, CRM/ERP integration, API marketplaces, and identity federation.
 
 → [Browse Part 8](./part-08-enterprise-application-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 59 | [SaaS Multi-Tenant](./part-08-enterprise-application-architectures/chapter-59-saas-multitenant.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔜 Coming Soon |
-| 60 | [B2B SaaS](./part-08-enterprise-application-architectures/chapter-60-b2b-saas.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="16"/> 🔜 Coming Soon |
-| 61 | [CRM Platform](./part-08-enterprise-application-architectures/chapter-61-crm-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/OpenSearch-Service.svg" width="16"/> 🔜 Coming Soon |
-| 62 | [ERP Integration](./part-08-enterprise-application-architectures/chapter-62-erp-integration.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/MQ.svg" width="16"/> 🔜 Coming Soon |
-| 63 | [API Marketplace](./part-08-enterprise-application-architectures/chapter-63-api-marketplace.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔜 Coming Soon |
-| 64 | [Identity Federation](./part-08-enterprise-application-architectures/chapter-64-identity-federation.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="16"/> 🔜 Coming Soon |
-| 65 | [Enterprise Portal](./part-08-enterprise-application-architectures/chapter-65-enterprise-portal.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="16"/> 🔜 Coming Soon |
-| 66 | [Workflow Automation](./part-08-enterprise-application-architectures/chapter-66-workflow-automation.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> 🔜 Coming Soon |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 59 | [SaaS Multi-Tenant](./part-08-enterprise-application-architectures/chapter-59-saas-multitenant.md) | Silo/pool/bridge tenancy, tenant context propagation, data isolation, tenant-aware IAM, per-tenant quotas |
+| 60 | [B2B SaaS](./part-08-enterprise-application-architectures/chapter-60-b2b-saas.md) | Enterprise SSO (SAML/OIDC), BYOK, data residency, SLA tiers, dedicated infrastructure, audit log export |
+| 61 | [CRM Platform](./part-08-enterprise-application-architectures/chapter-61-crm-platform.md) | CRM data model, activity stream, Salesforce/HubSpot integration, OpenSearch search, GDPR/CCPA compliance |
+| 62 | [ERP Integration](./part-08-enterprise-application-architectures/chapter-62-erp-integration.md) | AppFlow, Amazon MQ, SAP integration, EventBridge, Glue transformation, idempotency |
+| 63 | [API Marketplace](./part-08-enterprise-application-architectures/chapter-63-api-marketplace.md) | API Gateway usage plans, developer portal, API versioning, rate limiting, monetization |
+| 64 | [Identity Federation](./part-08-enterprise-application-architectures/chapter-64-identity-federation.md) | IAM Identity Center, SAML/OIDC, AD integration, Cognito, cross-account roles, ABAC |
+| 65 | [Enterprise Portal](./part-08-enterprise-application-architectures/chapter-65-enterprise-portal.md) | S3 + CloudFront, API Gateway, Cognito, role-based content, OpenSearch search, notifications |
+| 66 | [Workflow Automation](./part-08-enterprise-application-architectures/chapter-66-workflow-automation.md) | Step Functions, human approval, EventBridge Scheduler, parallel approvals, SLA dashboards |
 
 ---
 
