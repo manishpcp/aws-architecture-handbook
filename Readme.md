@@ -263,26 +263,26 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 ---
 
-## 🔒 Part 9 — Industry-Specific Architectures
+## ✅ Part 9 — Industry-Specific Architectures
 
-**Chapters 67–76 · Status: Planned**
+**Chapters 67–76 · Status: Complete**
 
 > Regulated, compliance-heavy reference architectures for banking, healthcare, retail, gaming, and more.
 
 → [Browse Part 9](./part-09-industry-specific-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 67 | [Banking](./part-09-industry-specific-architectures/chapter-67-banking.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/WAF.svg" width="16"/> 🔒 Planned |
-| 68 | [Healthcare](./part-09-industry-specific-architectures/chapter-68-healthcare.md) | <img src="https://icon.icepanel.io/AWS/svg/Business-Applications/HealthLake.svg" width="16"/> 🔒 Planned |
-| 69 | [Insurance](./part-09-industry-specific-architectures/chapter-69-insurance.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> 🔒 Planned |
-| 70 | [Government](./part-09-industry-specific-architectures/chapter-70-government.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Organizations.svg" width="16"/> 🔒 Planned |
-| 71 | [Retail](./part-09-industry-specific-architectures/chapter-71-retail.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/OpenSearch-Service.svg" width="16"/> 🔒 Planned |
-| 72 | [Manufacturing](./part-09-industry-specific-architectures/chapter-72-manufacturing.md) | <img src="https://icon.icepanel.io/AWS/svg/Internet-of-Things/IoT-Core.svg" width="16"/> 🔒 Planned |
-| 73 | [Telecommunications](./part-09-industry-specific-architectures/chapter-73-telecommunications.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> 🔒 Planned |
-| 74 | [Media Streaming](./part-09-industry-specific-architectures/chapter-74-media-streaming.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="16"/> 🔒 Planned |
-| 75 | [Education](./part-09-industry-specific-architectures/chapter-75-education.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="16"/> 🔒 Planned |
-| 76 | [Gaming](./part-09-industry-specific-architectures/chapter-76-gaming.md) | <img src="https://icon.icepanel.io/AWS/svg/Game-Development/GameLift.svg" width="16"/> 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 67 | [Banking](./part-09-industry-specific-architectures/chapter-67-banking.md) | PCI-DSS network segmentation, SOX audit trails, GLBA controls, real-time payments (FedNow/RTP), fraud detection ML |
+| 68 | [Healthcare](./part-09-industry-specific-architectures/chapter-68-healthcare.md) | HIPAA/HITRUST, BAA scope, PHI encryption, HL7 FHIR, EHR integration (Epic/Cerner), HealthLake, de-identification |
+| 69 | [Insurance](./part-09-industry-specific-architectures/chapter-69-insurance.md) | Policy administration, claims processing, underwriting ML, actuarial data platform, NAIC compliance, fraud detection |
+| 70 | [Government](./part-09-industry-specific-architectures/chapter-70-government.md) | FedRAMP, FISMA/NIST 800-53, GovCloud, CJIS compliance, ATO documentation, continuous monitoring, surge capacity |
+| 71 | [Retail](./part-09-industry-specific-architectures/chapter-71-retail.md) | Peak traffic handling (20-50x), PCI-DSS payments, omnichannel inventory, personalization ML, OpenSearch catalog, fraud detection |
+| 72 | [Manufacturing](./part-09-industry-specific-architectures/chapter-72-manufacturing.md) | Industrial IoT (IoT Core/Greengrass), predictive maintenance ML, OT/IT segmentation, MES/ERP integration, Timestream |
+| 73 | [Telecommunications](./part-09-industry-specific-architectures/chapter-73-telecommunications.md) | NFV/5G, Wavelength edge compute, subscriber data management, real-time billing, CDR processing, CALEA compliance |
+| 74 | [Media Streaming](./part-09-industry-specific-architectures/chapter-74-media-streaming.md) | MediaConvert/MediaLive transcoding, CloudFront delivery, adaptive bitrate (HLS/DASH), DRM, SSAI ad insertion |
+| 75 | [Education](./part-09-industry-specific-architectures/chapter-75-education.md) | FERPA compliance, LMS architecture, video lecture delivery, Chime SDK virtual classroom, learning analytics, WCAG |
+| 76 | [Gaming](./part-09-industry-specific-architectures/chapter-76-gaming.md) | GameLift server hosting, FlexMatch matchmaking, global leaderboards, anti-cheat telemetry, live ops, in-game economy |
 
 ---
 
