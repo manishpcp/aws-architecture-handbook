@@ -294,8 +294,6 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 → [Browse Part 10](./part-10-modern-architecture-patterns/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
 | # | Chapter | Key Topics |
 |---|---------|----------|
 | 77 | [Microservices](./part-10-modern-architecture-patterns/chapter-77-microservices.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> DDD service boundaries, Cloud Map, X-Ray tracing, database-per-service, Conway's Law |
