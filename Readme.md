@@ -286,9 +286,9 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 ---
 
-## 🔒 Part 10 — Modern Architecture Patterns
+## ✅ Part 10 — Modern Architecture Patterns
 
-**Chapters 77–86 · Status: Planned**
+**Chapters 77–86 · Status: Complete**
 
 > Microservices, CQRS, event sourcing, saga, circuit breaker, strangler fig, and more — the patterns behind resilient systems.
 
@@ -296,16 +296,18 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 | # | Chapter | Status |
 |---|---------|--------|
-| 77 | [Microservices](./part-10-modern-architecture-patterns/chapter-77-microservices.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔒 Planned |
-| 78 | [CQRS](./part-10-modern-architecture-patterns/chapter-78-cqrs.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> 🔒 Planned |
-| 79 | [Event Sourcing](./part-10-modern-architecture-patterns/chapter-79-event-sourcing.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/Kinesis-Data-Streams.svg" width="16"/> 🔒 Planned |
-| 80 | [Saga Pattern](./part-10-modern-architecture-patterns/chapter-80-saga-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> 🔒 Planned |
-| 81 | [Outbox Pattern](./part-10-modern-architecture-patterns/chapter-81-outbox-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/EventBridge.svg" width="16"/> 🔒 Planned |
-| 82 | [Bulkhead](./part-10-modern-architecture-patterns/chapter-82-bulkhead.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> 🔒 Planned |
-| 83 | [Circuit Breaker](./part-10-modern-architecture-patterns/chapter-83-circuit-breaker.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/App-Mesh.svg" width="16"/> 🔒 Planned |
-| 84 | [Strangler Fig](./part-10-modern-architecture-patterns/chapter-84-strangler-fig.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔒 Planned |
-| 85 | [Sidecar Pattern](./part-10-modern-architecture-patterns/chapter-85-sidecar-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> 🔒 Planned |
-| 86 | [API Gateway Pattern](./part-10-modern-architecture-patterns/chapter-86-api-gateway-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 77 | [Microservices](./part-10-modern-architecture-patterns/chapter-77-microservices.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> DDD service boundaries, Cloud Map, X-Ray tracing, database-per-service, Conway's Law |
+| 78 | [CQRS](./part-10-modern-architecture-patterns/chapter-78-cqrs.md) | <img src="https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" width="16"/> Write/read model separation, Aurora write-side, OpenSearch/ElastiCache read-side, eventual consistency |
+| 79 | [Event Sourcing](./part-10-modern-architecture-patterns/chapter-79-event-sourcing.md) | <img src="https://icon.icepanel.io/AWS/svg/Analytics/Kinesis-Data-Streams.svg" width="16"/> Append-only event store, Kinesis/DynamoDB Streams, projection rebuilding, snapshot strategy |
+| 80 | [Saga Pattern](./part-10-modern-architecture-patterns/chapter-80-saga-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Step-Functions.svg" width="16"/> Step Functions orchestration, choreography vs. orchestration, compensating transactions |
+| 81 | [Outbox Pattern](./part-10-modern-architecture-patterns/chapter-81-outbox-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/EventBridge.svg" width="16"/> Transactional outbox, CDC with DMS, DynamoDB Streams, at-least-once delivery, idempotent consumers |
+| 82 | [Bulkhead](./part-10-modern-architecture-patterns/chapter-82-bulkhead.md) | <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" width="16"/> Lambda reserved concurrency, RDS Proxy connection pools, SQS queue isolation, ASG separation |
+| 83 | [Circuit Breaker](./part-10-modern-architecture-patterns/chapter-83-circuit-breaker.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/App-Mesh.svg" width="16"/> App Mesh/Envoy circuit breaker, open/closed/half-open states, fallback strategies |
+| 84 | [Strangler Fig](./part-10-modern-architecture-patterns/chapter-84-strangler-fig.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> API Gateway routing layer, incremental migration, shared-to-separate DB strategy, rollback per step |
+| 85 | [Sidecar Pattern](./part-10-modern-architecture-patterns/chapter-85-sidecar-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="16"/> ADOT sidecar, Envoy proxy, AppConfig agent, ECS/EKS sidecar lifecycle |
+| 86 | [API Gateway Pattern](./part-10-modern-architecture-patterns/chapter-86-api-gateway-pattern.md) | <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" width="16"/> Auth at edge, rate limiting, BFF pattern, request routing, API versioning, gateway observability |
 
 ---
 
