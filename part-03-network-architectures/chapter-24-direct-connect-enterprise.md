@@ -1556,9 +1556,9 @@ A production Direct Connect Enterprise environment warrants a dedicated network 
 
 - VPC Flow Logs, enabled on every attachment subnet involved in hybrid traffic paths, provide the flow-level detail (source, destination, port, accept/reject) needed for both security investigation and traffic pattern analysis that aggregate CloudWatch metrics cannot provide alone.
 
-### Tracing (X-Ray)
+### Tracing (OpenTelemetry / X-Ray)
 
-- Application-level distributed tracing (X-Ray) is valuable for understanding *where* latency is introduced in a hybrid request path (on-premises processing time vs. network transit time vs. AWS-side processing time) — instrumenting the application layer, not the network layer itself, but essential for diagnosing "why is this hybrid call slow" questions that pure network metrics can't fully answer.
+- Application-level distributed tracing is valuable for understanding *where* latency is introduced in a hybrid request path (on-premises processing time vs. network transit time vs. AWS-side processing time) — instrumenting the application layer, not the network layer itself, but essential for diagnosing "why is this hybrid call slow" questions that pure network metrics can't fully answer. Per AWS's current guidance (as of June 2025), new application instrumentation should use OpenTelemetry SDKs with the AWS Distro for OpenTelemetry (ADOT), with AWS X-Ray as a supported backend.
 
 ### Alarms and Notifications
 

@@ -1601,7 +1601,7 @@ aws lambda get-function-configuration \
 # Compute an HMAC-SHA256 signature for a test payload (bash + openssl)
 
 PAYLOAD='{"id":"evt_test_123","type":"charge.succeeded"}'
-SECRET="whsec_test_signing_secret"
+SECRET="<your-webhook-signing-secret>"
 TIMESTAMP=$(date +%s)
 SIGNED_PAYLOAD="${TIMESTAMP}.${PAYLOAD}"
 SIGNATURE=$(echo -n "$SIGNED_PAYLOAD" | openssl dgst -sha256 -hmac "$SECRET" | sed 's/^.* //')
@@ -1695,8 +1695,8 @@ aws lambda delete-function --function-name webhook-ingestion-oldprovider-staging
 
 # Empty and delete an S3 archival bucket (staging only)
 
-aws s3 rm s3://webhook-archive-staging --recursive
-aws s3api delete-bucket --bucket webhook-archive-staging
+aws s3 rm s3://<your-webhook-archive-bucket>-staging --recursive
+aws s3api delete-bucket --bucket <your-webhook-archive-bucket>-staging
 
 ```
 

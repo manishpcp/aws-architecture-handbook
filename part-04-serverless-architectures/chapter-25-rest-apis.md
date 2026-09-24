@@ -189,7 +189,7 @@ This reference architecture follows a **layered, event-driven serverless design*
 4. **Messaging layer** — Amazon SQS and Amazon EventBridge for asynchronous processing, decoupling, and event fan-out.
 5. **Data layer** — Amazon DynamoDB for high-throughput key-value/document access patterns, and/or Amazon Aurora (PostgreSQL/MySQL compatible) for relational workloads requiring complex queries and transactions.
 6. **Storage layer** — Amazon S3 for object storage (file uploads, exports, static assets).
-7. **Observability layer** — Amazon CloudWatch (metrics, logs, alarms), AWS X-Ray (distributed tracing).
+7. **Observability layer** — Amazon CloudWatch (metrics, logs, alarms), OpenTelemetry via AWS Distro for OpenTelemetry (ADOT) with AWS X-Ray as backend (distributed tracing).
 8. **Security layer** — AWS IAM, AWS KMS, AWS Secrets Manager, AWS CloudTrail, Amazon GuardDuty, AWS Config.
 
 ### 3.2 Architecture Philosophy
@@ -217,7 +217,7 @@ The design follows four core principles:
 | EventBridge | Event bus for decoupled, event-driven integration between services. |
 | S3 | Object storage for uploads, exports, and static content. |
 | CloudWatch | Metrics, logs, dashboards, alarms. |
-| X-Ray | Distributed tracing across API Gateway → Lambda → downstream services. |
+| OpenTelemetry (via ADOT, with X-Ray as backend) | Distributed tracing across API Gateway → Lambda → downstream services. |
 | KMS | Encryption key management for data at rest. |
 | Secrets Manager | Secure storage and rotation of database credentials and third-party API keys. |
 
@@ -238,11 +238,11 @@ No component in the synchronous request path maintains session state. All state 
 7. Lambda executes business logic, reading/writing to DynamoDB or Aurora as needed.
 8. For operations requiring asynchronous processing, Lambda publishes a message to SQS or an event to EventBridge and returns a 202 Accepted response immediately.
 9. API Gateway returns the Lambda response to the client via CloudFront.
-10. All requests, invocations, and downstream calls are logged to CloudWatch and traced via X-Ray.
+10. All requests, invocations, and downstream calls are logged to CloudWatch and traced via OpenTelemetry (via ADOT, with X-Ray as the backend).
 
 ### 3.6 Request Lifecycle
 
-A request lifecycle spans **edge termination → authentication → validation → business logic → persistence → response serialization**. Each stage is independently scalable and independently observable — a critical property for enterprise-scale debugging, since a P99 latency regression can be isolated to a specific stage using X-Ray trace segments rather than requiring end-to-end log correlation by hand.
+A request lifecycle spans **edge termination → authentication → validation → business logic → persistence → response serialization**. Each stage is independently scalable and independently observable — a critical property for enterprise-scale debugging, since a P99 latency regression can be isolated to a specific stage using OpenTelemetry trace segments (via ADOT, with X-Ray as the backend) rather than requiring end-to-end log correlation by hand.
 
 ### 3.7 Response Lifecycle
 
@@ -447,11 +447,11 @@ Each service below is scoped to its role in this specific architecture. Only ser
 
 **Best practices:** Use structured (JSON) logging from Lambda for queryability via CloudWatch Logs Insights. Set log retention explicitly (default is "never expire," which silently accumulates cost, Section 16).
 
-### 4.19 AWS X-Ray
+### 4.19 Distributed Tracing (OpenTelemetry / X-Ray)
 
-**Purpose:** Distributed tracing across API Gateway, Lambda, and downstream AWS SDK calls, enabling latency breakdown by segment for debugging and performance optimization.
+**Purpose:** Distributed tracing across API Gateway, Lambda, and downstream AWS SDK calls, enabling latency breakdown by segment for debugging and performance optimization. AWS's current guidance (as of June 2025) recommends instrumenting new applications with OpenTelemetry SDKs via the AWS Distro for OpenTelemetry (ADOT), with AWS X-Ray as a supported backend.
 
-**Best practices:** Enable active tracing on both API Gateway and Lambda; annotate custom segments for significant business logic sections (e.g., "validate," "persist," "publish-event") to make traces actionable rather than just showing SDK call latency.
+**Best practices:** Enable active tracing on both API Gateway and Lambda using the AWS Distro for OpenTelemetry (ADOT) for new applications; annotate custom segments for significant business logic sections (e.g., "validate," "persist," "publish-event") to make traces actionable rather than just showing SDK call latency.
 
 ### 4.20 AWS CloudTrail
 

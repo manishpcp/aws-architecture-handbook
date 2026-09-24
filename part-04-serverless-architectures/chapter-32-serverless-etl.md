@@ -1637,7 +1637,7 @@ aws sqs start-message-move-task \
 
 # Empty a quarantine bucket prefix after triage (use with caution, versioned bucket)
 
-aws s3 rm s3://acme-etl-quarantine-prod/2026-08-01/ --recursive
+aws s3 rm s3://<your-etl-quarantine-bucket>-prod/2026-08-01/ --recursive
 
 # Stop a runaway Glue job
 

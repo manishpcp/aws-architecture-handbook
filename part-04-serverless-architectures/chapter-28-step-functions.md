@@ -1058,7 +1058,7 @@ aws stepfunctions describe-state-machine \
 aws stepfunctions start-execution \
   --state-machine-arn arn:aws:states:us-east-1:123456789012:stateMachine:order-orchestrator-prod \
   --name "order-98765" \
-  --input '{"orderId":"98765","s3PayloadPointer":"s3://acme-order-payloads/98765.json"}'
+  --input '{"orderId":"98765","s3PayloadPointer":"s3://your-order-payloads-bucket/98765.json"}'
 
 # List recent failed executions for triage
 

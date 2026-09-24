@@ -116,7 +116,7 @@ This architecture applies a small number of consistent principles at every layer
 - **Database:** RDS or Aurora (this chapter presents both, with explicit selection guidance in Section 4) in a Multi-AZ configuration, private-subnet-only, encrypted at rest.
 - **Static asset storage:** S3, served through CloudFront rather than directly from the application tier.
 - **Security and identity:** IAM roles for all compute-to-service access, KMS for encryption, Secrets Manager for database credentials, GuardDuty/Security Hub/Config for continuous security posture monitoring.
-- **Monitoring:** CloudWatch for metrics/logs/alarms, X-Ray for distributed tracing, CloudTrail for audit logging.
+- **Monitoring:** CloudWatch for metrics/logs/alarms, OpenTelemetry (via ADOT) for distributed tracing with X-Ray as backend, CloudTrail for audit logging.
 
 ## How Components Interact
 
@@ -1297,7 +1297,7 @@ Given this system's Tier 1 classification, changes to the Aurora cluster configu
 26. Deploy WAF rule changes in count mode before switching to block mode.
 27. Tag this architecture's resources with a `Tier` value reflecting its Chapter 2 tier classification, making the availability-driven cost traceable in FinOps reporting.
 28. Enable organization-wide CloudTrail, GuardDuty, Security Hub, and Config as a baseline for this architecture, consistent with Chapter 2's general guidance.
-29. Correlate ALB, application, and database logs via a propagated request ID, and back this with X-Ray tracing rather than relying on manual timestamp correlation during incidents.
+29. Correlate ALB, application, and database logs via a propagated request ID, and back this with distributed tracing (OpenTelemetry via ADOT, with X-Ray as the backend) rather than relying on manual timestamp correlation during incidents.
 30. Document and test the regional backup-and-restore DR runbook (Section 13) at least annually, with retained evidence of the measured RTO/RPO.
 31. Validate post-deployment that traffic distribution across AZs remains balanced, as an explicit deployment validation step.
 32. Set database backup retention and deletion protection according to the compliance schedule from Section 2, and add a policy-as-code check preventing accidental reduction of either.

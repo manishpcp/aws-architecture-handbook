@@ -2057,9 +2057,9 @@ Structured (JSON) application logs are shipped to CloudWatch Logs with a consist
 
 ## Tracing
 
-## X-Ray
+## OpenTelemetry / AWS X-Ray
 
-AWS X-Ray instrumentation is added to every ECS service and Lambda function via the X-Ray SDK, producing a service map that visualizes the full request path (ALB → ECS → Aurora/DynamoDB → EventBridge) and surfaces per-segment latency, making it straightforward to identify which specific hop is responsible for a latency regression rather than guessing from aggregate metrics alone.
+Distributed tracing is added to every ECS service and Lambda function using the AWS Distro for OpenTelemetry (ADOT), with AWS X-Ray as the trace backend. ADOT provides a single, industry-standard instrumentation path (OpenTelemetry SDKs) that produces a service map visualizing the full request path (ALB → ECS → Aurora/DynamoDB → EventBridge) and surfaces per-segment latency, making it straightforward to identify which specific hop is responsible for a latency regression rather than guessing from aggregate metrics alone. The AWS X-Ray SDK remains a valid option for use cases requiring X-Ray-specific features not yet available in ADOT (e.g., centralized sampling rules in certain languages), but ADOT is the recommended starting point for new instrumentation.
 
 ## Alarms
 
@@ -2211,7 +2211,7 @@ All production changes — infrastructure and application — flow through the s
 14. Enable AWS Config, CloudTrail, and GuardDuty organization-wide from day one, not retrofitted later.
 15. Route audit logs to a dedicated, access-restricted log-archive account with S3 Object Lock enabled.
 16. Define SLO-based alarms (latency, error rate) in addition to resource-utilization alarms.
-17. Instrument every service with distributed tracing (X-Ray) from initial deployment, not added reactively during an incident.
+17. Instrument every service with distributed tracing (OpenTelemetry via ADOT, with X-Ray as the backend) from initial deployment, not added reactively during an incident.
 18. Use blue-green deployments with automated rollback triggers tied to CloudWatch alarms.
 19. Test disaster recovery failover on a regular (at minimum quarterly) cadence, not just on paper.
 20. Right-size compute resources quarterly using Compute Optimizer and Container Insights data.

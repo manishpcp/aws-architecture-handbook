@@ -618,7 +618,7 @@ The following walks through a concrete example: a nightly **"EOD Settlement Batc
 3. **IAM role assumed.** The scheduler assumes `role-eod-settlement-scheduler-invoke`, which is scoped to `states:StartExecution` on exactly one state machine ARN.
 4. **Step Functions execution starts.** The state machine `eod-settlement-workflow` begins execution with input `{"business_date": "2026-08-08"}`.
 5. **Idempotency check.** The first state, `CheckAlreadyProcessed` (a Lambda function), performs a conditional read against DynamoDB for `PK=eod-settlement#2026-08-08`. If a `COMPLETED` record already exists, the workflow short-circuits to a `NoOpSuccess` state — protecting against duplicate invocation from a scheduler retry.
-6. **Extract step.** The `ExtractTransactions` Lambda lists and downloads the day's transaction files from `s3://landing-zone/transactions/2026-08-08/`.
+6. **Extract step.** The `ExtractTransactions` Lambda lists and downloads the day's transaction files from `s3://<your-landing-zone-bucket>/transactions/2026-08-08/`.
 7. **Validation step.** The `ValidateTransactions` Lambda checks schema, checksums, and record counts against an expected-count file; on validation failure, the workflow transitions to a `Catch` block.
 8. **Transform/aggregate step.** The `AggregateSettlement` Lambda computes net settlement positions per counterparty.
 9. **Write results.** Results are written to `s3://processed-zone/settlement/2026-08-08/` and a summary record to DynamoDB with status `COMPLETED`.
@@ -759,7 +759,7 @@ Every distinct actor in this architecture has its own IAM role — there is no s
 |---|---|---|
 | `role-sched-eod-settlement` | EventBridge Scheduler (this schedule only) | `states:StartExecution` on one state machine ARN |
 | `role-sfn-eod-settlement` | Step Functions state machine | `lambda:InvokeFunction` on the 4 Lambdas this workflow calls |
-| `role-lambda-eod-extract` | Extract Lambda execution | `s3:GetObject` on `landing-zone/transactions/*`, `dynamodb:PutItem`/`GetItem` on the job-state table with a `job_name` condition |
+| `role-lambda-eod-extract` | Extract Lambda execution | `s3:GetObject` on `<your-landing-zone-bucket>/transactions/*`, `dynamodb:PutItem`/`GetItem` on the job-state table with a `job_name` condition |
 | `role-lambda-eod-transform` | Transform Lambda execution | `dynamodb:Query` scoped to leading key, no S3 access needed |
 | `role-lambda-eod-load` | Load Lambda execution | `s3:PutObject` on `processed-zone/settlement/*`, `events:PutEvents` on the central bus |
 | `role-cicd-terraform-deploy` | CI/CD pipeline | Scoped `iam:PassRole` limited to the specific roles this pipeline manages, plus resource-creation permissions for the modules it owns |
@@ -778,8 +778,8 @@ Example least-privilege policy for the Extract Lambda's execution role:
       "Effect": "Allow",
       "Action": ["s3:GetObject", "s3:ListBucket"],
       "Resource": [
-        "arn:aws:s3:::landing-zone-prod",
-        "arn:aws:s3:::landing-zone-prod/transactions/*"
+        "arn:aws:s3:::<your-landing-zone-bucket>-prod",
+        "arn:aws:s3:::<your-landing-zone-bucket>-prod/transactions/*"
       ]
     },
     {

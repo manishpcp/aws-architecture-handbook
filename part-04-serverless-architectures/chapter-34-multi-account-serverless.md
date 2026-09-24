@@ -1318,7 +1318,7 @@ aws athena start-query-execution \
                    WHERE useridentity.arn LIKE '%create-order-exec-role%'
                    AND eventtime > '2026-08-01'
                    ORDER BY eventtime DESC LIMIT 50" \
-  --result-configuration OutputLocation=s3://example-org-athena-results/
+  --result-configuration OutputLocation=s3://<your-athena-results-bucket>/
 
 # Inspect a Dead Letter Queue for failed cross-account event forwarding
 
@@ -1344,8 +1344,8 @@ aws lambda list-functions --query 'Functions[].FunctionName'
 
 # Empty and delete a workload's S3 buckets (only after confirming no retention hold)
 
-aws s3 rm s3://orders-account-deployment-artifacts --recursive
-aws s3api delete-bucket --bucket orders-account-deployment-artifacts
+aws s3 rm s3://<your-deployment-artifacts-bucket> --recursive
+aws s3api delete-bucket --bucket <your-deployment-artifacts-bucket>
 
 # Suspend an account via Control Tower / Organizations (does not delete data immediately)
 

@@ -1226,9 +1226,9 @@ A dedicated hybrid-connectivity dashboard showing:
 | BGP session state transitions to idle/active (not established) | Detects a BGP-layer failure that may not be reflected in tunnel state alone |
 | Sustained, unexpected VPN data-transfer volume when VPN should be in backup/idle role | Detects an extended, unnoticed failover condition where Direct Connect should have been restored but traffic remains on the more expensive VPN path |
 
-## Tracing / X-Ray
+## Tracing (OpenTelemetry / X-Ray)
 
-- Not directly applicable to VPN connectivity itself; X-Ray operates at the application-request level (Chapter 3), above this chapter's network-transport layer.
+- Not directly applicable to VPN connectivity itself; distributed tracing operates at the application-request level (Chapter 3), above this chapter's network-transport layer. Per AWS's current guidance (as of June 2025), new application instrumentation should use OpenTelemetry SDKs with the AWS Distro for OpenTelemetry (ADOT), with AWS X-Ray as a supported backend.
 
 ## SLIs / SLOs / Error Budgets
 
