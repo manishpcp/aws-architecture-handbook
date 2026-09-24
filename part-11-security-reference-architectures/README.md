@@ -1,6 +1,6 @@
 # Part 11 — Security Reference Architectures
 
-**Chapters 87–94 · Status: 🔒 Planned**
+**Chapters 87–94 · Status: ✅ Complete**
 
 ← [Back to Main README](../Readme.md) · [← Part 10](../part-10-modern-architecture-patterns/README.md) · [Part 12 →](../part-12-resilience-operations-and-cost/README.md)
 
@@ -33,7 +33,7 @@ This part covers eight security reference architectures — each one a complete,
 
 ### Chapter 87 — Zero Trust
 
-**[Read →](./chapter-87-zero-trust.md)** · 🔒 Coming soon
+**[Read →](./chapter-87-zero-trust.md)**
 
 Zero trust architecture on AWS — eliminating the assumption that anything inside the network perimeter is trustworthy, and replacing it with continuous verification of every request regardless of origin, using IAM authentication, mTLS between services, and least-privilege access enforced at every layer.
 
@@ -43,7 +43,7 @@ Zero trust architecture on AWS — eliminating the assumption that anything insi
 
 ### Chapter 88 — Multi-Account Security
 
-**[Read →](./chapter-88-multi-account-security.md)** · 🔒 Coming soon
+**[Read →](./chapter-88-multi-account-security.md)**
 
 Security governance across an AWS Organizations multi-account structure — Service Control Policies as non-overridable guardrails, centralized security tooling in a dedicated security account, and the account vending machine pattern that ensures every new account starts with the correct security baseline.
 
@@ -53,7 +53,7 @@ Security governance across an AWS Organizations multi-account structure — Serv
 
 ### Chapter 89 — IAM Identity Center
 
-**[Read →](./chapter-89-iam-identity-center.md)** · 🔒 Coming soon
+**[Read →](./chapter-89-iam-identity-center.md)**
 
 IAM Identity Center (formerly AWS SSO) as the enterprise identity layer for AWS — federating corporate identity providers, managing permission sets across hundreds of accounts, and providing the just-in-time access and session management that enterprise security teams require.
 
@@ -63,7 +63,7 @@ IAM Identity Center (formerly AWS SSO) as the enterprise identity layer for AWS 
 
 ### Chapter 90 — Secrets Management
 
-**[Read →](./chapter-90-secrets-management.md)** · 🔒 Coming soon
+**[Read →](./chapter-90-secrets-management.md)**
 
 A production secrets management architecture — storing, rotating, auditing, and distributing secrets (database credentials, API keys, certificates) across a multi-account, multi-service environment, with the rotation automation and access controls that eliminate static long-lived credentials entirely.
 
@@ -73,7 +73,7 @@ A production secrets management architecture — storing, rotating, auditing, an
 
 ### Chapter 91 — Encryption
 
-**[Read →](./chapter-91-encryption.md)** · 🔒 Coming soon
+**[Read →](./chapter-91-encryption.md)**
 
 A comprehensive encryption architecture — data at rest, data in transit, and data in use — with the KMS key hierarchy, customer-managed key strategy, and envelope encryption patterns that satisfy compliance requirements for demonstrable key control without creating operational complexity that breaks systems.
 
@@ -83,7 +83,7 @@ A comprehensive encryption architecture — data at rest, data in transit, and d
 
 ### Chapter 92 — SOC Operations
 
-**[Read →](./chapter-92-soc-operations.md)** · 🔒 Coming soon
+**[Read →](./chapter-92-soc-operations.md)**
 
 Building a Security Operations Center on AWS — the tooling, processes, and automation that enable a security team to detect, investigate, and respond to security incidents across a large AWS environment, with the SIEM integration, playbook automation, and metrics that measure SOC effectiveness.
 
@@ -93,7 +93,7 @@ Building a Security Operations Center on AWS — the tooling, processes, and aut
 
 ### Chapter 93 — Threat Detection
 
-**[Read →](./chapter-93-threat-detection.md)** · 🔒 Coming soon
+**[Read →](./chapter-93-threat-detection.md)**
 
 Automated threat detection across an AWS organization — GuardDuty for anomaly-based detection, Inspector for vulnerability scanning, Macie for sensitive data discovery, and the custom detection rules and response automation that extend AWS-native detection to organization-specific threat models.
 
@@ -103,7 +103,7 @@ Automated threat detection across an AWS organization — GuardDuty for anomaly-
 
 ### Chapter 94 — Compliance
 
-**[Read →](./chapter-94-compliance.md)** · 🔒 Coming soon
+**[Read →](./chapter-94-compliance.md)**
 
 Automating compliance evidence collection, control monitoring, and audit reporting across an AWS environment — so that SOC 2, PCI-DSS, HIPAA, and ISO 27001 audits are a continuous, automated process rather than a quarterly scramble to collect screenshots.
 

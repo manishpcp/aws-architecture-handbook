@@ -1,6 +1,6 @@
 # Part 12 — Resilience, Operations & Cost
 
-**Chapters 95–100 · Status: 🔒 Planned**
+**Chapters 95–100 · Status: ✅ Complete**
 
 ← [Back to Main README](../Readme.md) · [← Part 11](../part-11-security-reference-architectures/README.md)
 
@@ -33,7 +33,7 @@ If you have read any other part of this book, this part is where the operational
 
 ### Chapter 95 — Disaster Recovery
 
-**[Read →](./chapter-95-disaster-recovery.md)** · 🔒 Coming soon
+**[Read →](./chapter-95-disaster-recovery.md)**
 
 A complete disaster recovery architecture — covering all four DR strategy tiers (Backup and Restore, Pilot Light, Warm Standby, Multi-Site Active-Active), the AWS services that implement each tier, and the testing discipline that turns a documented RTO/RPO into a demonstrated, auditable capability rather than an untested hypothesis.
 
@@ -43,7 +43,7 @@ A complete disaster recovery architecture — covering all four DR strategy tier
 
 ### Chapter 96 — Observability Platform
 
-**[Read →](./chapter-96-observability-platform.md)** · 🔒 Coming soon
+**[Read →](./chapter-96-observability-platform.md)**
 
 A production observability platform built on the three pillars — metrics, logs, and traces — with the SLI/SLO framework, error budget tracking, and burn-rate alerting that connects infrastructure signals to real customer experience, and the centralized architecture that makes observability data available across a multi-account organization.
 
@@ -53,7 +53,7 @@ A production observability platform built on the three pillars — metrics, logs
 
 ### Chapter 97 — FinOps Architecture
 
-**[Read →](./chapter-97-finops-architecture.md)** · 🔒 Coming soon
+**[Read →](./chapter-97-finops-architecture.md)**
 
 A FinOps architecture that makes cloud spend visible, accountable, and optimized — with the tagging strategy, cost allocation model, anomaly detection, rightsizing discipline, and commitment purchasing framework that turns AWS Cost Explorer from a bill into a management tool.
 
@@ -63,7 +63,7 @@ A FinOps architecture that makes cloud spend visible, accountable, and optimized
 
 ### Chapter 98 — Multi-Region Active-Active
 
-**[Read →](./chapter-98-multi-region-active-active.md)** · 🔒 Coming soon
+**[Read →](./chapter-98-multi-region-active-active.md)**
 
 The architecture for workloads that must survive a complete AWS regional failure with near-zero RTO and RPO — running active traffic in multiple regions simultaneously, with the data replication, conflict resolution, and global traffic routing that makes multi-region active-active operationally viable rather than just theoretically possible.
 
@@ -73,7 +73,7 @@ The architecture for workloads that must survive a complete AWS regional failure
 
 ### Chapter 99 — Reference Landing Zone
 
-**[Read →](./chapter-99-reference-landing-zone.md)** · 🔒 Coming soon
+**[Read →](./chapter-99-reference-landing-zone.md)**
 
 The foundational AWS account structure for an enterprise organization — the account hierarchy, organizational units, Service Control Policies, centralized logging, security tooling, and network architecture that every workload account inherits from day one, built on AWS Control Tower with customizations for enterprise requirements.
 
@@ -83,7 +83,7 @@ The foundational AWS account structure for an enterprise organization — the ac
 
 ### Chapter 100 — Future-Proof Cloud Architecture
 
-**[Read →](./chapter-100-future-proof-cloud-architecture.md)** · 🔒 Coming soon
+**[Read →](./chapter-100-future-proof-cloud-architecture.md)**
 
 The final chapter — a synthesis of the principles, patterns, and decision frameworks from all 100 chapters into a forward-looking guide for building cloud architecture that remains maintainable, adaptable, and cost-effective as AWS services evolve, organizational requirements change, and technology patterns shift.
 

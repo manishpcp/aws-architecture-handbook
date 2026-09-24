@@ -309,43 +309,43 @@ Each chapter follows the same battle-tested structure so you can navigate direct
 
 ---
 
-## 🔒 Part 11 — Security Reference Architectures
+## ✅ Part 11 — Security Reference Architectures
 
-**Chapters 87–94 · Status: Planned**
+**Chapters 87–94 · Status: Complete**
 
 > Zero trust, multi-account security, IAM Identity Center, secrets management, encryption, SOC operations, and compliance.
 
 → [Browse Part 11](./part-11-security-reference-architectures/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 87 | [Zero Trust](./part-11-security-reference-architectures/chapter-87-zero-trust.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM.svg" width="16"/> 🔒 Planned |
-| 88 | [Multi-Account Security](./part-11-security-reference-architectures/chapter-88-multi-account-security.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Organizations.svg" width="16"/> 🔒 Planned |
-| 89 | [IAM Identity Center](./part-11-security-reference-architectures/chapter-89-iam-identity-center.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="16"/> 🔒 Planned |
-| 90 | [Secrets Management](./part-11-security-reference-architectures/chapter-90-secrets-management.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Secrets-Manager.svg" width="16"/> 🔒 Planned |
-| 91 | [Encryption](./part-11-security-reference-architectures/chapter-91-encryption.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Key-Management-Service.svg" width="16"/> 🔒 Planned |
-| 92 | [SOC Operations](./part-11-security-reference-architectures/chapter-92-soc-operations.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Security-Hub.svg" width="16"/> 🔒 Planned |
-| 93 | [Threat Detection](./part-11-security-reference-architectures/chapter-93-threat-detection.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/GuardDuty.svg" width="16"/> 🔒 Planned |
-| 94 | [Compliance](./part-11-security-reference-architectures/chapter-94-compliance.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Config.svg" width="16"/> 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 87 | [Zero Trust](./part-11-security-reference-architectures/chapter-87-zero-trust.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM.svg" width="16"/> Zero trust principles, IAM-authenticated service calls, mTLS, AWS Verified Access, micro-segmentation |
+| 88 | [Multi-Account Security](./part-11-security-reference-architectures/chapter-88-multi-account-security.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Organizations.svg" width="16"/> SCPs as guardrails, security account structure, centralized GuardDuty & Security Hub, Control Tower |
+| 89 | [IAM Identity Center](./part-11-security-reference-architectures/chapter-89-iam-identity-center.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="16"/> Enterprise SSO, permission sets, ABAC, MFA enforcement, just-in-time access, audit logging |
+| 90 | [Secrets Management](./part-11-security-reference-architectures/chapter-90-secrets-management.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Secrets-Manager.svg" width="16"/> Secrets Manager rotation, cross-account access, Parameter Store vs Secrets Manager, ACM, PKI |
+| 91 | [Encryption](./part-11-security-reference-architectures/chapter-91-encryption.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Key-Management-Service.svg" width="16"/> KMS key hierarchy, envelope encryption, cross-account keys, TLS config, CloudHSM, field-level encryption |
+| 92 | [SOC Operations](./part-11-security-reference-architectures/chapter-92-soc-operations.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Security-Hub.svg" width="16"/> Security Hub, GuardDuty, Security Lake, SIEM integration, automated response, MTTD/MTTR |
+| 93 | [Threat Detection](./part-11-security-reference-architectures/chapter-93-threat-detection.md) | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/GuardDuty.svg" width="16"/> GuardDuty finding triage, Inspector CVE scanning, Macie sensitive data discovery, automated response |
+| 94 | [Compliance](./part-11-security-reference-architectures/chapter-94-compliance.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Config.svg" width="16"/> AWS Config rules, Security Hub standards, Audit Manager, conformance packs, automated remediation |
 
 ---
 
-## 🔒 Part 12 — Resilience, Operations & Cost
+## ✅ Part 12 — Resilience, Operations & Cost
 
-**Chapters 95–100 · Status: Planned**
+**Chapters 95–100 · Status: Complete**
 
 > Disaster recovery, observability, FinOps, multi-region active-active, landing zones, and future-proof cloud architecture.
 
 → [Browse Part 12](./part-12-resilience-operations-and-cost/README.md)
 
-| # | Chapter | Status |
-|---|---------|--------|
-| 95 | [Disaster Recovery](./part-12-resilience-operations-and-cost/chapter-95-disaster-recovery.md) | <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="16"/> 🔒 Planned |
-| 96 | [Observability Platform](./part-12-resilience-operations-and-cost/chapter-96-observability-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="16"/> 🔒 Planned |
-| 97 | [FinOps Architecture](./part-12-resilience-operations-and-cost/chapter-97-finops-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Business-Applications/Cost-Explorer.svg" width="16"/> 🔒 Planned |
-| 98 | [Multi-Region Active-Active](./part-12-resilience-operations-and-cost/chapter-98-multi-region-active-active.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Route-53.svg" width="16"/> 🔒 Planned |
-| 99 | [Reference Landing Zone](./part-12-resilience-operations-and-cost/chapter-99-reference-landing-zone.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Control-Tower.svg" width="16"/> 🔒 Planned |
-| 100 | [Future-Proof Cloud Architecture](./part-12-resilience-operations-and-cost/chapter-100-future-proof-cloud-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Well-Architected-Tool.svg" width="16"/> 🔒 Planned |
+| # | Chapter | Key Topics |
+|---|---------|----------|
+| 95 | [Disaster Recovery](./part-12-resilience-operations-and-cost/chapter-95-disaster-recovery.md) | <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="16"/> DR strategy tiers, AWS Backup, Aurora Global DB, Route 53 failover, DR testing, RTO/RPO measurement |
+| 96 | [Observability Platform](./part-12-resilience-operations-and-cost/chapter-96-observability-platform.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="16"/> CloudWatch, X-Ray, SLI/SLO, error budgets, burn-rate alerting, Managed Grafana, OpenTelemetry |
+| 97 | [FinOps Architecture](./part-12-resilience-operations-and-cost/chapter-97-finops-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Business-Applications/Cost-Explorer.svg" width="16"/> Tagging strategy, Cost Anomaly Detection, Compute Optimizer, Savings Plans, Spot, unit economics |
+| 98 | [Multi-Region Active-Active](./part-12-resilience-operations-and-cost/chapter-98-multi-region-active-active.md) | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Route-53.svg" width="16"/> Route 53 latency routing, Aurora Global DB, DynamoDB Global Tables, conflict resolution, health-check failover |
+| 99 | [Reference Landing Zone](./part-12-resilience-operations-and-cost/chapter-99-reference-landing-zone.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Control-Tower.svg" width="16"/> Control Tower, OU structure, Account Factory for Terraform, SCP guardrails, centralized logging |
+| 100 | [Future-Proof Cloud Architecture](./part-12-resilience-operations-and-cost/chapter-100-future-proof-cloud-architecture.md) | <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/Well-Architected-Tool.svg" width="16"/> Architecture evolution, fitness functions, AI-assisted review, technical debt, 10 key decisions |
 
 ---
 
